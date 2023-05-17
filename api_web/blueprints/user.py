@@ -6,7 +6,7 @@ from flask import request, render_template, redirect, url_for, Blueprint
 from flask_login import login_required, logout_user, login_user
 from flask import session
 
-import cvparser.utils.user as user_utils
+import api_web.utils.user as user_utils
 
 user_bp = Blueprint('user', __name__)
 
@@ -120,7 +120,7 @@ def change_password():
             logging.error(err_msg)
             print(err_msg)
             return err_msg
-        user = u_utils.get_user_by_name(username)
+        user = user_utils.get_user_by_name(username)
         if user is None:
             err_msg = f'Error: user {username} not exists!'
             logging.error(err_msg)

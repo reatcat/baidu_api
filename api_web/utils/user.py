@@ -6,7 +6,7 @@ import shutil
 
 from flask import session
 
-from models import User
+from api_web.models import User
 from api_web.extensions import db, APP_FILE
 
 
