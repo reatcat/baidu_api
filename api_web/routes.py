@@ -1,6 +1,6 @@
 from flask import render_template
 from flask import session, jsonify, make_response
-import cvparser.utils.user as user_utils
+import utils.user as user_utils
 from flask import Blueprint
 main_bp = Blueprint('main', __name__)
 

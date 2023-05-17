@@ -5,8 +5,8 @@ from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from cvparser.extensions import db
-from cvparser.extensions import APP_FILE
+from extensions import db
+from extensions import APP_FILE
 
 
 class User(db.Model, UserMixin):

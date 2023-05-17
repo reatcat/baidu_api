@@ -6,8 +6,8 @@ import shutil
 
 from flask import session
 
-from cvparser.models import User
-from cvparser.extensions import db, APP_FILE
+from models import User
+from api_web.extensions import db, APP_FILE
 
 
 """ 调试信息 """
