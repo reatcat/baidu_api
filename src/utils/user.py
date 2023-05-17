@@ -6,8 +6,8 @@ import shutil
 
 from flask import session
 
-from api_web.models import User
-from api_web.extensions import db, APP_FILE
+from src.models import User
+from src.extensions import db, APP_FILE
 
 
 """ 调试信息 """

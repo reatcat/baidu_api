@@ -6,7 +6,7 @@ from flask import request, render_template, redirect, url_for, Blueprint
 from flask_login import login_required, logout_user, login_user
 from flask import session
 
-import api_web.utils.user as user_utils
+import src.utils.user as user_utils
 
 user_bp = Blueprint('user', __name__)
 
