@@ -29,6 +29,7 @@ def user_index():
 
 
 @user_bp.route('/login', methods=['GET', 'POST'])
+@user_bp.route('/', methods=['GET', 'POST'] )
 def login():
     """用户登录
 
