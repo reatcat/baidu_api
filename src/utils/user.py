@@ -5,7 +5,8 @@ import datetime
 import shutil
 
 from flask import session
-
+import sys
+sys.path.append('./')
 from src.models import User
 from src.extensions import db, APP_FILE
 
