@@ -41,7 +41,7 @@ const Register:FC = () => {
                     <div >
                         {/* <img src="./Home_nav_middle.png" alt="yun" /> */}
                     </div>
-                    <h1>嘟嘟收件箱</h1>
+                    <h1>代取名</h1>
                 </div>
                 <div className='login-in-form-create'> 
                     <div style={{color:'#fafafc',fontSize:'26px',margin:'10px'}}>

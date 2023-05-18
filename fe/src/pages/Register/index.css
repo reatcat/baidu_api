@@ -1,6 +1,6 @@
 .login-in-form-create{
     width: 520px;
-    height: 500px;
+    height: 480px;
     border: 2px solid #05f9dc;
     border-radius: 20px;
     margin: auto;
@@ -12,7 +12,7 @@
 @media only screen and (min-width: 1280px){
     .login-in-form-create{
         width: 520px;
-        height: 500px;
+        height: 480px;
         border: 2px solid #05f9dc;
         border-radius: 20px;
         margin: auto;
@@ -25,7 +25,7 @@
 @media only screen and (min-width: 1600px){
     .login-in-form-create{
         width: 520px;
-        height: 500px;
+        height: 480px;
         border: 2px solid #05f9dc;
         border-radius: 20px;
         margin: auto;
@@ -38,7 +38,7 @@
 @media only screen and (min-width: 1920px){
     .login-in-form-create{
         width: 520px;
-        height: 500px;
+        height: 480px;
         border: 2px solid #05f9dc;
         border-radius: 20px;
         margin: auto;
