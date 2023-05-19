@@ -34,8 +34,7 @@ const Login:FC = () => {
             {/* 返回首页 */}
             <div className="backs">
                 <Link to="/" className="gobacks">
-                    {/* <img className="home" src="./home.svg" alt="svg1" /> */}
-                    {/* <HomeOutlined style={{margin:"0 10px 0 0"}}/> */}
+                    <img className="home" src="./home.svg" alt="svg1" />
                     返回首页
                 </Link>
             </div>

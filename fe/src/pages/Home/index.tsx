@@ -8,7 +8,7 @@ const Home:FC = ()=>{
             <Link to="/Login" >
                 登录
             </Link>
-            <Link to="/Login" >
+            <Link to="/Register" >
                 注册
             </Link>
         </div>

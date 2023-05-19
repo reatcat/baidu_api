@@ -30,7 +30,7 @@ const Register:FC = () => {
         <div className='log-in'>
             <div className="backs">
                 <Link to="/" className="gobacks">
-                    {/* <img className="home" src="./home.svg" alt="svg1" /> */}
+                    <img className="home" src="./home.svg" alt="svg1" />
                     返回首页
                 </Link>
             </div>
@@ -83,8 +83,8 @@ const Register:FC = () => {
                             <Form.Item name="Password" rules={
                                 [
                                     { required: true, message: '密码不可以为空' },
-                                    {pattern:/(.[^a-z0-9])/g,message:'需大小写字母与数字'},
-                                    {min:6,message:"长度不得小于6位"}
+                                    { pattern:/^[0-9a-zA-Z]{1,}$/g,message:'只允许数字字母组合'},
+                                    { min:6,message:"长度不得小于6位"}
                                 ]} 
                             >
                                      <Popover 
@@ -93,7 +93,7 @@ const Register:FC = () => {
                                             fontSize: '8px',
                                             lineHeight: '14px',
                                             color: '#757575',
-                                        }}>请输入密码(大小写字母加数字,长度不少于6位)</div>}
+                                        }}>请输入密码(数字字母组合,长度不少于6位)</div>}
                                         title={null}
                                         placement="leftTop"
                                         trigger="hover"

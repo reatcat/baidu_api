@@ -201,13 +201,16 @@
 }
 .gobacks{
     color: #fafafc;
-    font-size: 20px;
+    font-size: 25px;
+    text-decoration: none;
+}
+.gobacks:hover{
+    color: #00dfc4;
 }
 .ant-col{
     width: 100%;
 }
 .home{
-    width: 26px;
-    margin: 1px 2px;
-    padding-bottom: 5px;
+    width: 27px;
+    margin: 2px 2px 0 2px;
 }
