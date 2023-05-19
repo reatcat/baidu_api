@@ -5,8 +5,8 @@ from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from extensions import db
-from extensions import APP_FILE
+from src import db
+from src.extensions import APP_FILE
 
 
 class User(db.Model, UserMixin):
@@ -15,10 +15,11 @@ class User(db.Model, UserMixin):
     Attributes:
         id (db.Interger): 自增主键
         username (db.String): 用户名（非空，不可重复）
+        nickname (db.String, optional): 昵称
         psw_hash (db.String): 密码散列值（非空）
         email (db.String, optional): 邮箱地址
         userspace (db.String): 用户空间路径（非空，不可重复）
-
+    
     Methods:
         set_password(str): 设置密码
         validate_password(str) -> bool: 验证密码
@@ -27,6 +28,7 @@ class User(db.Model, UserMixin):
     """
     id = db.Column(db.Integer, primary_key=True)  # 主键
     username = db.Column(db.String(30), nullable=False, unique=True)  # 用户名
+    nickname = db.Column(db.String(30))  # 昵称 (optional)
     psw_hash = db.Column(db.String(128), nullable=False)  # 密码散列值
     email = db.Column(db.String(30))  # 邮箱 (optional)
     userspace = db.Column(db.String(50), nullable=False, unique=True)  # 用户空间路径
@@ -45,7 +47,7 @@ class User(db.Model, UserMixin):
         """验证密码
 
         判断用户输入的密码是否正确
-
+        
         Args:
             password (str): 输入的密码
 
@@ -64,10 +66,11 @@ class User(db.Model, UserMixin):
 
     def set_userspace(self, username: str):
         """设置用户空间路径
-
+        
         采用一定的规则生成不可重复的路径
-
+        
         """
+
         def generate_userspace(username: str):
             userspace = username + ''.join(random.sample(
                 string.ascii_letters + string.digits,
@@ -78,3 +81,4 @@ class User(db.Model, UserMixin):
         self.userspace = generate_userspace(username)
         if not os.path.exists(self.userspace):
             os.mkdir(self.userspace)
+

@@ -5,8 +5,7 @@ import datetime
 import shutil
 
 from flask import session
-import sys
-sys.path.append('./')
+
 from src.models import User
 from src.extensions import db, APP_FILE
 
@@ -64,37 +63,30 @@ def get_password(request):
 """ 字段检查 """
 
 
-import re
-
 def check_username(username: str):
     """检查用户名是否合法
 
     Args:
-        username (str): 待检查的用户名字符串
-        用户名包含中文，字母，数字
+        username (str): _description_
+
     Returns:
-        bool: 合法返回True，不合法返回False
+        _type_: _description_
     """
-    # 匹配中文、字母、数字
-    if re.match(r'^[\u4e00-\u9fa5a-zA-Z0-9]+$', username):
-        return True
-    else:
-        return False
+    # pattern = r'^[\w]{1, 30}$'
+    # return bool(re.match(pattern, username))
+    return True
+
 
 def check_password(password: str):
     """检查密码是否合法
 
     Args:
-        password (str): 待检查的密码字符串
-        密码必须包含至少一个数字，并且长度在6到20个字符之间，但是不限制其他字符的种类，只要不是空格就可以。
+        password (str): _description_
+
     Returns:
-        bool: 合法返回True，不合法返回False
+        _type_: _description_
     """
-    # 匹配数字、大小写字母、符号
-    if re.match(r'^(?=.*\d)[\S]{6,20}$', password):
-        return True
-    else:
-        return False
+    return True
 
 
 def check_email(email: str):
@@ -311,4 +303,3 @@ def unregister_user(username: str):
     return 1
 
 
-""" Table 关联 """

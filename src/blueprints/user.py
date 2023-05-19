@@ -5,11 +5,11 @@ from flask import make_response, jsonify
 from flask import request, render_template, redirect, url_for, Blueprint
 from flask_login import login_required, logout_user, login_user
 from flask import session
-import sys
-sys.path.append('./')
+
 import src.utils.user as user_utils
 
 user_bp = Blueprint('user', __name__)
+
 
 @user_bp.route('/index')
 def user_index():
@@ -30,7 +30,6 @@ def user_index():
 
 
 @user_bp.route('/login', methods=['GET', 'POST'])
-@user_bp.route('/', methods=['GET', 'POST'] )
 def login():
     """用户登录
 
@@ -40,7 +39,6 @@ def login():
     if request.method == 'POST':
         data = request.get_json()
         data_info = json.loads(data['data'])
-#######################################
         username = data_info['Username']
         password = data_info['Password']
         # ! DEBUG
@@ -69,15 +67,18 @@ def register():
     if request.method == 'POST':
         data = request.get_json()
         data_info = json.loads(data['data'])
-        ############################
         username = data_info['Username']
         password = data_info['Password']
-        email = data_info['Email']
+        email = ""
         print("username: {}, password: {}, email: {}".format(username, password, email))
         # 将用户注册
         stat_code = user_utils.register_user(username, password, email)
         result = jsonify(data={'data': stat_code})
         response = make_response(result)
+        # if stat_code == 1:
+        #     return "Register succeed!"
+        # else:
+        #     return "Register failed!"
         return response
     return "Register page."
 
@@ -90,7 +91,11 @@ def logout():
         _type_: _description_
     """
     if request.method == 'POST':
+        # logout_user()
         session.clear()
+        # result = jsonify(data={'data': 1})
+        # response = make_response(result)
+        # return response
         return "Logout success!"
     return "Logout get request."
 
@@ -113,34 +118,14 @@ def unregister():
         response = make_response(result)
         return response
     return "Unregister."
-@user_bp.route('/password', methods=['GET', 'POST'])
-def change_password():
-    if request.method == 'POST':
-        username = session.get('username')
-        if username is None:
-            err_msg = f'Error: unlogin user {username} request url {request.url}'
-            logging.error(err_msg)
-            print(err_msg)
-            return err_msg
-        user = user_utils.get_user_by_name(username)
-        if user is None:
-            err_msg = f'Error: user {username} not exists!'
-            logging.error(err_msg)
-            print(err_msg)
-            return err_msg
-        data = request.get_json()
-        data_info = json.loads(data['data'])
-        # ! DEBUG
-        print(data_info)
-        print(type(data_info))
-        # ! DEBUG
-#################################################
-        original_password = data_info['oldpassword']
-        new_password = data_info['newpassword']
-        stat_code = user_utils.modify_password(user, original_password, new_password)
-        # 返回响应
-        result = jsonify(data={'data': stat_code})
-        response = make_response(result)
-        return response
-    msg = f'Request {request.url} method {request.method}'
-    return msg
+
+
+@user_bp.route('/homepage', methods=['GET', 'POST'])
+def homepage():
+    """用户主页
+
+    Returns:
+        _type_: _description_
+    """
+    pass
+    return "Homepage."
