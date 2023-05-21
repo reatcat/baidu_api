@@ -45,7 +45,7 @@ const Login:FC = () => {
                     <div >
                         {/* <img src="./Home_nav_middle.png" alt="head" /> */}
                     </div>
-                    <h1>代取名</h1>
+                    <h1>待取名</h1>
                 </div>
                 {/* 表单 */}
                 <div className='login-in-form'> 
