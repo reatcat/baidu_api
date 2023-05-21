@@ -1,0 +1,78 @@
+nav {
+    height: 60px;
+    background-color: #f7f9fb;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+.middle {
+    width: 33%;
+    display: flex;
+    margin-left: 28%;
+    justify-content: center;
+    align-items: center;
+}
+.right {
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 4%;
+}
+#nav_productName {
+    display: flex;
+    color: #333333;
+    font-size: 18px;
+    font-family: "YouYuan";
+    align-items: center;
+}
+.nav_op {
+    margin: 10px;
+    padding: 8px 10px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+.nav_op a {
+    color: #417bff;
+}
+.nav_op:hover {
+    background-color: #417bff;
+}
+.nav_op:hover a{
+    color: #fff;
+}
+#nav_op3{
+    cursor: pointer;
+}
+#nav_op4{
+    cursor: pointer;
+}
+.unregister{
+    cursor: pointer;
+    color: #000;
+}
+.unregister:hover{
+    color: #417bff;
+}
+.login{
+    text-decoration: none;
+}
+.linktoo{
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    color: #417bff;
+    margin: 10px;
+    padding: 8px 10px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+.linktoo:hover{
+    background-color: #417bff;
+    color: #fff;
+}

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
 import { Modal, message,Popover } from 'antd'
 import axios from "axios"
+import './index.css'
 const Home:FC = ()=>{
     const [username,setUsername] = useState('')
     const [log,setLog] = useState(false)
@@ -40,6 +41,18 @@ const Home:FC = ()=>{
         },
         })
     }
+    // popover函数
+    const content = (
+        <div>
+          <div style={{marginTop:'5px'}}>
+            <div className="unregister" onClick={showmodal_unregister}>注销账户</div>
+            {contextHolders}
+          </div>
+        </div>
+    )
+    const handleOpenChange = (newOpen: boolean) => {
+        setOpen(newOpen)
+    }
     // 使用axios获得用户名
     useEffect(()=>{
         axios.get('/api/user/index')
@@ -60,6 +73,7 @@ const Home:FC = ()=>{
         .then(()=>{
             setLog(false)
             setUsername('')
+            message.success('已注销当前账户')
         })
     }
     // 退出函数
@@ -68,27 +82,42 @@ const Home:FC = ()=>{
         .then(()=>{
             setLog(false)
             setUsername('')
+            message.success('已退出当前账户')
         })
     }
     return (
         <div>
-            {
-                log?
-                <div>
-                    周富
+            {/* head */}
+            <nav>
+                <div className="middle">
+                    <div id="nav_productName">
+                        {/* <img id="nav_image" src="./Home_nav_middle.png" alt="nav"/> */}
+                        <div>
+                            待取名
+                        </div>
+                    </div>
                 </div>
-                :
-                <div>
-                    周福
+                    <div className="right">
+                    <div id="nav_op3" className="nav_op" style={{display:log?'flex':'none'}}>
+                        {/* 下拉菜单，个人中心或者注销账户 */}
+                        <Popover content={content} open={open} trigger="hover" onOpenChange={handleOpenChange}>
+                            <a onClick={(e) => e.preventDefault()}>
+                                {username}
+                            </a>
+                        </Popover>
+                    </div>
+                    <div id="nav_op4"  style={{display:log?'flex':'none'}}>
+                        <button onClick={showmodal_logout} className="linktoo">退出登录</button>
+                        {contextHolder}
+                    </div>
+                    <div id="nav_op3" className="nav_op" style={{display:log?'none':'flex'}}>
+                        <Link to="/Login" className="login">登录</Link>
+                    </div>
+                    <div id="nav_op4" className="nav_op" style={{display:log?'none':'flex'}}>
+                        <Link to="/Register" className="login">注册</Link>
+                    </div>
                 </div>
-            }
-            啦啦啦啦
-            <Link to="/Login" >
-                登录
-            </Link>
-            <Link to="/Register" >
-                注册
-            </Link>
+            </nav>
         </div>
     )
 }
