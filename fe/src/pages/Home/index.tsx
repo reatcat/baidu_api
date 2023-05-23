@@ -44,10 +44,11 @@ const Home:FC = ()=>{
     // popover函数
     const content = (
         <div>
-          <div style={{marginTop:'5px'}}>
-            <div className="unregister" onClick={showmodal_unregister}>注销账户</div>
-            {contextHolders}
-          </div>
+            <Link to="/Personal" className="personal">个人中心</Link>
+            <div style={{marginTop:'5px'}}>
+                <div className="unregister" onClick={showmodal_unregister}>注销账户</div>
+                {contextHolders}
+            </div>
         </div>
     )
     const handleOpenChange = (newOpen: boolean) => {
