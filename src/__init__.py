@@ -5,7 +5,7 @@ from flask import Flask
 
 from src.extensions import db, cache
 from src.blueprints.user import user_bp
-
+from src.blueprints.admin import admin_bp
 from src.settings import configs
 
 
@@ -28,6 +28,7 @@ def create_app(config_name=None):
 
 def register_blueprints(app):
     app.register_blueprint(user_bp, url_prefix='/api/user')
+    app.register_blueprint(admin_bp, url_prefix='/api/admin')
 
 
 
@@ -42,6 +43,7 @@ def register_commands(app):
 
         storage_path = os.path.join(os.path.dirname(__file__), 'storage')
         caches_path = os.path.join(os.path.dirname(__file__), 'caches')
+
         if os.path.exists(storage_path):
             shutil.rmtree(storage_path)
         os.mkdir(storage_path)
