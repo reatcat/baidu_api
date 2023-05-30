@@ -45,12 +45,13 @@
 }
 
 .icon-con p {
-    padding-top: 5px;
-    font-size: 15px;
+    /* padding-top: 5px; */
+    font-size: 14px;
 }
 
 .icon-con h2 {
     font-weight: 400;
+    font-size: 20px;
 }
 .nav:hover .icon-con{
     filter: contrast(10);
@@ -240,6 +241,8 @@
     background-color: transparent;
     border-bottom: 1px solid #c2c2c2;
     outline: none;
+    color: #292929;
+    font-size: 16px;
 }
 .inputs:focus {
     border: 1px solid #c2c2c2;
