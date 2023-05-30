@@ -24,7 +24,7 @@ const formItemLayout = {
     },
 }
 const iniuserinfo = {
-    username:'',
+    username:'张妙送',
     email:''
 }
 const Personal:FC = ()=>{
