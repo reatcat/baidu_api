@@ -9,6 +9,7 @@ nav {
     left: 0;
     right: 0;
     z-index: 2;
+    border-bottom: 1px dashed rgb(160, 160, 160);
 }
 .middle {
     width: 33%;
@@ -27,9 +28,9 @@ nav {
 #nav_productName {
     display: flex;
     color: #333333;
-    font-size: 18px;
-    font-family: "YouYuan";
+    font-size: 25px;
     align-items: center;
+    cursor: pointer;
 }
 .nav_op {
     margin: 10px;
@@ -79,4 +80,49 @@ nav {
 .personal{
     color: #000;
     text-decoration: none;
+}
+.search{
+    top: 50px;
+    position: fixed;
+    width: 100%;
+    height: auto;
+    background-color: #f7f9fb;
+}
+.search>input{
+    border: none;
+    border-radius: 3px;    
+    background-color: rgb(216, 213, 213);
+    margin: 20px 1%;
+    width: 98%;
+    height: 34px;
+    font-size: 14px;
+    text-indent: 10px;
+    outline: none;
+}
+.search>input:focus{
+    outline:1px solid#0fa37f;
+    box-shadow: 0px 0px 8px 0px #0fa37f;
+}
+.search>input:hover{
+    outline:1px solid#0fa37f;
+}
+.main{
+    display: flex;
+    width: 100%;
+    margin-top: 140px;
+}
+.menu{
+    margin: 0 0 0 2%;
+}
+.menu-item{
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid rgb(216, 213, 213);
+    width: 180px;
+    height: 180px;
+    border-radius: 5px;
+    margin: 0 24px 30px 0;
+}
+.menu-item:hover{
+    box-shadow: 2px 0px 10px 2px rgb(216, 213, 213);
 }

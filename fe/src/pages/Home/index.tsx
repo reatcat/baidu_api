@@ -6,6 +6,7 @@ import { Modal, message,Popover } from 'antd'
 import axios from "axios"
 import './index.css'
 const Home:FC = ()=>{
+    const nav = useNavigate()
     const [username,setUsername] = useState('')
     const [log,setLog] = useState(false)
     const [open,setOpen] = useState(false)
@@ -86,15 +87,181 @@ const Home:FC = ()=>{
             message.success('已退出当前账户')
         })
     }
+    // 跳到彩蛋
+    const jumptocaidan = ()=>{
+        nav('/EasterEgg')
+    }
+    // 菜单栏数据
+    const data = [
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        },
+        {
+            id:1,
+            name:"私人教练",
+            img:"",
+            status:true
+        },
+        {
+            id:2,
+            name:"化妆师",
+            img:"",
+            status:false
+        },
+        {
+            id:3,
+            name:"起名师",
+            img:"",
+            status:false
+        }
+    ]
+    // 获得搜索框内容
+    const [value,setValue] = useState("")
+    const getValue = (e:any) => {
+        const tmpvalue = e.target.value
+        setValue(tmpvalue)
+        console.log(tmpvalue)
+        // todo
+        // 获得值后搜索内容进行新的渲染
+    }
     return (
         <div>
             {/* head */}
             <nav>
                 <div className="middle">
-                    <div id="nav_productName">
+                    <div id="nav_productName" onClick={jumptocaidan}>
                         {/* <img id="nav_image" src="./Home_nav_middle.png" alt="nav"/> */}
                         <div>
-                            待取名
+                            Better Prompt
                         </div>
                     </div>
                 </div>
@@ -119,6 +286,21 @@ const Home:FC = ()=>{
                     </div>
                 </div>
             </nav>
+            <div className="search">
+                <input type="text" placeholder="搜索场景名" defaultValue={value} onKeyDown={e => getValue(e)} onChange={e => getValue(e)}/>
+            </div>
+            <div className="main">
+                <div className="menu">
+                    {data.map((t,i)=>(
+                        <div className="menu-item">
+                            {/* <img src={t.img} alt={t.name} /> */}
+                            <div>
+                                {t.name}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
