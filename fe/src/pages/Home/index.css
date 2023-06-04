@@ -106,6 +106,25 @@ nav {
 .search>input:hover{
     outline:1px solid#0fa37f;
 }
+.sort{
+    top: 60px;
+    position: fixed;
+    width: 100%;
+    height: auto;
+    background-color: #f7f9fb;
+}
+.segmented{
+    background-color: rgb(216, 213, 213);
+    width: 98.3%;
+    margin: 10px 0 10px 1%;
+    border-radius: 3px;
+    height: 45px;
+}
+.ant-segmented-item{
+    width: 25%;
+    height: 40px;
+    font-size: 20px;
+}
 .main{
     display: flex;
     width: 100%;
@@ -125,4 +144,17 @@ nav {
 }
 .menu-item:hover{
     box-shadow: 2px 0px 10px 2px rgb(216, 213, 213);
+    transform:scale(1.1,1.1);
+}
+/* .menu-item:hover>img{
+    width: 50%;
+} */
+.menu-item>img{
+    width: 45%;
+    margin: 15% 20% 0 25%;
+}
+.menu-item>div{
+    font-size: 25px;
+    margin-top: 10px;
+    text-align: center;
 }

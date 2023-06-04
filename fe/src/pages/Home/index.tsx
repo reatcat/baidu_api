@@ -2,7 +2,7 @@
 import { FC,useEffect,useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
-import { Modal, message,Popover } from 'antd'
+import { Modal, message,Popover,Segmented } from 'antd'
 import axios from "axios"
 import './index.css'
 const Home:FC = ()=>{
@@ -91,168 +91,166 @@ const Home:FC = ()=>{
     const jumptocaidan = ()=>{
         nav('/EasterEgg')
     }
-    // 菜单栏数据
+    // 菜单栏数据3类
     const data = [
         {
             id:1,
-            name:"私人教练",
-            img:"",
-            status:true
+            name:"旅游指南",
+            group:1,
+            img:"./lvyou.svg"
         },
         {
             id:2,
-            name:"化妆师",
-            img:"",
-            status:false
+            name:"草拟标题",
+            group:1,
+            img:"./biaoti.svg"
         },
         {
             id:3,
-            name:"起名师",
-            img:"",
-            status:false
-        },
-        {
-            id:1,
             name:"私人教练",
-            img:"",
-            status:true
+            group:1,
+            img:"./jiaolian.svg"
         },
         {
-            id:2,
-            name:"化妆师",
-            img:"",
-            status:false
+            id:4,
+            name:"起名大师",
+            group:1,
+            img:"./qiming.svg"
         },
         {
-            id:3,
-            name:"起名师",
-            img:"",
-            status:false
+            id:5,
+            name:"定制妆容",
+            group:1,
+            img:"./zhuangrong.svg"
         },
         {
-            id:1,
-            name:"私人教练",
-            img:"",
-            status:true
+            id:6,
+            name:"润色简历",
+            group:2,
+            img:"./jianli.svg"
         },
         {
-            id:2,
-            name:"化妆师",
-            img:"",
-            status:false
+            id:7,
+            name:"模拟面试",
+            group:2,
+            img:"./mianshi.svg"
         },
         {
-            id:3,
-            name:"起名师",
-            img:"",
-            status:false
+            id:8,
+            name:"创业启发",
+            group:2,
+            img:"./chuangye.svg"
         },
         {
-            id:1,
-            name:"私人教练",
-            img:"",
-            status:true
+            id:9,
+            name:"求职帮手",
+            group:2,
+            img:"./qiuzhi.svg"
         },
         {
-            id:2,
-            name:"化妆师",
-            img:"",
-            status:false
+            id:10,
+            name:"学习导师",
+            group:2,
+            img:"./daoshi.svg"
         },
         {
-            id:3,
-            name:"起名师",
-            img:"",
-            status:false
-        },
-        {
-            id:1,
-            name:"私人教练",
-            img:"",
-            status:true
-        },
-        {
-            id:2,
-            name:"化妆师",
-            img:"",
-            status:false
-        },
-        {
-            id:3,
-            name:"起名师",
-            img:"",
-            status:false
-        },
-        {
-            id:1,
-            name:"私人教练",
-            img:"",
-            status:true
-        },
-        {
-            id:2,
-            name:"化妆师",
-            img:"",
-            status:false
-        },
-        {
-            id:3,
-            name:"起名师",
-            img:"",
-            status:false
-        },
-        {
-            id:1,
-            name:"私人教练",
-            img:"",
-            status:true
-        },
-        {
-            id:1,
-            name:"私人教练",
-            img:"",
-            status:true
-        },
-        {
-            id:2,
-            name:"化妆师",
-            img:"",
-            status:false
-        },
-        {
-            id:3,
-            name:"起名师",
-            img:"",
-            status:false
-        },
-        {
-            id:1,
-            name:"私人教练",
-            img:"",
-            status:true
-        },
-        {
-            id:2,
-            name:"化妆师",
-            img:"",
-            status:false
-        },
-        {
-            id:3,
-            name:"起名师",
-            img:"",
-            status:false
+            id:11,
+            name:"敬请期待……",
+            group:3,
+            img:"./more.svg"
         }
     ]
-    // 获得搜索框内容
-    const [value,setValue] = useState("")
-    const getValue = (e:any) => {
-        const tmpvalue = e.target.value
-        setValue(tmpvalue)
-        console.log(tmpvalue)
-        // todo
-        // 获得值后搜索内容进行新的渲染
+    const group1 = [
+        {
+            id:1,
+            name:"旅游指南",
+            group:1,
+            img:"./lvyou.svg"
+        },
+        {
+            id:2,
+            name:"草拟标题",
+            group:1,
+            img:"./biaoti.svg"
+        },
+        {
+            id:3,
+            name:"私人教练",
+            group:1,
+            img:"./jiaolian.svg"
+        },
+        {
+            id:4,
+            name:"起名大师",
+            group:1,
+            img:"./qiming.svg"
+        },
+        {
+            id:5,
+            name:"定制妆容",
+            group:1,
+            img:"./zhuangrong.svg"
+        },
+        {
+            id:6,
+            name:"敬请期待……",
+            group:3,
+            img:"./more.svg"
+        }
+    ]
+    const group2 = [
+        {
+            id:1,
+            name:"润色简历",
+            group:2,
+            img:"./jianli.svg"
+        },
+        {
+            id:2,
+            name:"模拟面试",
+            group:2,
+            img:"./mianshi.svg"
+        },
+        {
+            id:3,
+            name:"创业启发",
+            group:2,
+            img:"./chuangye.svg"
+        },
+        {
+            id:4,
+            name:"求职帮手",
+            group:2,
+            img:"./qiuzhi.svg"
+        },
+        {
+            id:5,
+            name:"学习导师",
+            group:2,
+            img:"./daoshi.svg"
+        },
+        {
+            id:6,
+            name:"敬请期待……",
+            group:3,
+            img:"./more.svg"
+        }
+    ]
+    // 获得segmented的值渲染数据
+    const [type,setType] = useState("1")
+    const gettype = (value:any) =>{
+        setType(value)
+        console.log(type)
     }
+    // 获得搜索框内容
+    // const [value,setValue] = useState("")
+    // const getValue = (e:any) => {
+    //     const tmpvalue = e.target.value
+    //     setValue(tmpvalue)
+    //     console.log(tmpvalue)
+    //     // todo
+    //     // 获得值后搜索内容进行新的渲染
+    // }
     return (
         <div>
             {/* head */}
@@ -286,20 +284,54 @@ const Home:FC = ()=>{
                     </div>
                 </div>
             </nav>
-            <div className="search">
+            {/* 只有10个，还是别搜索了…… */}
+            {/* <div className="search">
                 <input type="text" placeholder="搜索场景名" defaultValue={value} onKeyDown={e => getValue(e)} onChange={e => getValue(e)}/>
+            </div> */}
+            {/* 顶部分类 */}
+            {/* 引用antd-segmented */}
+            <div className="sort">
+                {/* <div className="sort-head"> */}
+                    <Segmented onChange={e => gettype(e)} className="segmented" options={[{ label: '全部', value: '1'},{ label: '日常生活', value: '2',},{ label: '职业生涯规划', value: '3',},{ label: '开发中敬请期待……', value: '4', disabled: true },]} defaultValue={"1"}/>
+                {/* </div> */}
             </div>
             <div className="main">
-                <div className="menu">
-                    {data.map((t,i)=>(
-                        <div className="menu-item">
-                            {/* <img src={t.img} alt={t.name} /> */}
-                            <div>
-                                {t.name}
+                {
+                    type === "1"?
+                    <div className="menu">
+                        {data.map((t)=>(
+                            <div className="menu-item">
+                                <img src={t.img} alt={t.name} />
+                                <div>
+                                    {t.name}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                    :type === "2"?
+                    <div className="menu">
+                        {group1.map((t,i)=>(
+                            <div className="menu-item">
+                                <img src={t.img} alt={t.name} />
+                                <div>
+                                    {t.name}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    :
+                    <div className="menu">
+                        {group2.map((t,i)=>(
+                            <div className="menu-item">
+                                <img src={t.img} alt={t.name} />
+                                <div>
+                                    {t.name}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                }
+                
             </div>
         </div>
     )
