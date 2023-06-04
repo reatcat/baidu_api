@@ -301,9 +301,12 @@ const Home:FC = ()=>{
                     <div className="menu">
                         {data.map((t)=>(
                             <div className="menu-item">
-                                <img src={t.img} alt={t.name} />
-                                <div>
-                                    {t.name}
+                                <div className="menu-item-img">
+                                    <img src={t.img} alt={t.name} />
+                                </div>
+                                <div className="menu-item-name">
+                                    <h2>{t.name}</h2>
+                                    <p></p>
                                 </div>
                             </div>
                         ))}
@@ -312,9 +315,12 @@ const Home:FC = ()=>{
                     <div className="menu">
                         {group1.map((t,i)=>(
                             <div className="menu-item">
-                                <img src={t.img} alt={t.name} />
-                                <div>
-                                    {t.name}
+                                <div className="menu-item-img">
+                                    <img src={t.img} alt={t.name} />
+                                </div>
+                                <div className="menu-item-name">
+                                    <h2>{t.name}</h2>
+                                    <p></p>
                                 </div>
                             </div>
                         ))}
@@ -323,9 +329,12 @@ const Home:FC = ()=>{
                     <div className="menu">
                         {group2.map((t,i)=>(
                             <div className="menu-item">
-                                <img src={t.img} alt={t.name} />
-                                <div>
-                                    {t.name}
+                                <div className="menu-item-img">
+                                    <img src={t.img} alt={t.name} />
+                                </div>
+                                <div className="menu-item-name">
+                                    <h2>{t.name}</h2>
+                                    <p></p>
                                 </div>
                             </div>
                         ))}

@@ -112,6 +112,7 @@ nav {
     width: 100%;
     height: auto;
     background-color: #f7f9fb;
+    z-index: 200;
 }
 .segmented{
     background-color: rgb(216, 213, 213);
@@ -131,30 +132,54 @@ nav {
     margin-top: 140px;
 }
 .menu{
-    margin: 0 0 0 2%;
+    margin: 0 0 0 5%;
 }
 .menu-item{
     display: inline-block;
     cursor: pointer;
     border: 1px solid rgb(216, 213, 213);
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 200px;
     border-radius: 5px;
-    margin: 0 24px 30px 0;
+    margin: 0 50px 30px 0;
+    overflow: hidden;
 }
 .menu-item:hover{
     box-shadow: 2px 0px 10px 2px rgb(216, 213, 213);
     transform:scale(1.1,1.1);
 }
-/* .menu-item:hover>img{
-    width: 50%;
-} */
-.menu-item>img{
+.menu-item-img{
+    overflow: hidden;
+}
+.menu-item-img>img{
     width: 45%;
     margin: 15% 20% 0 25%;
 }
-.menu-item>div{
+.menu-item:hover .menu-item-img>img{
+    transform: scale(1.2);
+    filter: blur(0.9px);
+}
+.menu-item-name{
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+    height: 150px;
+    background-color: rgb(216, 213, 213);
+    transition: 0.5s;
+}
+.menu-item-name h2{
     font-size: 25px;
-    margin-top: 10px;
     text-align: center;
 }
+.menu-item-name p{
+    padding: 0 30px;
+    font-family: 'fangsong';
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: center;
+}
+.menu-item:hover .menu-item-name{
+    bottom: 100px;
+}
+
