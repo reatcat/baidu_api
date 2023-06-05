@@ -275,7 +275,8 @@ const Home:FC = ()=>{
     //     // 获得值后搜索内容进行新的渲染
     // }
     return (
-        <div>
+        // style={{backgroundImage:"linear-gradient(to top, #30cfd0 0%, #330867 100%)"}}
+        <div >
             {/* head */}
             <nav>
                 <div className="middle">

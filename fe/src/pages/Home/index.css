@@ -115,9 +115,9 @@ nav {
     z-index: 200;
 }
 .segmented{
-    background-color: rgb(216, 213, 213);
+    background-image: linear-gradient(to right, #a8edea 0%, #fed6e3 100%);
     width: 98.3%;
-    margin: 10px 0 10px 1%;
+    margin: 10px 0 0 1%;
     border-radius: 3px;
     height: 45px;
 }
@@ -129,7 +129,7 @@ nav {
 .main{
     display: flex;
     width: 100%;
-    margin-top: 140px;
+    margin-top: 120px;
 }
 .menu{
     margin: 0 0 0 5%;
@@ -137,12 +137,12 @@ nav {
 .menu-item{
     display: inline-block;
     cursor: pointer;
-    border: 1px solid rgb(216, 213, 213);
     width: 220px;
     height: 200px;
-    border-radius: 5px;
+    border-radius: 9px;
     margin: 0 50px 30px 0;
     overflow: hidden;
+    background-image: linear-gradient(to bottom, #a8edea 0%, #fed6e3 100%);
 }
 .menu-item:hover{
     box-shadow: 2px 0px 10px 2px rgb(216, 213, 213);
@@ -156,7 +156,7 @@ nav {
     margin: 15% 20% 0 25%;
 }
 .menu-item:hover .menu-item-img>img{
-    transform: scale(1.2);
+    transform: scale(1.1);
     filter: blur(0.9px);
 }
 .menu-item-name{
@@ -164,7 +164,6 @@ nav {
     bottom: 0px;
     width: 100%;
     height: 150px;
-    background-color: rgb(216, 213, 213);
     transition: 0.5s;
     opacity: .8;
 }
@@ -183,5 +182,6 @@ nav {
 }
 .menu-item:hover .menu-item-name{
     bottom: 100px;
+    background-color: #ccefee ;
 }
 
