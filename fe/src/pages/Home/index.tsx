@@ -275,13 +275,12 @@ const Home:FC = ()=>{
     //     // 获得值后搜索内容进行新的渲染
     // }
     return (
-        // style={{backgroundImage:"linear-gradient(to top, #30cfd0 0%, #330867 100%)"}}
-        <div >
+        <div className="homes">
             {/* head */}
             <nav>
                 <div className="middle">
                     <div id="nav_productName" onClick={jumptocaidan}>
-                        {/* <img id="nav_image" src="./Home_nav_middle.png" alt="nav"/> */}
+                        <img id="nav_image" src="./nav.png" alt="nav"/>
                         <div>
                             Better Prompt
                         </div>
