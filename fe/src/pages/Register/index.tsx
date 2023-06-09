@@ -39,7 +39,7 @@ const Register:FC = () => {
                 {/* 头部标题 */}
                 <div className = "head">
                     <div >
-                        {/* <img src="./Home_nav_middle.png" alt="yun" /> */}
+                        <img src="./nav.png" alt="nav" style={{width:'50px',height:'50px',marginTop:'10px',marginLeft:'20px'}}/>
                     </div>
                     <h1>Better Prompt</h1>
                 </div>
