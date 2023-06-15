@@ -1,5 +1,5 @@
 nav {
-    height: 60px;
+    height: 7%;
     background-color: #f7f9fb;
     display: flex;
     justify-content: space-between;
@@ -114,7 +114,7 @@ nav {
     outline:1px solid#0fa37f;
 } */
 .sort{
-    top: 53px;
+    top: 7%;
     position: fixed;
     width: 100%;
     height: auto;
@@ -136,7 +136,7 @@ nav {
 .main{
     display: flex;
     width: 100%;
-    margin-top: 97px;
+    margin-top: 6.4%;
 }
 .menu{
     margin: 1% 0 0 5%;
