@@ -1,6 +1,6 @@
 // 此页面为注册页面
 import { Form,message,Popover } from 'antd'
-import { Link,useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import {FC} from "react"
 import ParticlesBg from 'particles-bg'
 import "./index.css"
@@ -28,14 +28,14 @@ const Register:FC = () => {
     }
     return (
         <div className='log-in'>
-            <div className="backs">
+            {/* <div className="backs">
                 <Link to="/" className="gobacks">
                     <img className="home" src="./home.svg" alt="svg1" />
                     返回首页
                 </Link>
-            </div>
+            </div> */}
             <div className="login-in">
-                <ParticlesBg type="circle" bg={true} />
+                <ParticlesBg type="lines" bg={true} />
                 {/* 头部标题 */}
                 <div className = "head">
                     <div >
