@@ -65,12 +65,12 @@ nav {
     color: #000;
 }
 .unregister:hover{
-    color: #417bff;
+    color: #7453FC;
 }
 .login{
     text-decoration: none;
 }
-.linktoo{
+/* .linktoo{
     cursor: pointer;
     border: none;
     background-color: #fff;
@@ -83,10 +83,13 @@ nav {
 .linktoo:hover{
     background-color: #417bff;
     color: #fff;
-}
+} */
 .personal{
     color: #000;
     text-decoration: none;
+}
+.personal:hover{
+    color: #7453FC;
 }
 /* .search{
     top: 50px;
@@ -114,7 +117,7 @@ nav {
     outline:1px solid#0fa37f;
 } */
 .sort{
-    top: 7%;
+    top: 9.9%;
     position: fixed;
     width: 100%;
     height: auto;
@@ -136,7 +139,7 @@ nav {
 .main{
     display: flex;
     width: 100%;
-    margin-top: 6.4%;
+    margin-top: 7.5%;
 }
 .menu{
     margin: 1% 0 0 5%;

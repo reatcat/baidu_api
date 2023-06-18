@@ -814,7 +814,7 @@ Categories & Collections Style
 */
 
 .categories-collections {
-  background-image: url(../../../public/dark-bg.jpg);
+  /* background-image: url(../../../public/dark-bg.jpg); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -823,7 +823,7 @@ Categories & Collections Style
 }
 
 .categories-collections:after {
-  background-image: url(../../../public/category-collection-dec.png);
+  /* background-image: url(../../../public/category-collection-dec.png); */
   width: 300px;
   height: 282px;
   position: absolute;
@@ -1089,7 +1089,7 @@ Currently Market Style
 */
 
 .currently-market {
-  background-image: url(../../../public/dark-bg.jpg);
+  /* background-image: url(../../../public/dark-bg.jpg); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1417,7 +1417,7 @@ Explore Style
 }
 
 .discover-items {
-  background-image: url(../../../public/dark-bg.jpg);
+  /* background-image: url(../../../public/dark-bg.jpg); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1622,7 +1622,7 @@ Details Page Style
 */
 
 .item-details-page {
-  background-image: url(../../../public/dark-bg.jpg);
+  /* background-image: url(../../../public/dark-bg.jpg); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1631,7 +1631,7 @@ Details Page Style
 }
 
 .item-details-page:after {
-  background-image: url(../../../public/category-collection-dec.png);
+  /* background-image: url(../../../public/category-collection-dec.png); */
   width: 300px;
   height: 282px;
   position: absolute;
@@ -1856,7 +1856,7 @@ Author Page Style
 */
 
 .author-page {
-  background-image: url(../../../public/dark-bg.jpg);
+  /* background-image: url(../../../public/dark-bg.jpg); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

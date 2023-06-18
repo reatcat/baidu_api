@@ -7,8 +7,8 @@ import axios from "axios"
 import './index.css'
 const Home:FC = ()=>{
     const nav = useNavigate()
-    const [username,setUsername] = useState('')
-    const [log,setLog] = useState(false)
+    const [username,setUsername] = useState('zzz')
+    const [log,setLog] = useState(true)
     const [open,setOpen] = useState(false)
     // 定义退出modal
     const [modal_logout, contextHolder] = Modal.useModal()
@@ -46,6 +46,10 @@ const Home:FC = ()=>{
     const content = (
         <div>
             <Link to="/Personal" className="personal">个人中心</Link>
+            <div style={{marginTop:'5px'}}>
+                <div onClick={showmodal_logout} className="unregister">退出登录</div>
+                {contextHolder}
+            </div>
             <div style={{marginTop:'5px'}}>
                 <div className="unregister" onClick={showmodal_unregister}>注销账户</div>
                 {contextHolders}
@@ -88,8 +92,8 @@ const Home:FC = ()=>{
         })
     }
     // 跳到彩蛋
-    const jumptocaidan = ()=>{
-        nav('/EasterEgg')
+    const jumptoindex = ()=>{
+        nav('/')
     }
     // 菜单栏数据3类
     const data = [
@@ -277,9 +281,9 @@ const Home:FC = ()=>{
     return (
         <div className="homes">
             {/* head */}
-            <nav>
+            {/* <nav>
                 <div className="middle">
-                    <div id="nav_productName" onClick={jumptocaidan}>
+                    <div id="nav_productName" onClick={jumptoindex}>
                         <img id="nav_image" src="./nav.png" alt="nav"/>
                         <div>
                             Better Prompt
@@ -288,7 +292,6 @@ const Home:FC = ()=>{
                 </div>
                     <div className="right">
                     <div id="nav_op3" className="nav_op" style={{display:log?'flex':'none'}}>
-                        {/* 下拉菜单，个人中心或者注销账户 */}
                         <Popover content={content} open={open} trigger="hover" onOpenChange={handleOpenChange}>
                             <a onClick={(e) => e.preventDefault()}>
                                 {username}
@@ -306,7 +309,46 @@ const Home:FC = ()=>{
                         <Link to="/Register" className="login">注册</Link>
                     </div>
                 </div>
-            </nav>
+            </nav> */}
+            <header className={"header-area header-sticky background-header"}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <nav className="main-nav" style={{margin:'0 3%'}}>
+                                <div id="nav_productName" onClick={jumptoindex}>
+                                    <img id="nav_image" style={{width:'45px'}} src="./nav.png" alt="nav"/>
+                                    <div style={{marginLeft:'10px'}}>
+                                        <div style={{color:'#7453FC',fontStyle:'italic'}}>
+                                            Better Prompt
+                                        </div>
+                                        <div style={{ fontStyle:'italic',fontSize:'15px'}}>
+                                            Faster and more efficient
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul className="nav">
+                                    <li>
+                                        <Link to='/'>首页</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/Home' className="active">全新体验</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/'>作者简介</Link>
+                                    </li>
+                                    <li>
+                                        <Popover content={content} open={open} trigger="hover" onOpenChange={handleOpenChange}>
+                                            <a onClick={(e) => e.preventDefault()}>
+                                                {username}
+                                            </a>
+                                        </Popover>
+                                    </li>
+                                </ul>   
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
             {/* 只有10个，还是别搜索了…… */}
             {/* <div className="search">
                 <input type="text" placeholder="搜索场景名" defaultValue={value} onKeyDown={e => getValue(e)} onChange={e => getValue(e)}/>
