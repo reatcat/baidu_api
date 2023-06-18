@@ -8,13 +8,13 @@
 .log-in{
     width: 100%;
     height: 100%;
-    background-color: #03529c;
+    background-color: #01213f;
 }
 .login-in {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: #034a8e;
+    background-color: #01213f;
     margin: auto;
     text-align: center;
     justify-content: center;
@@ -127,7 +127,7 @@
     width: 80%;
     padding: 10px;
     border: 1px solid rgba(255,255,255,0.25);
-    background-color: #034584;
+    background-color: #01213f;
     border-radius: 5px;
     outline: none;
     font-size: 1em;
@@ -149,7 +149,7 @@
     transform: translateX(10px) translateY(-7px);
     font-size: 0.65em;
     padding: 0 10px;
-    background-color: #034584;
+    background-color: #01213f;
     border-left: 1px solid #00dfc4;
     border-right: 1px solid #00dfc4;
 }
@@ -158,7 +158,7 @@
     padding: 10px;
     margin-top: 40px;
     border: 1px solid rgba(255,255,255,0.25);
-    background-color: #034584;
+    background-color: #01213f;
     border-radius: 5px;
     outline: none;
     font-size: 1em;
@@ -181,7 +181,7 @@
     transform: translateX(10px) translateY(-7px);
     font-size: 0.65em;
     padding: 0 10px;
-    background-color: #034584;
+    background-color: #01213f;
     border-left: 1px solid #00dfc4;
     border-right: 1px solid #00dfc4;
 }
@@ -193,7 +193,7 @@
 .button{
     cursor: pointer;
     font-size: 24px;
-    background-color: #034584;
+    background-color: #01213f;
     border: 1px solid #c7c8d8;
     border-radius: 8px;
     color: #fafafc;

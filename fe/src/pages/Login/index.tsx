@@ -32,14 +32,14 @@ const Login:FC = () => {
     return (
         <div className="log-in">
             {/* 返回首页 */}
-            <div className="backs">
+            {/* <div className="backs">
                 <Link to="/" className="gobacks">
                     <img className="home" src="./home.svg" alt="svg1" />
                     返回首页
                 </Link>
-            </div>
+            </div> */}
             <div className="login-in">
-                <ParticlesBg type="circle" bg={true} />
+                <ParticlesBg type="lines" bg={true} />
                 {/* 头部标题 */}
                 <div className = "head">
                     <div >
