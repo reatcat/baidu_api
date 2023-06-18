@@ -1,5 +1,5 @@
 /* 导航栏 */
-.nav {
+.navss {
     width: 110px;
     margin-right: 180px;
     height: 100vh;
@@ -10,7 +10,7 @@
 
 }
 
-.nav:hover {
+.navss:hover {
     width: 280px;
 }
 
@@ -53,15 +53,15 @@
     font-weight: 400;
     font-size: 20px;
 }
-.nav:hover .icon-con{
+.navss:hover .icon-con{
     filter: contrast(10);
 }
-.nav:hover .icon-con h2{
+.navss:hover .icon-con h2{
     animation: showup 1s forwards;
-}.nav:hover .icon-con p{
+}.navss:hover .icon-con p{
     animation: showup 1s forwards;
 }
-.nav:hover .con {
+.navss:hover .con {
     animation: showup 1s forwards;
 }
 @keyframes showup {
@@ -83,7 +83,7 @@
     transition: 0.5s;
 }
 
-.nav:hover .line {
+.navss:hover .line {
     width: 230px;
 }
 
@@ -136,7 +136,7 @@
     opacity: 0;
 }
 
-.nav:hover .con {
+.navss:hover .con {
     width: 160px;
     display: flex;
     justify-content: center;
@@ -144,7 +144,7 @@
     opacity: 1;
 }
 
-.nav:hover .ricon {
+.navss:hover .ricon {
     width: 60px;
     display: flex;
     justify-content: center;
@@ -177,7 +177,7 @@
     opacity: 1;
 }
 
-.nav:hover .serve {
+.navss:hover .serve {
     width: 230px;
 }
 

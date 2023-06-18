@@ -3,10 +3,14 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Personal from "./pages/Personal"
-import Easteregg from "./pages/EasterEgg"
+import Index from "./pages/Index"
 const router = createHashRouter([
     {
         path: "",
+        element: <Index />,
+    },
+    {
+        path: "/Home",
         element: <Home/>,
     },
     {
@@ -20,10 +24,6 @@ const router = createHashRouter([
     {
         path: "/Personal",
         element: <Personal/>,
-    },
-    {
-        path: "/EasterEgg",
-        element: <Easteregg />,
     }
 ])
 export default router

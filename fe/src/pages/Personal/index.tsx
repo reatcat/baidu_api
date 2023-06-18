@@ -86,7 +86,7 @@ const Personal:FC = ()=>{
   return (
     <div style={{display:'flex'}}>
         <ParticlesBg type="cobweb" bg={true} />
-        <div className="nav">
+        <div className="navss">
             {/* <!--头像--> */}
             <div className="myicon">
                 <div className="icon-img"><img src="./portrait.png" alt="portrait" /></div>
