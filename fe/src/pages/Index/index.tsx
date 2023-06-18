@@ -55,7 +55,9 @@ const Index:FC = ()=>{
                     <div className="header-text" style={{marginLeft:'5%',marginTop:'5%'}}>
                         <h6 style={{fontStyle:'italic'}}>Better Prompt</h6>
                         <h2 style={{fontStyle:'italic'}}>Faster &amp; more efficient.</h2>
-                        <p>Better Prompt 用于补全润色prompt旨在提供实用性高、稳定性强的、对社会有价值的的promt,助力人机沟通我们的服务理念是更快更高效</p>
+                        <p>Better Prompt 用于补全润色prompt旨在提供实用性高、稳定性强的、对社会有价值的的promt,助力人机沟通。<br></br>
+                            我们的服务理念是Faster and more efficient
+                        </p>
                         <div className="buttons">
                         <div className="border-button">
                             <Link to='/Login'>登录以开启新体验</Link>
