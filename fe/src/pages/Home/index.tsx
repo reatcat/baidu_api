@@ -2,7 +2,11 @@
 import { FC,useEffect,useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
-import { Modal, message,Popover,Segmented } from 'antd'
+import { Modal, message,Popover} from 'antd'
+import 'swiper/swiper-bundle.css'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation, Pagination } from 'swiper'
+
 import axios from "axios"
 import './index.css'
 const Home:FC = ()=>{
@@ -264,11 +268,11 @@ const Home:FC = ()=>{
         }
     ]
     // 获得segmented的值渲染数据
-    const [type,setType] = useState("1")
-    const gettype = (value:any) =>{
-        setType(value)
-        console.log(type)
-    }
+    // const [type,setType] = useState("1")
+    // const gettype = (value:any) =>{
+    //     setType(value)
+    //     console.log(type)
+    // }
     // 获得搜索框内容
     // const [value,setValue] = useState("")
     // const getValue = (e:any) => {
@@ -278,8 +282,35 @@ const Home:FC = ()=>{
     //     // todo
     //     // 获得值后搜索内容进行新的渲染
     // }
+    // const onSetTransition = (swiper:any,transition:any) => {
+    //     for (let i = 0; i < swiper.slides.length; i++) {
+    //         let slide = swiper.slides.eq(i)
+    //         slide.transition(transition);
+    //     }
+    // }
+
+    // const onProgress = (swiper:any, progress:any) => {
+    //     for(let i = 0; i < swiper.slides.length; i++){
+    //         let slide = swiper.slides.eq(i);
+    //         let slideProgress = swiper.slides[i].progress
+    //         let modify = 1;
+    //         if (Math.abs(slideProgress) > 1) {
+    //            modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
+    //         }
+    //         let translate = slideProgress * modify * 319 + 'px';
+    //         let scale = 1 - Math.abs(slideProgress) / 5;
+    //         let zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+    //         slide.transform('translateX(' + translate + ') scale(' + scale + ')');
+    //         slide.css('zIndex', zIndex);
+    //         slide.css('opacity', 1);
+    //         if (Math.abs(slideProgress) > 3) {
+    //             slide.css('opacity', 0);
+    //         }
+    //     }
+    // }
+
     return (
-        <div className="homes">
+        <div  >
             {/* head */}
             {/* <nav>
                 <div className="middle">
@@ -353,14 +384,63 @@ const Home:FC = ()=>{
             {/* <div className="search">
                 <input type="text" placeholder="搜索场景名" defaultValue={value} onKeyDown={e => getValue(e)} onChange={e => getValue(e)}/>
             </div> */}
+            <div className="page-heading">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <h6>Better Prompt</h6>
+                            <h2>Try Our Best Products</h2>
+                        </div>
+                    </div>
+                </div>
+                <div id="certify">
+                    <div className="swiper-container">
+                            <Swiper
+                                            key={data.length}
+                                            className="swiper-wrapper"
+                                            loop={true} //循环切换
+                                            autoplay={true}
+                                            watchSlidesProgress={true}  //Progress（进度、进程）分为swiper的progress 和每个slide单独的progress。
+                                            loopedSlides={5} //可视slide有3个，loopedSlides可设为5个或以上
+                                            slidesPerView={'auto'}
+                                            pagination={{ clickable: true }} //此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换。
+                                            navigation={true} //前后进退按纽
+                                            centeredSlides={true} //设定为true时，active slide会居中，而不是默认状态下的居左。
+                                            initialSlide={Math.floor(data.length/2)} //与centeredSlide结合使用，指定初始化的索引
+                                            modules={[Navigation,Pagination,Autoplay]}
+                                            // onProgress={onProgress} //回调函数，当Swiper的progress被改变时执行。接受swiper实例和此Swiper的progress作为参数（返回值范围一般在0-1）。
+                                            // onSetTransition={onSetTransition} //回调函数，每当设置Swiper开始过渡动画时执行。transtion获取到的是Swiper的speed值。
+                                            >
+                                        {data.map(t => {
+                                            return (
+                                                <SwiperSlide key={t.id} >
+                                                    <div className="menu-item">
+                                                        <div className="menu-item-img">
+                                                            <img src={t.img} alt={t.name} />
+                                                        </div>
+                                                        <div className="menu-item-name">
+                                                            <h2>{t.name}</h2>
+                                                            <p>{t.description}</p>
+                                                        </div>
+                                                    </div>
+                                                </SwiperSlide>
+                                            )
+                                        })}
+                            </Swiper>
+                    </div>
+                </div>
+            </div>
+
+
+
             {/* 顶部分类 */}
             {/* 引用antd-segmented */}
-            <div className="sort">
+            {/* <div className="sort"> */}
                 {/* <div className="sort-head"> */}
-                    <Segmented onChange={e => gettype(e)} className="segmented" options={[{ label: '全部', value: '1'},{ label: '日常生活', value: '2',},{ label: '职业生涯规划', value: '3',},{ label: '开发中敬请期待……', value: '4', disabled: true },]} defaultValue={"1"}/>
+                    {/* <Segmented onChange={e => gettype(e)} className="segmented" options={[{ label: '全部', value: '1'},{ label: '日常生活', value: '2',},{ label: '职业生涯规划', value: '3',},{ label: '开发中敬请期待……', value: '4', disabled: true },]} defaultValue={"1"}/> */}
                 {/* </div> */}
-            </div>
-            <div className="main">
+            {/* </div> */}
+            {/* <div className="main">
                 {
                     type === "1"?
                     <div className="menu">
@@ -406,7 +486,7 @@ const Home:FC = ()=>{
                     </div>
                 }
                 
-            </div>
+            </div> */}
         </div>
     )
 }
