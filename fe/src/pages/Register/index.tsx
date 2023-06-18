@@ -18,7 +18,7 @@ const Register:FC = () => {
             switch(code){
                 case 1:
                     message.success('注册成功!')
-                    nav('/login')
+                    nav('/Login')
                     break;
                 case 0:
                     message.warning('用户名已存在!')
