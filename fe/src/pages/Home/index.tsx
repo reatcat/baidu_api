@@ -179,94 +179,94 @@ const Home:FC = ()=>{
             description:"开发中，敬请期待……"
         }
     ]
-    const group1 = [
-        {
-            id:1,
-            name:"旅游指南",
-            group:1,
-            img:"./lvyou.svg",
-            description:"作为一个出色的旅游指南制定者并且具备雄厚的知识储备，为您提供一份准确全面、实用性强且结合当地特色的旅游指南。"
-        },
-        {
-            id:2,
-            name:"草拟标题",
-            group:1,
-            img:"./biaoti.svg",
-            description:"作为一名出色的语言工作者，为您的文章制定一个符合要求的标题，起到画龙点睛的作用。"
-        },
-        {
-            id:3,
-            name:"私人教练",
-            group:1,
-            img:"./jiaolian.svg",
-            description:"作为一名私人教练和营养师，根据您的自身条件给出您满意的训练建议。"
-        },
-        {
-            id:4,
-            name:"起名大师",
-            group:1,
-            img:"./qiming.svg",
-            description:"作为一名精通中国文化的起名大师，根据您的要求给您满意合适的名字。"
-        },
-        {
-            id:5,
-            name:"定制妆容",
-            group:1,
-            img:"./zhuangrong.svg",
-            description:"作为一名高级化妆师，根据您的自身条件和场景给出您最佳的妆容建议，让您大放光彩。"
-        },
-        {
-            id:6,
-            name:"敬请期待……",
-            group:3,
-            img:"./more.svg",
-            description:"开发中，敬请期待……"
-        }
-    ]
-    const group2 = [
-        {
-            id:1,
-            name:"润色简历",
-            group:2,
-            img:"./jianli.svg",
-            description:"作为一个资深的面试官并且非常擅长润色求职简历，为您润色您的求职简历使之更加受面试官青睐，并输出docx文档，助力您的求职。"
-        },
-        {
-            id:2,
-            name:"模拟面试",
-            group:2,
-            img:"./mianshi.svg",
-            description:"作为一个资深面试官，为您模拟出在您求职的过程中面试官可能问出来的问题，并且给出参考答案，让您在面试中展现自己，获得满意offer。"
-        },
-        {
-            id:3,
-            name:"创业启发",
-            group:2,
-            img:"./chuangye.svg",
-            description:"作为一名优秀的创业师，根据您的愿望生成创业的idea，为您生成详细的计划书，助力您的创业。"
-        },
-        {
-            id:4,
-            name:"求职帮手",
-            group:2,
-            img:"./qiuzhi.svg",
-            description:"作为一名求职达人，根据您所申请的工作以及您的相关技能和经验的信息，为您创作一封专业和有效的求职信。"
-        },
-        {
-            id:5,
-            name:"学习导师",
-            group:2,
-            img:"./daoshi.svg",
-            description:"作为一个精通所有知识的老师，以个性化和耐心的方式从多个角度全面为您传授您所感兴趣的的知识。"
-        },
-        {
-            id:6,
-            name:"敬请期待……",
-            group:3,
-            img:"./more.svg",
-            description:"开发中，敬请期待……"
-        }
-    ]
+    // const group1 = [
+    //     {
+    //         id:1,
+    //         name:"旅游指南",
+    //         group:1,
+    //         img:"./lvyou.svg",
+    //         description:"作为一个出色的旅游指南制定者并且具备雄厚的知识储备，为您提供一份准确全面、实用性强且结合当地特色的旅游指南。"
+    //     },
+    //     {
+    //         id:2,
+    //         name:"草拟标题",
+    //         group:1,
+    //         img:"./biaoti.svg",
+    //         description:"作为一名出色的语言工作者，为您的文章制定一个符合要求的标题，起到画龙点睛的作用。"
+    //     },
+    //     {
+    //         id:3,
+    //         name:"私人教练",
+    //         group:1,
+    //         img:"./jiaolian.svg",
+    //         description:"作为一名私人教练和营养师，根据您的自身条件给出您满意的训练建议。"
+    //     },
+    //     {
+    //         id:4,
+    //         name:"起名大师",
+    //         group:1,
+    //         img:"./qiming.svg",
+    //         description:"作为一名精通中国文化的起名大师，根据您的要求给您满意合适的名字。"
+    //     },
+    //     {
+    //         id:5,
+    //         name:"定制妆容",
+    //         group:1,
+    //         img:"./zhuangrong.svg",
+    //         description:"作为一名高级化妆师，根据您的自身条件和场景给出您最佳的妆容建议，让您大放光彩。"
+    //     },
+    //     {
+    //         id:6,
+    //         name:"敬请期待……",
+    //         group:3,
+    //         img:"./more.svg",
+    //         description:"开发中，敬请期待……"
+    //     }
+    // ]
+    // const group2 = [
+    //     {
+    //         id:1,
+    //         name:"润色简历",
+    //         group:2,
+    //         img:"./jianli.svg",
+    //         description:"作为一个资深的面试官并且非常擅长润色求职简历，为您润色您的求职简历使之更加受面试官青睐，并输出docx文档，助力您的求职。"
+    //     },
+    //     {
+    //         id:2,
+    //         name:"模拟面试",
+    //         group:2,
+    //         img:"./mianshi.svg",
+    //         description:"作为一个资深面试官，为您模拟出在您求职的过程中面试官可能问出来的问题，并且给出参考答案，让您在面试中展现自己，获得满意offer。"
+    //     },
+    //     {
+    //         id:3,
+    //         name:"创业启发",
+    //         group:2,
+    //         img:"./chuangye.svg",
+    //         description:"作为一名优秀的创业师，根据您的愿望生成创业的idea，为您生成详细的计划书，助力您的创业。"
+    //     },
+    //     {
+    //         id:4,
+    //         name:"求职帮手",
+    //         group:2,
+    //         img:"./qiuzhi.svg",
+    //         description:"作为一名求职达人，根据您所申请的工作以及您的相关技能和经验的信息，为您创作一封专业和有效的求职信。"
+    //     },
+    //     {
+    //         id:5,
+    //         name:"学习导师",
+    //         group:2,
+    //         img:"./daoshi.svg",
+    //         description:"作为一个精通所有知识的老师，以个性化和耐心的方式从多个角度全面为您传授您所感兴趣的的知识。"
+    //     },
+    //     {
+    //         id:6,
+    //         name:"敬请期待……",
+    //         group:3,
+    //         img:"./more.svg",
+    //         description:"开发中，敬请期待……"
+    //     }
+    // ]
     // 获得segmented的值渲染数据
     // const [type,setType] = useState("1")
     // const gettype = (value:any) =>{
@@ -308,7 +308,16 @@ const Home:FC = ()=>{
     //         }
     //     }
     // }
-
+    // 是否自动切换照片
+    // const [hover,setHover] = useState(true)
+    // const mouseenter = ()=>{
+    //     setHover(true)
+    //     console.log(hover)
+    // }
+    // const mouseleave = ()=>{
+    //     setHover(false)
+    //     console.log(hover)
+    // }
     return (
         <div  >
             {/* head */}
@@ -396,6 +405,7 @@ const Home:FC = ()=>{
                 <div id="certify">
                     <div className="swiper-container">
                             <Swiper
+                                            
                                             key={data.length}
                                             className="swiper-wrapper"
                                             loop={true} //循环切换
@@ -415,6 +425,7 @@ const Home:FC = ()=>{
                                             return (
                                                 <SwiperSlide key={t.id} >
                                                     <div className="menu-item">
+                                                        <div className="menu-item-box"></div>
                                                         <div className="menu-item-img">
                                                             <img src={t.img} alt={t.name} />
                                                         </div>
