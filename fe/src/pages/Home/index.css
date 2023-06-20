@@ -207,7 +207,7 @@ nav {
     bottom: 40px;
     background-color: #d30dd6;
 }
-.homes{
+/* .homes{
     background-attachment:fixed;
     width:100%;
     height:100%;
@@ -220,7 +220,7 @@ nav {
     -webkit-background-size: cover;
     -o-background-size: cover;
     background-position: center 0;
-}
+} */
 #certify{
     position: relative;
     width: 100%;
