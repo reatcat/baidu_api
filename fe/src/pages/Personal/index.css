@@ -7,11 +7,12 @@
     border-radius: 0 10px 10px 0;
     overflow: hidden;
     transition: 0.5s;
-
+    opacity: .5;
 }
 
 .navss:hover {
     width: 280px;
+    opacity: 1;
 }
 
 
@@ -58,7 +59,8 @@
 }
 .navss:hover .icon-con h2{
     animation: showup 1s forwards;
-}.navss:hover .icon-con p{
+}
+.navss:hover .icon-con p{
     animation: showup 1s forwards;
 }
 .navss:hover .con {
@@ -184,6 +186,7 @@
 /* 用户信息界面 */
 .change_password,
 .user_information {
+    opacity: .5;
     position: relative;
     width: 45vw;
     height: 400px;
@@ -194,7 +197,12 @@
     transition: 0.5s;
     top:150px;
 }
-
+.change_password:hover{
+    opacity: 1;
+}
+.user_information:hover{
+    opacity: 1;
+}
 .photo {
     width: 150px;
     height: 150px;
@@ -202,10 +210,9 @@
     left: -75px;
     top: 125px;
     border-radius: 20px;
-    box-shadow: 0 0 10px #c2c2c2;
+    box-shadow: 0 0 10px #640166;
     background-size: cover;
     background-repeat: no-repeat;
-    backdrop-filter: blur(50px);
 }
 
 .user_information,
@@ -264,9 +271,9 @@
 }
 .btn:hover {
     cursor: pointer;
-    background-color: #3b9dff;
+    background-color:#7453FC;
     color: white;
-    border: 1px solid #3b9dff;
+    border: 1px solid #7453FC;
 }
 
 
@@ -323,4 +330,11 @@
     margin-top: 15%;
     margin-left: 45%;
     border-radius: 8px;
+}
+.Personal-page{
+    display: flex;
+    background-image: url(../../../public/banner-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }

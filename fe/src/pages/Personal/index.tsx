@@ -24,7 +24,7 @@ const formItemLayout = {
     },
 }
 const iniuserinfo = {
-    username:'',
+    username:'111',
     email:''
 }
 const Personal:FC = ()=>{
@@ -84,15 +84,15 @@ const Personal:FC = ()=>{
         getuserinfo()
     },[])
   return (
-    <div style={{display:'flex'}}>
-        <ParticlesBg type="cobweb" bg={true} />
+    <div className="Personal-page">
+        {/* <ParticlesBg type="cobweb" bg={true} /> */}
         <div className="navss">
             {/* <!--头像--> */}
             <div className="myicon">
                 <div className="icon-img"><img src="./portrait.png" alt="portrait" /></div>
                 <div className="icon-con">
-                    <p>你好</p>
-                    <h2>{userinfo.username}</h2>
+                    <p style={{color:'black',marginLeft:'1px'}}>您好</p>
+                    <h2 style={{color:'black'}}>{userinfo.username}</h2>
                 </div>
             </div>
             {/* <!-- 分隔线 --> */}
@@ -115,7 +115,7 @@ const Personal:FC = ()=>{
                     <div className="tab_list_item" id="item3">
                         <div className="light"></div>
                         <div className="con">
-                            <Link to="/" id="goback">
+                            <Link to="/Home" id="goback">
                                 <img className="home" style={{width:'20px'}} src="./home.svg" alt="svg1" />
                                 <div style={{marginTop:'5px'}}>
                                     返回主页
