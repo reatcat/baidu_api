@@ -1,6 +1,7 @@
 // 此页面为菜单(介绍)页面
-import { FC } from "react"
+import { FC,useEffect,useState } from "react"
 import {Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 import './index.css'
 const Index:FC = ()=>{
     const nav = useNavigate()
@@ -8,6 +9,20 @@ const Index:FC = ()=>{
     const jumptoindex = ()=>{
         nav('/')
     }
+    const [log,setLog] = useState(false)
+    // 使用axios获得用户名
+    useEffect(()=>{
+        axios.get('/api/user/index')
+        .then((res)=>{
+            // 依据返回的code确定三个状态
+            const code = res.data.data.code
+            if(code === 1){
+                // const name = res.data.data.username
+                // 设置登录状态
+                setLog(true)
+            }
+        })
+    },[])
     return (
         <>
             <header className="header-area header-sticky">
@@ -30,12 +45,24 @@ const Index:FC = ()=>{
                                     <li>
                                         <Link to='/' className="active">首页</Link>
                                     </li>
-                                    <li>
-                                        <Link to='/Login'>登录</Link>
-                                    </li>
-                                    <li>
-                                        <Link to='/Register'>注册</Link>
-                                    </li>
+                                    {
+                                        log?
+                                        <li>
+                                            <Link to='/Home'>全新体验</Link>
+                                        </li>
+                                        :
+                                        <li>
+                                            <Link to='/Login'>登录</Link>
+                                        </li>
+                                    }
+                                    {
+                                        log?
+                                        <></>
+                                        :
+                                        <li>
+                                            <Link to='/Login'>注册</Link>
+                                        </li>
+                                    }
                                     <li>
                                         <Link to='/'>作者简介</Link>
                                     </li>

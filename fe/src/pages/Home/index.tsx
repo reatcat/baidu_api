@@ -10,8 +10,8 @@ import axios from "axios"
 import './index.css'
 const Home:FC = ()=>{
     const nav = useNavigate()
-    const [username,setUsername] = useState('zzz')
-    const [log,setLog] = useState(true)
+    const [username,setUsername] = useState('')
+    // const [log,setLog] = useState(true)
     const [open,setOpen] = useState(false)
     // 定义退出modal
     const [modal_logout, contextHolder] = Modal.useModal()
@@ -72,7 +72,7 @@ const Home:FC = ()=>{
                 const name = res.data.data.username
                 // 设置用户名
                 setUsername(name)
-                setLog(true)
+                // setLog(true)
             }
         })
     },[])
@@ -80,18 +80,20 @@ const Home:FC = ()=>{
     const unregister = ()=>{
         axios.post('/api/user/unregister')
         .then(()=>{
-            setLog(false)
+            // setLog(false)
             setUsername('')
             message.success('已注销当前账户')
+            nav('/')
         })
     }
     // 退出函数
     const logout = () =>{
         axios.post('/api/user/logout')
         .then(()=>{
-            setLog(false)
+            // setLog(false)
             setUsername('')
             message.success('已退出当前账户')
+            nav('/')
         })
     }
     // 跳到彩蛋
