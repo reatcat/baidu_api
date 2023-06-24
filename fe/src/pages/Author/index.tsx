@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
 import { Modal, message,Popover} from 'antd'
 import 'swiper/swiper-bundle.css'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper'
 import axios from "axios"
 import './index.css'
 const Author:FC = ()=>{
@@ -143,7 +141,77 @@ const Author:FC = ()=>{
                 </div>
             </header>
             <div className="page-heading">
-                
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <h6>Better Prompt</h6>
+                            <h2>View Details For Us</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* 项目介绍 */}
+            <div className="author-page">
+
+            </div>
+            {/* 作者介绍 */}
+            <div className="create-nft">
+                <div className="container" style={{marginLeft:'5%'}}>
+                    <div className="col-lg-8">
+                        <div className="section-heading">
+                            <div className="line-dec"></div>
+                            <h2>View Details For Author.</h2>
+                        </div>
+                    </div>
+                    <div className="rows">
+                        <div className="col-lg-4">
+                            <div className="item first-item">
+                                <div className="number">
+                                <h6>1</h6>
+                                </div>
+                                <div className="icon">
+                                {/* <img src="assets/images/icon-02.png" alt=""> */}
+                                </div>
+                                <h4>赵宇航</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div className="col-lg-4">
+                            <div className="item second-item">
+                                <div className="number">
+                                <h6>2</h6>
+                                </div>
+                                <div className="icon">
+                                {/* <img src="assets/images/icon-04.png" alt=""> */}
+                                </div>
+                                <h4>张庙松</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div className="col-lg-4">
+                            <div className="item second-item">
+                                <div className="number">
+                                <h6>3</h6>
+                                </div>
+                                <div className="icon">
+                                {/* <img src="assets/images/icon-04.png" alt=""> */}
+                                </div>
+                                <h4>沈楚明</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div className="col-lg-4">
+                            <div className="item">
+                                <div className="icon">
+                                {/* <img src="assets/images/icon-06.png" alt=""> */}
+                                </div>
+                                <h4>潘勇</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     )
