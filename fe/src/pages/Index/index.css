@@ -1856,7 +1856,7 @@ Author Page Style
 */
 
 .author-page {
-  /* background-image: url(../../../public/dark-bg.jpg); */
+  background-image: url(../../../public/dark-bg.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
