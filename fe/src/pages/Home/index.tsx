@@ -233,7 +233,7 @@ const Home:FC = ()=>{
                                         <Link to='/Home' className="active">全新体验</Link>
                                     </li>
                                     <li>
-                                        <Link to='/'>作者简介</Link>
+                                        <Link to='/'>关于我们</Link>
                                     </li>
                                     <li>
                                         <Popover content={content} open={open} trigger="hover" onOpenChange={handleOpenChange}>

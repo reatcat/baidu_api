@@ -64,7 +64,7 @@ const Index:FC = ()=>{
                                         </li>
                                     }
                                     <li>
-                                        <Link to='/'>作者简介</Link>
+                                        <Link to='/'>关于我们</Link>
                                     </li>
                                 </ul>   
                                 <a className='menu-trigger'>
