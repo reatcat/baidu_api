@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Personal from "./pages/Personal"
 import Index from "./pages/Index"
+import Author from "./pages/Author"
 const router = createHashRouter([
     {
         path: "",
@@ -20,6 +21,10 @@ const router = createHashRouter([
     {
         path: "/Register",
         element: <Register/>,
+    },
+    {
+        path: "/Author",
+        element: <Author/>,
     },
     {
         path: "/Personal",
