@@ -157,10 +157,17 @@ const Author:FC = ()=>{
             {/* 作者介绍 */}
             <div className="create-nft">
                 <div className="container" style={{marginLeft:'5%'}}>
-                    <div className="col-lg-8">
-                        <div className="section-heading">
-                            <div className="line-dec"></div>
-                            <h2>View Details For Author.</h2>
+                    <div style={{display:'flex'}}>
+                        <div className="col-lg-8" >
+                            <div className="section-heading">
+                                <div className="line-dec"></div>
+                                <h2>View Details For Author.</h2>
+                            </div>
+                        </div>
+                        <div className="address">
+                            <div className="main-button">
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">我们的项目地址</a>
+                            </div>
                         </div>
                     </div>
                     <div className="rows">
@@ -170,10 +177,10 @@ const Author:FC = ()=>{
                                 <h6>1</h6>
                                 </div>
                                 <div className="icon">
-                                {/* <img src="assets/images/icon-02.png" alt=""> */}
+                                    <img className="author-icon" src="./author01.jpg" alt="author01" />
                                 </div>
-                                <h4>赵宇航</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <h4>潘勇</h4>
+                                <p>Email:1837271943@qq.com<br/>负责文档撰写,ppt与视频制作.</p>
                             </div>
                         </div>
                         <div className="col-lg-4">
@@ -182,10 +189,10 @@ const Author:FC = ()=>{
                                 <h6>2</h6>
                                 </div>
                                 <div className="icon">
-                                {/* <img src="assets/images/icon-04.png" alt=""> */}
+                                    <img className="author-icon" src="./author02.jpg" alt="author02" />
                                 </div>
-                                <h4>张庙松</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <h4>赵宇航</h4>
+                                <p>Email:2739904664@qq.com<br/>负责前端设计与实现.</p>
                             </div>
                         </div>
                         <div className="col-lg-4">
@@ -194,19 +201,19 @@ const Author:FC = ()=>{
                                 <h6>3</h6>
                                 </div>
                                 <div className="icon">
-                                {/* <img src="assets/images/icon-04.png" alt=""> */}
+                                    <img className="author-icon" src="./author03.jpg" alt="author03" />
                                 </div>
-                                <h4>沈楚明</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <h4>张庙松</h4>
+                                <p>Email:1875912440@qq.com<br/>负责后端设计与实现.</p>
                             </div>
                         </div>
                         <div className="col-lg-4">
                             <div className="item">
                                 <div className="icon">
-                                {/* <img src="assets/images/icon-06.png" alt=""> */}
+                                    <img className="author-icon" src="./author04.jpg" alt="author04" />
                                 </div>
-                                <h4>潘勇</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <h4>沈楚明</h4>
+                                <p>Email:2271519405@qq.com<br/>负责对话核心功能实现.</p>
                             </div>
                         </div>
                     </div>

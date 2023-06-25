@@ -11,3 +11,14 @@
     margin-right: calc(-0.5 * var(--bs-gutter-x));
     margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
+.address{
+    margin: auto;
+    margin-left: 50%;
+}
+.author-icon{
+    width: 100%;
+    border-radius: 50%;
+}
+.author-icon:hover{
+    transform: scale(1.2);
+}
