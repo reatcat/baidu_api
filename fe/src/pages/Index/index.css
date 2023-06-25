@@ -1062,9 +1062,9 @@ Create NFT Style
   border-radius: 50%;
 }
 
-.create-nft .item .icon img {
+/* .create-nft .item .icon img {
   max-width: 31px;
-}
+} */
 
 .create-nft h4 {
   font-size: 20px;
