@@ -1,6 +1,7 @@
 // 此页面为菜单(介绍)页面
 import { FC,useEffect,useState } from "react"
 import {Link, useNavigate } from "react-router-dom"
+import { createThrottle } from '../../component/help'
 import axios from "axios"
 import './index.css'
 const Index:FC = ()=>{
@@ -23,13 +24,49 @@ const Index:FC = ()=>{
             }
         })
     },[])
+    // 监听滚动位置，是否显示返回顶部
+    const [show, switchShow] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > 10
+            if (shouldShow !== show) {
+                switchShow(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show])
+    // 图片是否出现
+    const [show1, switchShow1] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > 115
+            if (shouldShow !== show1) {
+                switchShow1(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show1])
+    // 文字是否出现
+    const [show2, switchShow2] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > 100
+            if (shouldShow !== show2) {
+                switchShow2(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show2])
     return (
         <>
-            <header className="header-area header-sticky">
+            <header className={show?"header-area header-sticky background-header":"header-area header-sticky"}>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <nav className="main-nav" style={{margin:'2% 5% 0 5%'}}>
+                            <nav className="main-nav" style={show?{margin:'0 3%'}:{margin:'2% 5% 0 5%'}}>
                                 <div id="nav_productName" onClick={jumptoindex}>
                                     <img id="nav_image" style={{width:'45px'}} src="./nav.png" alt="nav"/>
                                     <div style={{marginLeft:'10px'}}>
@@ -48,7 +85,7 @@ const Index:FC = ()=>{
                                     {
                                         log?
                                         <li>
-                                            <Link to='/Home'>全新体验</Link>
+                                            <Link to='/Home'>继续使用</Link>
                                         </li>
                                         :
                                         <li>
@@ -100,6 +137,63 @@ const Index:FC = ()=>{
                 </div>
                 </div>
             </div>
+            <div className="categories-collections" >
+                <div className="container">
+                    <div className="row">
+                        <div style={{textAlign:'center',fontSize:'40px',color:'white'}}>
+                            适用场景
+                        </div>
+                        <div className={show2?"changjing-show":"changjing"}>
+                            从日常生活到职业生涯规划,我们全覆盖.
+                        </div>
+                        <div style={{display:'flex',marginTop:'20px'}}>
+                            <div className={show1?"tupian-show":"tupian"}>
+                                <h1 style={{color:'black'}}>
+                                    日常生活
+                                </h1>
+                                <div className="tupian-img">
+                                    <img src="./live.svg" alt="live"/>
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            旅游指南 私人教练
+                                        </li>
+                                        <li>
+                                            起名大师 定制妆容
+                                        </li>
+                                        <li>
+                                            学习导师 敬请期待
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className={show1?"tupian-show2":"tupian"}>
+                                <h1 style={{color:'black'}}>
+                                    生涯规划
+                                </h1>
+                                <div className="tupian-img">
+                                    <img src="./work.svg" alt="live"/>
+                                </div>
+                                <div style={{marginBottom:'2px'}}>
+                                    <ul>
+                                        <li>
+                                            草拟标题 润色简历
+                                        </li>
+                                        <li>
+                                            模拟面试 创业启发
+                                        </li>
+                                        <li>
+                                            求职帮手 敬请期待
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>                       
         </>
     )
 }
