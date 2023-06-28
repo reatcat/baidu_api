@@ -9,8 +9,8 @@ import './index.css'
 const Author:FC = ()=>{
     const nav = useNavigate()
     const [username,setUsername] = useState('')
-    // const [log,setLog] = useState(true)
     const [open,setOpen] = useState(false)
+    const [log,setLog] = useState(false)
     // 定义退出modal
     const [modal_logout, contextHolder] = Modal.useModal()
     // 定义注销modal
@@ -70,7 +70,7 @@ const Author:FC = ()=>{
                 const name = res.data.data.username
                 // 设置用户名
                 setUsername(name)
-                // setLog(true)
+                setLog(true)
             }
         })
     },[])
@@ -121,9 +121,24 @@ const Author:FC = ()=>{
                                     <li>
                                         <Link to='/'>首页</Link>
                                     </li>
-                                    <li>
-                                        <Link to='/Home'>全新体验</Link>
-                                    </li>
+                                    {
+                                        log?
+                                        <li>
+                                            <Link to='/Home'>继续使用</Link>
+                                        </li>
+                                        :
+                                        <li>
+                                            <Link to='/Login'>登录</Link>
+                                        </li>
+                                    }
+                                    {
+                                        log?
+                                        <></>
+                                        :
+                                        <li>
+                                            <Link to='/Login'>注册</Link>
+                                        </li>
+                                    }
                                     <li>
                                         <Link to='/Author' className="active">关于我们</Link>
                                     </li>
