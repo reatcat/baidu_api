@@ -2191,3 +2191,73 @@ body {
   transform: translateY(-10px);
   box-shadow: 0 26px 40px -24px white;
 }
+.youshi{
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-family:'Times New Roman', Times, serif;
+  position: relative;
+  top: 300px;
+}
+.youshi-show{
+  text-align: center;
+  color: rgb(202, 202, 202);
+  font-size: 20px;
+  font-family:'Times New Roman', Times, serif;
+  position: relative;
+  top: 10px;
+  transition: .4s;
+}
+.first-wrap{
+  display: flex;
+  margin-top: 2%;
+}
+.youshi-img{
+  width: 80%;
+  margin: 0 10%;
+}
+.zhineng{
+  margin: 0 10%;
+  position: relative;
+  top: 300px;
+}
+.zhineng-show{
+  margin: 0 10%;
+  position: relative;
+  top: 40px;
+  transition: 0.6s;
+}
+.haoyong{
+  margin: 0 10%;
+  position: relative;
+  top: 300px;
+}
+.haoyong-show{
+  margin: 0 10%;
+  position: relative;
+  top: 40px;
+  transition: 0.8s;
+}
+.gaoxiao{
+  margin: 0 10%;
+  position: relative;
+  top: 300px;
+}
+.gaoxiao-show{
+  margin: 0 10%;
+  position: relative;
+  top: 40px;
+  transition: 1s;
+}
+.jieshao{
+  text-align: center;
+}
+.jieshao>h3{
+  margin-top: 10px;
+  color: #1e1e1e;
+  font-size: 26px;
+}
+.jieshao>div{
+  margin-top: 10px;
+  color: rgb(202, 202, 202);
+}

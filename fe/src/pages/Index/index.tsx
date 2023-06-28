@@ -60,6 +60,30 @@ const Index:FC = ()=>{
         document.addEventListener('scroll', listener)
         return ()=>document.removeEventListener('scroll', listener)
     }, [show2])
+    // 优势是否出现
+    const [show3, switchShow3] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > 880
+            if (shouldShow !== show3) {
+                switchShow3(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show3])
+    // 优势是否出现
+    const [show4, switchShow4] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > 1200
+            if (shouldShow !== show4) {
+                switchShow4(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show4])
     return (
         <>
             <header className={show?"header-area header-sticky background-header":"header-area header-sticky"}>
@@ -137,7 +161,7 @@ const Index:FC = ()=>{
                 </div>
                 </div>
             </div>
-            <div className="categories-collections" >
+            <div className="categories-collections" style={{padding:'120px 0 90px 0'}}>
                 <div className="container">
                     <div className="row">
                         <div style={{textAlign:'center',fontSize:'40px',color:'white'}}>
@@ -154,7 +178,7 @@ const Index:FC = ()=>{
                                 <div className="tupian-img">
                                     <img src="./live.svg" alt="live"/>
                                 </div>
-                                <div>
+                                <div style={{marginBottom:'10px'}}>
                                     <ul>
                                         <li>
                                             旅游指南 私人教练
@@ -175,7 +199,7 @@ const Index:FC = ()=>{
                                 <div className="tupian-img">
                                     <img src="./work.svg" alt="live"/>
                                 </div>
-                                <div style={{marginBottom:'2px'}}>
+                                <div style={{marginBottom:'10px'}}>
                                     <ul>
                                         <li>
                                             草拟标题 润色简历
@@ -190,10 +214,58 @@ const Index:FC = ()=>{
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-            </div>                       
+            </div>      
+            <div className="create-nft">
+                <div className="container">
+                    <div>
+                        <div style={{textAlign:'center',fontSize:'40px',color:'black'}}>
+                            我们的优势
+                        </div>
+                        <div className={show3?"youshi-show":"youshi"}>
+                            Better Prompt,让您的prompt更高效
+                        </div>
+                        <div>
+                            <div className="first-wrap">
+                                <div className={show4?"zhineng-show":"zhineng"}>
+                                    <div className="youshi-img">
+                                        <img src="./zhineng.svg" alt="zhineng"/>
+                                    </div>
+                                    <div className="jieshao">
+                                        <h3>更智能</h3>
+                                        <div>
+                                            生成的promtp更快速、更高效
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={show4?"haoyong-show":"haoyong"}>
+                                    <div className="youshi-img">
+                                        <img src="./haoyong.svg" alt="haoyong"/>
+                                    </div>
+                                    <div className="jieshao">
+                                        <h3>更好用</h3>
+                                        <div>
+                                            极简的交互设计，助您快速上手
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={show4?"gaoxiao-show":"gaoxiao"}>
+                                    <div className="youshi-img">
+                                        <img src="./gaoxiao.svg" alt="gaoxiao"/>
+                                    </div>
+                                    <div className="jieshao">
+                                        <h3>更方便</h3>
+                                        <div>
+                                            自动补全prompt，轻松完成需求
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                 
         </>
     )
 }
