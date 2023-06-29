@@ -1263,6 +1263,7 @@ Page Heading Style
 
 .page-heading {
   background-image: url(../../../public/heading-bg.jpg);
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
