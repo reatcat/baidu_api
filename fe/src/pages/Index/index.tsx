@@ -76,7 +76,7 @@ const Index:FC = ()=>{
     const [show4, switchShow4] = useState(false)
     useEffect(()=>{
         const listener = createThrottle(()=>{
-            const shouldShow = window.scrollY > 1200
+            const shouldShow = window.scrollY > 1100
             if (shouldShow !== show4) {
                 switchShow4(shouldShow)
             }
@@ -234,6 +234,7 @@ const Index:FC = ()=>{
                                     </div>
                                     <div className="jieshao">
                                         <h3>更智能</h3>
+                                        <div className="line-dec"></div>
                                         <div>
                                             生成的promtp更快速、更高效
                                         </div>
@@ -245,6 +246,7 @@ const Index:FC = ()=>{
                                     </div>
                                     <div className="jieshao">
                                         <h3>更好用</h3>
+                                        <div className="line-dec"></div>
                                         <div>
                                             极简的交互设计，助您快速上手
                                         </div>
@@ -256,6 +258,7 @@ const Index:FC = ()=>{
                                     </div>
                                     <div className="jieshao">
                                         <h3>更方便</h3>
+                                        <div className="line-dec"></div>
                                         <div>
                                             自动补全prompt，轻松完成需求
                                         </div>
