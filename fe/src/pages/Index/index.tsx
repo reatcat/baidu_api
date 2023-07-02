@@ -148,7 +148,14 @@ const Index:FC = ()=>{
                         </p>
                         <div className="buttons">
                         <div className="border-button">
-                            <Link to='/Login'>登录以开启新体验</Link>
+                            {
+                                log?
+                                <Link to='/Home'>继续使用</Link>
+                                :
+                                <Link to='/Login'>登录以开启新体验</Link>
+
+                            }
+                            
                         </div>
                         <div className="main-button">
                             <a id="docLink" target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
