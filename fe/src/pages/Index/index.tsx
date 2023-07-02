@@ -121,7 +121,7 @@ const Index:FC = ()=>{
                                         <></>
                                         :
                                         <li>
-                                            <Link to='/Login'>注册</Link>
+                                            <Link to='/Register'>注册</Link>
                                         </li>
                                     }
                                     <li>
