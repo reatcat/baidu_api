@@ -997,7 +997,7 @@ Create NFT Style
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  padding: 120px 0px;
+  padding: 130px 0px;
   position: relative;
 }
 
@@ -2141,7 +2141,7 @@ body {
   font-family:'Times New Roman', Times, serif;
   position: relative;
   top: 20px;
-  transition: .4s;
+  transition: .3s;
 }
 .tupian{
   background-color: rgb(194, 192, 192);
