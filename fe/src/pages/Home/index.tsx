@@ -1,14 +1,19 @@
 // 此页面为主页页面
-import { FC,useEffect,useState } from "react"
+import { FC,useEffect,useState,useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
 import { Modal, message,Popover} from 'antd'
 import axios from "axios"
+import copy from 'copy-to-clipboard'
 import './index.css'
+type Message = {
+    content: string;
+    sender: 'user' | 'assistant';
+    timestamp: string;
+}
 const Home:FC = ()=>{
     const nav = useNavigate()
     const [username,setUsername] = useState('')
-    // const [log,setLog] = useState(true)
     const [open,setOpen] = useState(false)
     // 定义退出modal
     const [modal_logout, contextHolder] = Modal.useModal()
@@ -123,6 +128,40 @@ const Home:FC = ()=>{
     //         }
     //     }
     // }
+    const [messages, setMessages] = useState<Message[]>([])
+    const [isLoading, setIsLoading] = useState(false)// 添加isLoading状态
+    const [textareaValue, setTextareaValue] = useState('')
+    const messageRef = useRef<HTMLDivElement>(null);
+    const handelSendmessage = ()=>{
+            const newMessage: Message = {
+                content: textareaValue,
+                sender: 'user',
+                timestamp: new Date().toLocaleTimeString(),
+            }
+            setMessages([...messages, newMessage])
+            // 发送请求前设置isLoading为true
+            setTextareaValue('')
+            setIsLoading(true)
+            // 调接口
+            setTimeout(() => {
+                const replyMessage: Message = {
+                  content: "这是回复的内容",
+                  sender: "assistant",
+                  timestamp: new Date().toLocaleTimeString(),
+                };
+                setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                setIsLoading(false);
+            }, 1000)
+    }
+    const copyanwser = (text:string)=>{
+        copy(text)
+        message.success("复制成功!")
+    }
+    useEffect(() => {
+        if (messageRef.current) {
+          messageRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages])
     return (
         <div  >
             <header className={"header-area header-sticky background-header"}>
@@ -166,7 +205,7 @@ const Home:FC = ()=>{
             </header>
             <div className="page-heading" style={{paddingTop:'5%'}}>
                 <div className="col-lg-12">
-                    <h6>Better Prompt</h6>
+                    <h6>Try It</h6>
                 </div>
                 <div className="box">
                     <div className="box-left">
@@ -194,7 +233,9 @@ const Home:FC = ()=>{
                                 </div>
                             </div>
                             <div>
-                                <button className="box-button">
+                                <button className="box-button" onClick={(e)=>{
+                                    setMessages([])
+                                }}>
                                     <div className="box-button-icon">
                                         <img src="./add.svg" alt="" />
                                     </div>
@@ -204,9 +245,83 @@ const Home:FC = ()=>{
                                 </button>
                             </div>
                         </div>
+                        <div className="margin"></div>
                     </div>
                     <div className="box-right">
-
+                        <div className="box-right-box">
+                            <div className="box-chat">
+                                {messages.map((message, index) => (
+                                    <div
+                                        key={index}
+                                        className={`message ${message.sender === 'user' ? 'user' : 'assistant'}`}
+                                        ref={index === messages.length - 1 ? messageRef : null}
+                                    >
+                                        <div className="message-container">
+                                            <div style={{marginTop:'20px'}}>
+                                                <div className="user-avatar">
+                                                    <img src={message.sender === 'user' ?"./user.svg":"./assistant.svg"} alt="avatar" />
+                                                </div>
+                                            </div>
+                                            <div className="message-item">
+                                                {
+                                                    message.sender === 'user'?
+                                                    <></>
+                                                    :
+                                                    <div className="actions">
+                                                        <div className="action" onClick={(e)=>copyanwser(message.content)}>
+                                                            复制
+                                                        </div>
+                                                        
+                                                    </div>
+                                                }
+                                                <div className="message-body">
+                                                    {message.content}
+                                                </div>
+                                            </div>
+                                            <div className="message-time">
+                                                <div >
+                                                    {message.timestamp} 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                    <div className="message assistant">
+                                        <div className="message-container">
+                                            <div style={{marginTop:'20px'}}>
+                                                <div className="user-avatar">
+                                                    <img src="./assistant.svg" alt="avatar" />
+                                                </div>
+                                            </div>
+                                            <div className="message-item">
+                                                <div className="message-body">
+                                                   加载中
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="box-right-input">
+                                <div className="box-right-input-bottom">
+                                    <textarea value={textareaValue} className="send-question" placeholder="Ctrl + Enter发送" 
+                                    onChange={(e) => setTextareaValue(e.target.value)}
+                                    onKeyDown={(e) =>{if (e.ctrlKey && e.key === 'Enter') {
+                                        handelSendmessage()
+                                    }} }
+                                    rows={3}></textarea>
+                                    <button className="send-button" onClick={handelSendmessage}>
+                                        <div className="send-button-icon">
+                                            <img src="./send.svg" alt="send" />
+                                        </div>
+                                        <div className="send">
+                                            发送
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
