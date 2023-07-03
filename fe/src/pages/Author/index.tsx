@@ -155,7 +155,7 @@ const Author:FC = ()=>{
                     </div>
                 </div>
             </header>
-            <div className="page-heading">
+            <div className="page-heading" style={{minHeight:'10vh'}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
