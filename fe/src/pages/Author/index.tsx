@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
 import { Modal, message,Popover} from 'antd'
 import 'swiper/swiper-bundle.css'
+import { createThrottle } from '../../component/help'
 import axios from "axios"
 import './index.css'
 const Author:FC = ()=>{
@@ -98,6 +99,39 @@ const Author:FC = ()=>{
     const jumptoindex = ()=>{
         nav('/')
     }
+    const [show1, switchShow] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > 10
+            if (shouldShow !== show1) {
+                switchShow(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show1])
+    const [show2, switchShow2] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > window.innerHeight * 1.3
+            if (shouldShow !== show2) {
+                switchShow2(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show2])
+    const [show3, switchShow3] = useState(false)
+    useEffect(()=>{
+        const listener = createThrottle(()=>{
+            const shouldShow = window.scrollY > window.innerHeight * 2
+            if (shouldShow !== show3) {
+                switchShow3(shouldShow)
+            }
+        }, 500) as EventListener;
+        document.addEventListener('scroll', listener)
+        return ()=>document.removeEventListener('scroll', listener)
+    }, [show3])
     return (
         <div>
             {/* head */}
@@ -155,19 +189,73 @@ const Author:FC = ()=>{
                     </div>
                 </div>
             </header>
-            <div className="page-heading" style={{minHeight:'10vh'}}>
+            <div className="page-heading" style={{minHeight:'10vh',paddingTop:'6%'}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <h6>Better Prompt</h6>
+                            {/* <h6>Better Prompt</h6> */}
                             <h2>View Details For Us</h2>
                         </div>
                     </div>
                 </div>
             </div>
             {/* 项目介绍 */}
-            <div className="author-page">
-
+            <div className="author-page" style={{paddingTop:'0'}}>
+                <div className="author-head">
+                    <h1>产品介绍</h1>
+                    <div style={{fontStyle:'italic',fontSize:'18px'}}>遇见，就现在，别样体验，立刻开始！</div>
+                </div>
+                <div className="author-item first">
+                    <img className="intro-img" src="./intro-1.png" alt="intro-1" />
+                    <div className="intro-text">
+                        <h1 >简洁的页面设计</h1>
+                        <div>
+                            兼具美感和艺术感，散发浓郁的科技氛围.
+                        </div>
+                        <div>
+                            完美融合了现代设计，细腻而独特.
+                        </div>
+                    </div>
+                </div>
+                <div className={`${show1? 'author-item second' : ''}`} >
+                    <div className="intro-text" >
+                        <h1>多样的场景分布</h1>
+                        <div>
+                            从日常生活到职业规划.
+                        </div>
+                        <div>
+                            不同场景带来不同体验.
+                        </div>
+                    </div>
+                    <img style={{marginLeft:'20%'}} className="intro-img" src="./intro-2.png" alt="intro-2" />    
+                </div>
+                <div className={`${show2? 'author-item third' : ''}`}>
+                    <img className="intro-img" src="./intro-3.png" alt="intro-3" />
+                    <div className="intro-text">
+                        <h1 >强大的优势</h1>
+                        <div>
+                            更智能：生成的promtp更快速、更高效
+                        </div>
+                        <div>
+                            更好用：极简的交互设计，助您快速上手
+                        </div>
+                        <div>
+                            更方便：自动补全prompt，轻松完成需求
+                        </div>
+                    </div>
+                </div>
+                <div className={`${show3? 'author-item forth' : ''}`} >
+                    <div className="intro-text" >
+                        <h1>便捷的交互能力</h1>
+                        <div>
+                            实时对话，实时交互.
+                        </div>
+                        <div>
+                            自动引导补全promt，助力您的每一步.
+                        </div>
+                    </div>
+                    <img style={{marginLeft:'15%'}} className="intro-img" src="./intro-4.png" alt="intro-4" />    
+                </div>
             </div>
             {/* 作者介绍 */}
             <div className="create-nft">
@@ -176,7 +264,7 @@ const Author:FC = ()=>{
                         <div className="col-lg-8" >
                             <div className="section-heading">
                                 <div className="line-dec"></div>
-                                <h2>View Details For Author.</h2>
+                                <h2>View Details For Authors.</h2>
                             </div>
                         </div>
                         <div className="address">
