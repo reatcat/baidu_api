@@ -176,13 +176,18 @@ const Author:FC = ()=>{
                                     <li>
                                         <Link to='/Author' className="active">关于我们</Link>
                                     </li>
-                                    <li>
-                                        <Popover content={content} open={open} trigger="hover" onOpenChange={handleOpenChange}>
-                                            <a onClick={(e) => e.preventDefault()}>
-                                                {username}
-                                            </a>
-                                        </Popover>
-                                    </li>
+                                    {
+                                        log?
+                                        <li>
+                                            <Popover content={content} open={open} trigger="hover" onOpenChange={handleOpenChange}>
+                                                <a onClick={(e) => e.preventDefault()}>
+                                                    {username}
+                                                </a>
+                                            </Popover>
+                                        </li>
+                                        :
+                                        <></>
+                                    }
                                 </ul>   
                             </nav>
                         </div>
