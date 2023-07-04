@@ -55,7 +55,7 @@ const Index:FC = ()=>{
     const [show2, switchShow2] = useState(false)
     useEffect(()=>{
         const listener = createThrottle(()=>{
-            const shouldShow = window.scrollY > 100
+            const shouldShow = window.scrollY > window.innerHeight * 0.5
             if (shouldShow !== show2) {
                 switchShow2(shouldShow)
             }
@@ -67,7 +67,7 @@ const Index:FC = ()=>{
     const [show3, switchShow3] = useState(false)
     useEffect(()=>{
         const listener = createThrottle(()=>{
-            const shouldShow = window.scrollY > 880
+            const shouldShow = window.scrollY > window.innerHeight
             if (shouldShow !== show3) {
                 switchShow3(shouldShow)
             }
@@ -79,7 +79,7 @@ const Index:FC = ()=>{
     const [show4, switchShow4] = useState(false)
     useEffect(()=>{
         const listener = createThrottle(()=>{
-            const shouldShow = window.scrollY > 1100
+            const shouldShow = window.scrollY > window.innerHeight * 1.2
             if (shouldShow !== show4) {
                 switchShow4(shouldShow)
             }

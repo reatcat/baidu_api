@@ -2212,6 +2212,7 @@ body {
 .first-wrap{
   display: flex;
   margin-top: 2%;
+  justify-content: space-between;
 }
 .youshi-img{
   width: 80%;
