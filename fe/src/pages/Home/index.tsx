@@ -296,6 +296,11 @@ const Home:FC = ()=>{
                                             </div>
                                             <div className="message-item">
                                                 <div className="message-body">
+                                                    <div className="loading">
+                                                        <div></div>
+                                                        <div></div>
+                                                        <div></div>
+                                                    </div>
                                                    加载中
                                                 </div>
                                             </div>
