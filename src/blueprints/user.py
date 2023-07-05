@@ -14,16 +14,14 @@ user_bp = Blueprint('user', __name__)
 @user_bp.route('/index', methods=['GET', 'POST'])
 def user_index():
     username = session.get('username')
-    request = session.get('request')
-    print("request :{}".format(request))
-    data = []
+    
     # ! DEBUG
     print("Index session: {}".format(session))
     if username is not None:
         print("Username: {}".format(username))
     # ! DEBUG
     if user_utils.get_user_by_name(username) is not None:
-        result = jsonify(data={'username': username, 'code': 1,'return_data':data})
+        result = jsonify(data={'username': username, 'code': 1})
         # ! DEBUG
         print("Get username success!")
         # ! DEBUG
@@ -32,6 +30,25 @@ def user_index():
         return response
     return make_response()
 
+@user_bp.route('/chat', methods=['GET', 'POST'])
+def user_caht():
+    if request.method == 'POST':
+        data = request.get_json()
+        data_info = json.loads(data['data'])
+        # print(type(data_info))
+        # todo
+        # 调接口，获得回复内容
+        # input：data_info :string
+        # out:message :string
+
+
+
+        message = "cnm"
+        result = jsonify(data={'message': message, 'code': 1})
+        response = make_response(result)
+        print(response.json)
+        return response
+    return "chat"
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():

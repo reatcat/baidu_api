@@ -143,15 +143,27 @@ const Home:FC = ()=>{
             setTextareaValue('')
             setIsLoading(true)
             // 调接口
-            setTimeout(() => {
+            axios.post('/api/user/chat',{data:JSON.stringify(textareaValue)})
+            .then((res)=>{
+                // 依据返回的code确定三个状态
+                const text = res.data.data.message
                 const replyMessage: Message = {
-                  content: "这是回复的内容",
-                  sender: "assistant",
-                  timestamp: new Date().toLocaleTimeString(),
-                };
-                setMessages((prevMessages) => [...prevMessages, replyMessage]);
-                setIsLoading(false);
-            }, 1000)
+                    content: text,
+                    sender: "assistant",
+                    timestamp: new Date().toLocaleTimeString(),
+                  };
+                  setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                  setIsLoading(false);
+            })
+            // setTimeout(() => {
+            //     const replyMessage: Message = {
+            //       content: "这是回复的内容",
+            //       sender: "assistant",
+            //       timestamp: new Date().toLocaleTimeString(),
+            //     };
+            //     setMessages((prevMessages) => [...prevMessages, replyMessage]);
+            //     setIsLoading(false);
+            // }, 1000)
     }
     const copyanwser = (text:string)=>{
         copy(text)
