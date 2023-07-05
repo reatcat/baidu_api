@@ -2,7 +2,7 @@
 import { FC,useEffect,useState,useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
-import { Modal, message,Popover} from 'antd'
+import { Modal, message,Popover,Switch} from 'antd'
 import axios from "axios"
 import copy from 'copy-to-clipboard'
 import './index.css'
@@ -129,41 +129,89 @@ const Home:FC = ()=>{
     //     }
     // }
     const [messages, setMessages] = useState<Message[]>([{
-        content:'你好,这是生成prompt，请输入XXXX，下面是一个示例，请您按照格式输入xxxxxxxxxxxxxxxxxxxxxxxx',
+        content:'您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
         sender:'assistant',
         timestamp:new Date().toLocaleTimeString()
     }])
     const [isLoading, setIsLoading] = useState(false)// 添加isLoading状态
     const [textareaValue, setTextareaValue] = useState('')
     const messageRef = useRef<HTMLDivElement>(null)
-    // improveprompt
-    const handelSendmessage = ()=>{
-        const newMessage: Message = {
-            content: textareaValue,
-            sender: 'user',
-            timestamp: new Date().toLocaleTimeString(),
+    const [mode,setMode] = useState(1)
+    const changemode = (e:any)=>{
+        console.log(e)
+        if(e){
+            setMode(1)
+            const newMessage: Message = {
+                content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                sender: 'assistant',
+                timestamp: new Date().toLocaleTimeString(),
+            }
+            setMessages([newMessage])
+        }else{
+            setMode(2)
+            const newMessage: Message = {
+                content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                sender: 'assistant',
+                timestamp: new Date().toLocaleTimeString(),
+            }
+            setMessages([newMessage])   
         }
-        setMessages([...messages, newMessage])
-        // 发送请求前设置isLoading为true
-        setTextareaValue('')
-        setIsLoading(true)
-        // 调接口
-        axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:2}})
-        .then((res)=>{
-            // 依据返回的code确定三个状态
-            const text = res.data.data.message
+    }
+    const handelSendmessage = ()=>{
+        if(messages.length === 3){
+            message.warning("对话过多,请新开启一轮对话吧~")
+        }else{
+            const newMessage: Message = {
+                content: textareaValue,
+                sender: 'user',
+                timestamp: new Date().toLocaleTimeString(),
+            }
+            setMessages([...messages, newMessage])
+            // 发送请求前设置isLoading为true
+            setTextareaValue('')
+            setIsLoading(true)
+            // 调接口
             const replyMessage: Message = {
-                content: text,
+                content: "222",
                 sender: "assistant",
                 timestamp: new Date().toLocaleTimeString(),
                 };
-                setMessages((prevMessages) => [...prevMessages, replyMessage]);
-                setIsLoading(false);
-        })
+            setMessages((prevMessages) => [...prevMessages, replyMessage]);
+            setIsLoading(false);
+            // axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
+            // .then((res)=>{
+            //     // 依据返回的code确定三个状态
+            //     const text = res.data.data.message
+            //     const replyMessage: Message = {
+            //         content: text,
+            //         sender: "assistant",
+            //         timestamp: new Date().toLocaleTimeString(),
+            //         };
+            //     setMessages((prevMessages) => [...prevMessages, replyMessage]);
+            //     setIsLoading(false);
+            // })
+        }
     }
     const copyanwser = (text:string)=>{
         copy(text)
         message.success("复制成功!")
+    }
+    const newchat = ()=>{
+        if(mode === 1){
+            const newMessage: Message = {
+                content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                sender: 'assistant',
+                timestamp: new Date().toLocaleTimeString(),
+            }
+            setMessages([newMessage])
+        }else{
+            const newMessage: Message = {
+                content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                sender: 'assistant',
+                timestamp: new Date().toLocaleTimeString(),
+            }
+            setMessages([newMessage])
+        }
     }
     useEffect(() => {
         if (messageRef.current) {
@@ -228,10 +276,32 @@ const Home:FC = ()=>{
                                 <img src="./nav.png" alt="icon"  />
                             </div>
                         </div>
+                        <div >
+                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'5%'}}>
+                                <div style={{fontStyle:'italic',fontSize:'15px'}}>
+                                    点击右侧进行模式切换
+                                </div>
+                                <div>
+                                    <Switch onChange={(e)=>{changemode(e)}} style={{backgroundColor:'#4A2EB3'}} checkedChildren="生成" unCheckedChildren="优化" defaultChecked />
+                                </div>
+                            </div>
+                            <div style={{marginTop:'10%'}}>
+                                {
+                                    mode === 1?
+                                    <div>
+                                        Example:11
+                                    </div>
+                                    :
+                                    <div>
+                                        Example:22
+                                    </div>
+                                }
+                            </div>
+                        </div>
                         <div className="box-left-bottom">
                             <div style={{display:'inline-flex'}}>
                                 <div className="address">
-                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
+                                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
                                         <button className="box-button">
                                             <div className="address-icon">
                                                 <img src="./address.svg" alt="address" />
@@ -241,9 +311,7 @@ const Home:FC = ()=>{
                                 </div>
                             </div>
                             <div>
-                                <button className="box-button" onClick={(e)=>{
-                                    setMessages([])
-                                }}>
+                                <button className="box-button" onClick={(e)=>newchat()}>
                                     <div className="box-button-icon">
                                         <img src="./add.svg" alt="" />
                                     </div>
@@ -253,7 +321,6 @@ const Home:FC = ()=>{
                                 </button>
                             </div>
                         </div>
-                        <div className="margin"></div>
                     </div>
                     <div className="box-right">
                         <div className="box-right-box">

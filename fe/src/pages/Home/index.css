@@ -386,7 +386,7 @@ nav {
 .box-left-bottom{
     display: flex;
     justify-content:space-between;
-    padding-top: 180%;
+    padding-top: 100%;
 }
 .box-button{
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,.05);
@@ -526,6 +526,9 @@ nav {
     flex-direction: row-reverse;
 }
 .assistant{
+    max-width: 70%;
+    text-align: left;
+    letter-spacing: 1.5px;
     flex-direction: row;
 }
 .user>.message-container{
