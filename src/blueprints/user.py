@@ -30,25 +30,32 @@ def user_index():
         return response
     return make_response()
 
-@user_bp.route('/chat', methods=['GET', 'POST'])
-def user_caht():
+@user_bp.route('/gen_prompt', methods=['GET', 'POST'])
+def user_gen_prompt():
     if request.method == 'POST':
         data = request.get_json()
-        data_info = json.loads(data['data'])
-        # print(type(data_info))
+        text = data['data']['text']
+        code = data['data']['code']
+        print(text)
+        print(code)
+        message = ""
         # todo
         # 调接口，获得回复内容
-        # input：data_info :string
+        # input：text :string
         # out:message :string
+        # 生成prompt
+        if code == 1:
+            message = "这是生成prompt"
+        # 优化prompt
+        elif code ==2:
+            message = "这是优化prompt"
 
-
-
-        message = "cnm"
         result = jsonify(data={'message': message, 'code': 1})
         response = make_response(result)
         print(response.json)
         return response
     return "chat"
+
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
