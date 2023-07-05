@@ -128,42 +128,38 @@ const Home:FC = ()=>{
     //         }
     //     }
     // }
-    const [messages, setMessages] = useState<Message[]>([])
+    const [messages, setMessages] = useState<Message[]>([{
+        content:'你好,这是生成prompt，请输入XXXX，下面是一个示例，请您按照格式输入xxxxxxxxxxxxxxxxxxxxxxxx',
+        sender:'assistant',
+        timestamp:new Date().toLocaleTimeString()
+    }])
     const [isLoading, setIsLoading] = useState(false)// 添加isLoading状态
     const [textareaValue, setTextareaValue] = useState('')
-    const messageRef = useRef<HTMLDivElement>(null);
+    const messageRef = useRef<HTMLDivElement>(null)
+    // improveprompt
     const handelSendmessage = ()=>{
-            const newMessage: Message = {
-                content: textareaValue,
-                sender: 'user',
+        const newMessage: Message = {
+            content: textareaValue,
+            sender: 'user',
+            timestamp: new Date().toLocaleTimeString(),
+        }
+        setMessages([...messages, newMessage])
+        // 发送请求前设置isLoading为true
+        setTextareaValue('')
+        setIsLoading(true)
+        // 调接口
+        axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:2}})
+        .then((res)=>{
+            // 依据返回的code确定三个状态
+            const text = res.data.data.message
+            const replyMessage: Message = {
+                content: text,
+                sender: "assistant",
                 timestamp: new Date().toLocaleTimeString(),
-            }
-            setMessages([...messages, newMessage])
-            // 发送请求前设置isLoading为true
-            setTextareaValue('')
-            setIsLoading(true)
-            // 调接口
-            axios.post('/api/user/chat',{data:JSON.stringify(textareaValue)})
-            .then((res)=>{
-                // 依据返回的code确定三个状态
-                const text = res.data.data.message
-                const replyMessage: Message = {
-                    content: text,
-                    sender: "assistant",
-                    timestamp: new Date().toLocaleTimeString(),
-                  };
-                  setMessages((prevMessages) => [...prevMessages, replyMessage]);
-                  setIsLoading(false);
-            })
-            // setTimeout(() => {
-            //     const replyMessage: Message = {
-            //       content: "这是回复的内容",
-            //       sender: "assistant",
-            //       timestamp: new Date().toLocaleTimeString(),
-            //     };
-            //     setMessages((prevMessages) => [...prevMessages, replyMessage]);
-            //     setIsLoading(false);
-            // }, 1000)
+                };
+                setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                setIsLoading(false);
+        })
     }
     const copyanwser = (text:string)=>{
         copy(text)
