@@ -34,6 +34,7 @@ def user_index():
 def user_gen_prompt():
     if request.method == 'POST':
         data = request.get_json()
+        print(data)
         query = data['data']['text']
         code = data['data']['code']
         print(code)
