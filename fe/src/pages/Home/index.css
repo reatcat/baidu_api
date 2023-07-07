@@ -386,7 +386,6 @@ nav {
 .box-left-bottom{
     display: flex;
     justify-content:space-between;
-    padding-top: 100%;
 }
 .box-button{
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,.05);
@@ -671,5 +670,21 @@ nav {
     transform: scale(1);
   }
 }
-
+/* 创建渐变背景色 */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .rule{
+        text-align: left;
+        font-style: italic;
+        font-size: 20px;
+        background: linear-gradient(to right, #fa25cf, #4b4bf5);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+}
+.text{
+    margin-top: 2%;
+    font-size: 15px;
+    text-align: justify;
+}
   

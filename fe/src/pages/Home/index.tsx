@@ -289,16 +289,50 @@ const Home:FC = ()=>{
                                 {
                                     mode === 1?
                                     <div>
-                                        Example:11
+                                        <div className="rule">
+                                            输入格式:
+                                        </div>
+                                        <div className="text">
+                                            角色 目标 背景 标准 (空格分开)
+                                        </div>
+                                        <div className="rule" style={{marginTop:'5%'}}>
+                                            Example:
+                                        </div>
+                                        <div className="text">
+                                            撰稿人 撰写论文 大学项目 专业、清晰
+                                        </div>
+                                        <div className="rule" style={{marginTop:'5%'}}>
+                                            Explanation:
+                                        </div>
+                                        <div className="text">
+                                            角色--你想要prompt扮演的角色<br></br>
+                                            目标--你想要prompt实现的事情
+                                            背景--你需要这个prompt的背景
+                                            标准--你希望prompt是什么样的
+                                        </div>
                                     </div>
                                     :
                                     <div>
-                                        Example:22
+                                        <div className="rule">
+                                            输入格式:
+                                        </div>
+                                        <div className="text">
+                                            原Prompt 
+                                            修改要求 (空格分开)
+                                        </div>
+                                        <div className="rule" style={{marginTop:'5%'}}>
+                                            Example:
+                                        </div>
+                                        <div className="text">
+                                        {/* + prompt<br></br> */}
+                                        请作为一个专业的撰稿人，为大学项目撰写高质量、清晰的论文。在撰写过程中，请确保遵循项目的具体要求，准确理解论文的主题和目的，并充分利用可靠的事实和数据来支持你的观点。 对论文结构有描述。
+                                        {/* + 修改要求<br></br> */}
+                                        </div>
                                     </div>
                                 }
                             </div>
                         </div>
-                        <div className="box-left-bottom">
+                        <div className="box-left-bottom" style={mode === 1?{paddingTop:'43%'}:{paddingTop:'36%'}}>
                             <div style={{display:'inline-flex'}}>
                                 <div className="address">
                                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
