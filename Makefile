@@ -34,18 +34,11 @@ help:
 	@echo help
 	@echo - Show prompt messages.
 
-# .PHONY: run
-# run: $(BIN)/activate
-# 	$(PYTHON) app.py
-
-# $(BIN)/activate: requirements.txt
-# 	$(PYTHON) -m venv $(VENV)
-# 	$(PIP) install -r requirements.txt
-
 .PHONY: build
 build:
 	rm -rf src/templates
-	cd frontend && npm i && npm run build
+	pip install -r requirements
+	cd fe && npm i && npm run build
 
 run: build
 	$(BROWSER) http://127.0.0.1:5000
@@ -57,8 +50,8 @@ quick-run:
 
 .PHONY: image
 image:
-	docker build -t dodo-image .
-	docker run --name dodohub -p 5000:5000 dodo-image
+	docker build -t baidu_api .
+	docker run --name baidu_api -p 5000:5000 baidu_api
 
 .PHONY: requirements
 requirements:
