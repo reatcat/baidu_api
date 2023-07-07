@@ -34,9 +34,8 @@ def user_index():
 def user_gen_prompt():
     if request.method == 'POST':
         data = request.get_json()
-        text = data['data']['text']
+        query = data['data']['text']
         code = data['data']['code']
-        print(text)
         print(code)
         message = ""
         # todo
@@ -48,6 +47,10 @@ def user_gen_prompt():
             message = "这是生成prompt"
         # 优化prompt
         elif code ==2:
+            sen = query.split('&',1)
+            query = sen[0]
+            demand = sen[1]
+
             message = "这是优化prompt"
 
         result = jsonify(data={'message': message, 'code': 1})
