@@ -2,6 +2,7 @@ import os
 import click
 import shutil
 from flask import Flask
+from flask_cors import CORS
 
 from src.extensions import db, cache
 from src.blueprints.user import user_bp
@@ -61,5 +62,7 @@ db.init_app(app)
 
 """ Cache 初始化 """
 cache.init_app(app)
+# 保证跨域访问
+cors = CORS(app, resources={r"/*": {"origins": "*"}}, methods=['GET', 'HEAD', 'POST', 'OPTIONS'])
 # ! 以下引用不可移动
 from src import views
