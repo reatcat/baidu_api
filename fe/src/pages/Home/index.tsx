@@ -102,32 +102,6 @@ const Home:FC = ()=>{
     const jumptoindex = ()=>{
         nav('/')
     }
-    // const onSetTransition = (swiper:any,transition:any) => {
-    //     for (let i = 0; i < swiper.slides.length; i++) {
-    //         let slide = swiper.slides.eq(i)
-    //         slide.transition(transition);
-    //     }
-    // }
-
-    // const onProgress = (swiper:any, progress:any) => {
-    //     for(let i = 0; i < swiper.slides.length; i++){
-    //         let slide = swiper.slides.eq(i);
-    //         let slideProgress = swiper.slides[i].progress
-    //         let modify = 1;
-    //         if (Math.abs(slideProgress) > 1) {
-    //            modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
-    //         }
-    //         let translate = slideProgress * modify * 319 + 'px';
-    //         let scale = 1 - Math.abs(slideProgress) / 5;
-    //         let zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
-    //         slide.transform('translateX(' + translate + ') scale(' + scale + ')');
-    //         slide.css('zIndex', zIndex);
-    //         slide.css('opacity', 1);
-    //         if (Math.abs(slideProgress) > 3) {
-    //             slide.css('opacity', 0);
-    //         }
-    //     }
-    // }
     const [messages, setMessages] = useState<Message[]>([{
         content:'您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
         sender:'assistant',
@@ -158,7 +132,7 @@ const Home:FC = ()=>{
         }
     }
     const handelSendmessage = ()=>{
-        if(messages.length === 3){
+        if(messages.length >= 3){
             message.warning("对话过多,请新开启一轮对话吧~")
         }else{
             const newMessage: Message = {
@@ -170,26 +144,17 @@ const Home:FC = ()=>{
             // 发送请求前设置isLoading为true
             setTextareaValue('')
             setIsLoading(true)
-            // 调接口
-            const replyMessage: Message = {
-                content: "222",
-                sender: "assistant",
-                timestamp: new Date().toLocaleTimeString(),
-                };
-            setMessages((prevMessages) => [...prevMessages, replyMessage]);
-            setIsLoading(false);
-            // axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
-            // .then((res)=>{
-            //     // 依据返回的code确定三个状态
-            //     const text = res.data.data.message
-            //     const replyMessage: Message = {
-            //         content: text,
-            //         sender: "assistant",
-            //         timestamp: new Date().toLocaleTimeString(),
-            //         };
-            //     setMessages((prevMessages) => [...prevMessages, replyMessage]);
-            //     setIsLoading(false);
-            // })
+            axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
+            .then((res)=>{
+                const text = res.data.data.message
+                const replyMessage: Message = {
+                    content: text,
+                    sender: "assistant",
+                    timestamp: new Date().toLocaleTimeString(),
+                    };
+                setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                setIsLoading(false);
+            })
         }
     }
     const copyanwser = (text:string)=>{
@@ -332,7 +297,7 @@ const Home:FC = ()=>{
                                 }
                             </div>
                         </div>
-                        <div className="box-left-bottom" style={mode === 1?{paddingTop:'43%'}:{paddingTop:'36%'}}>
+                        <div className="box-left-bottom" style={mode === 1?{paddingTop:'43%'}:{paddingTop:'52%'}}>
                             <div style={{display:'inline-flex'}}>
                                 <div className="address">
                                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
