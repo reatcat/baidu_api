@@ -38,7 +38,9 @@ help:
 build:
 	rm -rf src/templates
 	pip install -r requirements
+	flask initdb
 	cd fe && npm i && npm run build
+
 
 run: build
 	$(BROWSER) http://127.0.0.1:5000
