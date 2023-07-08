@@ -24,7 +24,7 @@ const formItemLayout = {
     },
 }
 const iniuserinfo = {
-    username:'111',
+    username:'',
     email:''
 }
 const Personal:FC = ()=>{
