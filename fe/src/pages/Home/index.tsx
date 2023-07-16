@@ -196,7 +196,7 @@ const Home:FC = ()=>{
         if(!isFavorite){
             // 发送prompt与时间
             // console.log({text:JSON.stringify(text),time:JSON.stringify(time)})
-            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text),time:JSON.stringify(time)}})
+            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text)}})
             .then((res)=>{
                 const code = res.data.data.code
                 if(code === 1){
@@ -207,7 +207,7 @@ const Home:FC = ()=>{
         // 取消收藏
         else{
             // 发送prompt与时间
-            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text),time:JSON.stringify(time)}})
+            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text)}})
             .then((res)=>{
                 const code = res.data.data.code
                 if(code === 1){
