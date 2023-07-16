@@ -7,7 +7,7 @@ from flask_login import login_required, logout_user, login_user
 from flask import session
 
 import src.utils.user as user_utils
-
+import src.utils.save as save_utils
 user_bp = Blueprint('user', __name__)
 
 
@@ -68,6 +68,62 @@ def user_gen_prompt():
         return response
     return "chat"
 
+@user_bp.route('/save_prompt', methods=['GET', 'POST'])
+def user_save_prompt():
+    '''
+    用户保存（收藏prompt）
+    Returns: 返回cur_id :int
+
+    '''
+    if request.method == 'POST':
+        username = session.get('username')
+        if user_utils.get_user_by_name(username) is not None:
+            print(f'get username :'+username)
+            data = request.get_json()
+            print(data)
+            data_info = json.loads(data['data'])
+            new_save = save_utils.create_save_from_fe(data_info)
+            user = user_utils.get_user_by_name(username)
+            cur_id = save_utils.add_new_save_to_user(new_save,user)
+            result = jsonify(data={'cur_id': cur_id})
+            response = make_response(result)
+            print(response.json)
+            return response
+
+@user_bp.route('/delete_prompt/<int:save_id>', methods=['GET', 'POST'])
+def user_delete_prompt(save_id:int):
+    '''
+    用户删除收藏
+    Returns:返回code:1
+
+    '''
+    if request.method == 'POST':
+        username = session.get('username')
+        if user_utils.get_user_by_name(username) is not None:
+            print(f'get username :'+username)
+        state_code = save_utils.delete_save_byid(save_id)
+        result = jsonify(data={'data': 1})
+        response = make_response(result)
+        return response
+
+@user_bp.route('/get_saved_prompt', methods=['GET', 'POST'])
+def get_saved_prompt():
+    '''
+
+    Returns:返回列表中的所有save项
+
+    '''
+    username = session.get('username')
+    user = user_utils.get_user_by_name(username)
+    save_info_dict_list = user_utils.get_saves_info_of_user(user)
+    save_info_dict_list.sort(key=lambda k: k.get('Id', 0))# 根据Id进行排序
+
+    print(save_info_dict_list)
+    for save_info_dict in save_info_dict_list:
+        print(json.dump(save_info_dict,indent=1))
+    result = jsonify(data = {'data':json.dumps(save_info_dict_list)})
+    response = make_response(result)
+    return response
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():

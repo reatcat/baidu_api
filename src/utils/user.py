@@ -9,6 +9,7 @@ from flask import session
 from src.models import User
 from src.extensions import db, APP_FILE
 
+import src.utils.save as save_utils
 
 """ 调试信息 """
 
@@ -301,5 +302,27 @@ def unregister_user(username: str):
     db.session.delete(user)
     db.session.commit()
     return 1
+def add_save_for_user(save_info:list,user:User):
+    pass
+def add_save_for_user_byid(save_info:list,user_id: int):
+    user = get_user(user_id)
+    return add_save_for_user(save_info,user)
+
+def get_saves_info_of_user(user) -> list[dict]:
+    if user is None:
+        return None
+    # 创建 save_info_dict_list
+    save_info_dict_list = list()
+    for save in user.saves:
+        # 创建 save_info_dict
+        save_info_dict = save_utils.get_save_info(save)
+        # 将 save_info_dict 添加到 save_info_dict_list
+        save_info_dict_list.append(save_info_dict)
+
+    # 返回 save_info_dict_list
+    return save_info_dict_list
 
 
+def get_saves_info_of_user_byid(u_id: int) -> list[dict]:
+    user = get_user(u_id)
+    return get_saves_info_of_user(user)

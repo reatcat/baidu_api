@@ -1,6 +1,8 @@
 import os
 import string
 import random
+from datetime import datetime
+
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -32,6 +34,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(30))  # 邮箱 (optional)
     userspace = db.Column(db.String(50), nullable=False, unique=True)  # 用户空间路径
 
+    saves = db.relationship('Save',back_populates='creator',cascade = 'all')
     def set_password(self, password: str):
         """设置密码
 
@@ -81,3 +84,31 @@ class User(db.Model, UserMixin):
         if not os.path.exists(self.userspace):
             os.mkdir(self.userspace)
 
+class Save(db.Model):
+    """
+    保存的收藏prompt
+    """
+    id = db.Column(db.Integer, primary_key=True)  # 主键
+    prompt = db.Column(db.Text, nullable=False)  # prompt的文本内容
+    time= db.Column(db.DateTime, nullable=False)  # 创建时间
+
+
+    save_path = db.Column(db.String(50))  # 收集存放路径
+    creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # 创建者 ID
+    creator = db.relationship('User', back_populates='saves')
+
+
+    def set_prompt(self, prompt: str):
+        self.prompt = prompt
+    def set_time(self):
+        self.time = datetime.now().replace(microsecond=0)
+
+
+    def set_save_path(self):
+        # self.collection_path = os.path.join(self.creator.userspace, self.id)
+        self.save_path = os.path.join(
+            str(self.creator.userspace),
+            'prompt_' + str(self.id)
+        )
+        if not os.path.exists(self.save_path):
+            os.mkdir(self.save_path)
