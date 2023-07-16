@@ -1,5 +1,5 @@
 // 此页面为个人中心页面
-// 个人中心包括我的信息，修改密码，返回主页
+// 个人中心包括我的信息，修改密码，,我的收藏，返回主页
 import { FC,useEffect,useState } from "react"
 import { Link } from "react-router-dom"
 import {
@@ -7,8 +7,9 @@ import {
     Input,
     message,
 } from 'antd'
-import ParticlesBg from 'particles-bg'
+// import ParticlesBg from 'particles-bg'
 // import 'antd/lib/input/style/css'
+import copy from 'copy-to-clipboard'
 import './index.css'
 import axios from "axios"
 // 局部生效样式
@@ -27,11 +28,17 @@ const iniuserinfo = {
     username:'',
     email:''
 }
+type favorite = {
+    content: string
+    time: string
+}
 const Personal:FC = ()=>{
     const [form] = Form.useForm()
     const [modify,setModify] = useState(false) 
-    const [modified,setModified] = useState(false)
+    const [modified,setModified] = useState(0)
     const [userinfo,setUserinfo] = useState(iniuserinfo)
+    // 定义item
+    const [item,setItem] = useState<favorite[]>([])
     // 修改信息完成
     const finishmodify = (values:string)=>{
         userinfo.username = JSON.parse(JSON.stringify(values)).username === undefined?userinfo.username:JSON.parse(JSON.stringify(values)).username
@@ -80,9 +87,53 @@ const Personal:FC = ()=>{
             setUserinfo({...userinfo})
         })
     }
+    // 获得item
+    const getitem = ()=>{
+        axios.get('/api/admin/xxxx')
+        .then((res)=>{
+            // 获得传递的item列表
+            // 传给我一个列表我自己解析就可以
+
+
+
+
+
+
+
+        })
+    }
     useEffect(()=>{
         getuserinfo()
+        getitem()
     },[])
+    const copytext = (text:string)=>{
+
+        copy(text)
+        message.success("复制成功!")
+    }
+    const deleteitem = (index:number)=>{
+        // 删除某一个item
+        // 传递索引过去删除，返回一个code=1
+        axios.post('/api/admin/xxxx',{data:index})
+        .then((res)=>{
+            const code = res.data.data.code
+            if(code === 1){
+                message.success("删除成功!")
+                // 重新渲染item
+                const updatedData = [...item]
+                updatedData.splice(index, 1)
+                setItem(updatedData)
+            }
+        })
+        message.success("删除成功!")
+        // 重新渲染item
+        const updatedData = [...item]
+        updatedData.splice(index, 1)
+        setItem(updatedData)
+
+        
+
+    }
   return (
     <div className="Personal-page">
         {/* <ParticlesBg type="cobweb" bg={true} /> */}
@@ -98,18 +149,25 @@ const Personal:FC = ()=>{
             {/* <!-- 分隔线 --> */}
             <div className="line"></div>
                 <div className="tab_list">
-                    <div className="tab_list_item" id="item1" onClick={()=>setModified(false)}>
+                    <div className="tab_list_item" id="item1" onClick={()=>setModified(0)}>
                         <div className="light"></div>
                         <div className="con">
                             <img className="home" style={{width:'20px'}} src="./personel.svg" alt="svg1" />
                             我的信息
                         </div>
                     </div>
-                    <div className="tab_list_item" id="item2" onClick={()=>setModified(true)}>
+                    <div className="tab_list_item" id="item2" onClick={()=>setModified(1)}>
                         <div className="light"></div>
                         <div className="con">
                             <img className="home" style={{width:'20px'}} src="./password.svg" alt="svg1" />
                             修改密码
+                        </div>
+                    </div>
+                    <div className="tab_list_item" id="item2" onClick={()=>setModified(2)}>
+                        <div className="light"></div>
+                        <div className="con">
+                            <img className="home" style={{width:'20px'}} src="./favorite.svg" alt="svg1" />
+                            我的收藏
                         </div>
                     </div>
                     <div className="tab_list_item" id="item3">
@@ -125,7 +183,7 @@ const Personal:FC = ()=>{
                     </div>
             </div>
         </div>
-        <div className="item user_information" style={{display:modified?'none':'flex'}}>
+        <div className="item user_information" style={{display:modified === 0?'flex':'none'}}>
             <div className="user_data">
                 <img src="./portrait.png" alt="" className="photo"/>
                 <div id="data1" style={{display:modify?'none':'flex'}}>
@@ -166,7 +224,7 @@ const Personal:FC = ()=>{
                 </div>
             </div>
         </div>
-        <div className="item change_password" style={{display:modified?'flex':'none'}}>
+        <div className="item change_password" style={{display:modified === 1?'flex':'none'}}>
             <div className="user_data" >
                  <Form
                     className={styles.coupon}
@@ -243,6 +301,61 @@ const Personal:FC = ()=>{
                     </Form.Item>
                 </Form>
             </div>
+        </div>
+        <div className="item myfaovrite" style={{display:modified === 2?'block':'none'}}>
+            {item.map((t,i)=>(
+                <div className="card">
+                <div className="cardHead">
+                    <div className='cardItems cardTitleBox'>
+                        <div className='itemTitles cardTitle'>
+                            收藏时间
+                        </div>
+                        <div className="member_title" style={{color:'grey'}}>
+                            {t.time}
+                        </div>
+                    </div>
+                </div>
+                <div className="cardBody">
+                    <div className="cardItems cardTimesBox">
+                        <div className="member_times" >
+                        {t.content}
+                        </div>
+                    </div>
+                </div>
+                <div className="cardItems cardOperateBox">
+                    <div className="member_operate">
+                        <div className="operate" onClick={(e)=>copytext(t.content)}>复制</div>
+                        <div className="operate" onClick={(e)=>deleteitem(i)}>删除</div>
+                    </div>
+                </div>
+            </div>
+            ))}
+            {/* <div className="card">
+                <div className="cardHead">
+                    <div className='cardItems cardTitleBox'>
+                        <div className='itemTitles cardTitle'>
+                            收藏时间
+                        </div>
+                        <div className="member_title" style={{color:'grey'}}>
+                            2023/7/16 13:43:06
+                        </div>
+                    </div>
+                </div>
+                <div className="cardBody">
+                    <div className="cardItems cardTimesBox">
+                        <div className="member_times" >
+                        您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~
+                        </div>
+                    </div>
+                </div>
+                <div className="cardItems cardOperateBox">
+                    <div className="member_operate">
+                        <div className="operate" >复制</div>
+                        <div className="operate" >删除</div>
+                    </div>
+                </div>
+            </div> */}
+
         </div>
     </div>
   )
