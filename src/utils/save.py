@@ -79,7 +79,7 @@ def add_new_save_to_user(save,user):
     db.session.commit()
     return save.id
 
-def create_save_from_fe(data_info:dict)->Save:
+def create_save_from_str(data_info:str)->Save:
     """
     由传输的数据创建
     Args:
@@ -88,7 +88,7 @@ def create_save_from_fe(data_info:dict)->Save:
     Returns:
 
     """
-    prompt = data_info['text']
+    prompt = data_info
     new_save = create_save(
         prompt=prompt
     )

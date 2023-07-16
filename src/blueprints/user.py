@@ -81,8 +81,9 @@ def user_save_prompt():
             print(f'get username :'+username)
             data = request.get_json()
             print(data)
-            data_info = json.loads(data['data'])
-            new_save = save_utils.create_save_from_fe(data_info)
+            # data_info = json.loads(data['data'])
+            data_info = data['data']
+            new_save = save_utils.create_save_from_str(data_info)
             user = user_utils.get_user_by_name(username)
             cur_id = save_utils.add_new_save_to_user(new_save,user)
             result = jsonify(data={'cur_id': cur_id})
