@@ -105,7 +105,7 @@ const Home:FC = ()=>{
     const [messages, setMessages] = useState<Message[]>([{
         content:'您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
         sender:'assistant',
-        timestamp:new Date().toLocaleTimeString()
+        timestamp:new Date().toLocaleString()
     }])
     const [isLoading, setIsLoading] = useState(false)// 添加isLoading状态
     const [textareaValue, setTextareaValue] = useState('')
@@ -118,7 +118,7 @@ const Home:FC = ()=>{
             const newMessage: Message = {
                 content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
-                timestamp: new Date().toLocaleTimeString(),
+                timestamp: new Date().toLocaleString(),
             }
             setMessages([newMessage])
         }else{
@@ -126,7 +126,7 @@ const Home:FC = ()=>{
             const newMessage: Message = {
                 content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
-                timestamp: new Date().toLocaleTimeString(),
+                timestamp: new Date().toLocaleString(),
             }
             setMessages([newMessage])   
         }
@@ -135,26 +135,30 @@ const Home:FC = ()=>{
         if(messages.length >= 3){
             message.warning("对话过多,请新开启一轮对话吧~")
         }else{
-            const newMessage: Message = {
-                content: textareaValue,
-                sender: 'user',
-                timestamp: new Date().toLocaleTimeString(),
+            if(textareaValue.length === 0){
+                message.warning("对话不能为空哦~")
+            }else{
+                const newMessage: Message = {
+                    content: textareaValue,
+                    sender: 'user',
+                    timestamp: new Date().toLocaleString(),
+                }
+                setMessages([...messages, newMessage])
+                // 发送请求前设置isLoading为true
+                setTextareaValue('')
+                setIsLoading(true)
+                axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
+                .then((res)=>{
+                    const text = res.data.data.message
+                    const replyMessage: Message = {
+                        content: text,
+                        sender: "assistant",
+                        timestamp: new Date().toLocaleTimeString(),
+                        };
+                    setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                    setIsLoading(false);
+                })
             }
-            setMessages([...messages, newMessage])
-            // 发送请求前设置isLoading为true
-            setTextareaValue('')
-            setIsLoading(true)
-            axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
-            .then((res)=>{
-                const text = res.data.data.message
-                const replyMessage: Message = {
-                    content: text,
-                    sender: "assistant",
-                    timestamp: new Date().toLocaleTimeString(),
-                    };
-                setMessages((prevMessages) => [...prevMessages, replyMessage]);
-                setIsLoading(false);
-            })
         }
     }
     const copyanwser = (text:string)=>{
@@ -166,14 +170,14 @@ const Home:FC = ()=>{
             const newMessage: Message = {
                 content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
-                timestamp: new Date().toLocaleTimeString(),
+                timestamp: new Date().toLocaleString(),
             }
             setMessages([newMessage])
         }else{
             const newMessage: Message = {
                 content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
-                timestamp: new Date().toLocaleTimeString(),
+                timestamp: new Date().toLocaleString(),
             }
             setMessages([newMessage])
         }
@@ -183,6 +187,36 @@ const Home:FC = ()=>{
           messageRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [messages])
+
+    const [isFavorite, setIsFavorite] = useState(false) // 使用状态来追踪按钮的收藏状态
+
+    const handleClick = (text:string,time:string) => {
+        // 分情况发送数据
+        // 收藏
+        if(!isFavorite){
+            // 发送prompt与时间
+            // console.log({text:JSON.stringify(text),time:JSON.stringify(time)})
+            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text),time:JSON.stringify(time)}})
+            .then((res)=>{
+                const code = res.data.data.code
+                if(code === 1){
+                    message.success("收藏成功!")
+                }
+            })
+        }
+        // 取消收藏
+        else{
+            // 发送prompt与时间
+            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text),time:JSON.stringify(time)}})
+            .then((res)=>{
+                const code = res.data.data.code
+                if(code === 1){
+                    message.success("取消收藏!")
+                }
+            })
+        }
+        setIsFavorite(!isFavorite) // 切换收藏状态
+    }
     return (
         <div  >
             <header className={"header-area header-sticky background-header"}>
@@ -341,11 +375,19 @@ const Home:FC = ()=>{
                                                     message.sender === 'user'?
                                                     <></>
                                                     :
+                                                    index === 0?
+                                                    <></>
+                                                    :
                                                     <div className="actions">
+                                                        <div className="action2" onClick={(e)=>handleClick(message.content,message.timestamp)} >
+                                                            <div id="star" className={`${isFavorite ? 'fill' : ''}`} ></div>
+                                                            <div>
+                                                                {isFavorite ? "取消收藏":"点击收藏"}
+                                                            </div>
+                                                        </div>
                                                         <div className="action" onClick={(e)=>copyanwser(message.content)}>
                                                             复制
                                                         </div>
-                                                        
                                                     </div>
                                                 }
                                                 <div className="message-body">

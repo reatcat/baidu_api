@@ -287,7 +287,7 @@ const Author:FC = ()=>{
                                 <div className="icon">
                                     <img className="author-icon" src="./author01.jpg" alt="author01" />
                                 </div>
-                                <h4>潘勇</h4>
+                                <h4>队员1</h4>
                                 <p>Email:1837271943@qq.com<br/>负责文档撰写,ppt与视频制作.</p>
                             </div>
                         </div>
@@ -299,7 +299,7 @@ const Author:FC = ()=>{
                                 <div className="icon">
                                     <img className="author-icon" src="./author02.jpg" alt="author02" />
                                 </div>
-                                <h4>赵宇航</h4>
+                                <h4>队员2</h4>
                                 <p>Email:2739904664@qq.com<br/>负责前端设计与实现.</p>
                             </div>
                         </div>
@@ -311,7 +311,7 @@ const Author:FC = ()=>{
                                 <div className="icon">
                                     <img className="author-icon" src="./author03.jpg" alt="author03" />
                                 </div>
-                                <h4>张庙松</h4>
+                                <h4>队员3</h4>
                                 <p>Email:1875912440@qq.com<br/>负责后端设计与实现.</p>
                             </div>
                         </div>
@@ -320,7 +320,7 @@ const Author:FC = ()=>{
                                 <div className="icon">
                                     <img className="author-icon" src="./author04.jpg" alt="author04" />
                                 </div>
-                                <h4>沈楚明</h4>
+                                <h4>队员4</h4>
                                 <p>Email:2271519405@qq.com<br/>负责对话核心功能实现.</p>
                             </div>
                         </div>
