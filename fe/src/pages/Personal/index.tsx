@@ -29,6 +29,7 @@ const iniuserinfo = {
     email:''
 }
 type favorite = {
+    id:string
     content: string
     time: string
 }
@@ -89,17 +90,19 @@ const Personal:FC = ()=>{
     }
     // 获得item
     const getitem = ()=>{
-        axios.get('/api/admin/xxxx')
+        axios.get('/api/user/get_saved_prompt')
         .then((res)=>{
             // 获得传递的item列表
             // 传给我一个列表我自己解析就可以
-
-
-
-
-
-
-
+            const itemlist = res.data.data.data
+            for(let i = 0;i < itemlist.length;i++){
+                let tmp:favorite = {
+                    id:itemlist[i].Id,
+                    content:itemlist[i].Prompt,
+                    time:itemlist[i].Time
+                }
+                item.push(tmp)
+            }
         })
     }
     useEffect(()=>{
@@ -111,28 +114,21 @@ const Personal:FC = ()=>{
         copy(text)
         message.success("复制成功!")
     }
-    const deleteitem = (index:number)=>{
+    const deleteitem = (index:number,id:string)=>{
         // 删除某一个item
         // 传递索引过去删除，返回一个code=1
-        axios.post('/api/admin/xxxx',{data:index})
-        .then((res)=>{
-            const code = res.data.data.code
-            if(code === 1){
-                message.success("删除成功!")
-                // 重新渲染item
-                const updatedData = [...item]
-                updatedData.splice(index, 1)
-                setItem(updatedData)
-            }
+        axios.post(`/api/user/delete_prompt/${id}`)
+            .then((res)=>{
+                console.log(res)
+                const code = res.data.data.data
+                if(code === 1){
+                    message.success("删除成功!")
+                    // 重新渲染item
+                    const updatedData = [...item]
+                    updatedData.splice(index, 1)
+                    setItem(updatedData)
+                }
         })
-        message.success("删除成功!")
-        // 重新渲染item
-        const updatedData = [...item]
-        updatedData.splice(index, 1)
-        setItem(updatedData)
-
-        
-
     }
   return (
     <div className="Personal-page">
@@ -303,6 +299,12 @@ const Personal:FC = ()=>{
             </div>
         </div>
         <div className="item myfaovrite" style={{display:modified === 2?'block':'none'}}>
+            {
+                item.length === 0?
+                <div className="rule" style={{textAlign:'center',fontSize:'20px',marginTop:'10%'}}>暂无收藏哦</div>
+                :
+                <></>
+            }
             {item.map((t,i)=>(
                 <div className="card">
                 <div className="cardHead">
@@ -325,7 +327,7 @@ const Personal:FC = ()=>{
                 <div className="cardItems cardOperateBox">
                     <div className="member_operate">
                         <div className="operate" onClick={(e)=>copytext(t.content)}>复制</div>
-                        <div className="operate" onClick={(e)=>deleteitem(i)}>删除</div>
+                        <div className="operate" onClick={(e)=>deleteitem(i,t.id)}>删除</div>
                     </div>
                 </div>
             </div>
