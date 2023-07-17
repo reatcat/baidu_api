@@ -100,7 +100,7 @@ def get_save_info(save) -> dict:
     save_info_dict = dict()
     save_info_dict['Id'] = save.id
     save_info_dict['Prompt'] = save.prompt
-    save_info_dict['Time'] = save.time
+    save_info_dict['Time'] = save.time.strftime("%Y-%m-%d %H:%M:%S")
 
     return save_info_dict
 

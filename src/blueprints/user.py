@@ -103,7 +103,7 @@ def user_delete_prompt(save_id:int):
         if user_utils.get_user_by_name(username) is not None:
             print(f'get username :'+username)
         state_code = save_utils.delete_save_byid(save_id)
-        result = jsonify(data={'data': 1})
+        result = jsonify(data={'data': state_code})
         response = make_response(result)
         return response
 
@@ -121,8 +121,9 @@ def get_saved_prompt():
 
     print(save_info_dict_list)
     for save_info_dict in save_info_dict_list:
-        print(json.dump(save_info_dict,indent=1))
-    result = jsonify(data = {'data':json.dumps(save_info_dict_list)})
+        print(json.dumps(save_info_dict,indent=1))
+    result = jsonify(data={'data': save_info_dict_list})
+    # result = jsonify(data = {'data':json.dumps(save_info_dict_list)})
     response = make_response(result)
     return response
 
