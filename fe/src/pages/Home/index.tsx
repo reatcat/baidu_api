@@ -7,9 +7,10 @@ import axios from "axios"
 import copy from 'copy-to-clipboard'
 import './index.css'
 type Message = {
-    content: string;
-    sender: 'user' | 'assistant';
-    timestamp: string;
+    content: string
+    sender: 'user' | 'assistant'
+    timestamp: string
+    isfavorite: boolean
 }
 const Home:FC = ()=>{
     const nav = useNavigate()
@@ -105,7 +106,8 @@ const Home:FC = ()=>{
     const [messages, setMessages] = useState<Message[]>([{
         content:'您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
         sender:'assistant',
-        timestamp:new Date().toLocaleString()
+        timestamp:new Date().toLocaleString(),
+        isfavorite:false
     }])
     const [isLoading, setIsLoading] = useState(false)// 添加isLoading状态
     const [textareaValue, setTextareaValue] = useState('')
@@ -119,6 +121,7 @@ const Home:FC = ()=>{
                 content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
                 timestamp: new Date().toLocaleString(),
+                isfavorite:false
             }
             setMessages([newMessage])
         }else{
@@ -127,6 +130,7 @@ const Home:FC = ()=>{
                 content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
                 timestamp: new Date().toLocaleString(),
+                isfavorite:false
             }
             setMessages([newMessage])   
         }
@@ -142,6 +146,7 @@ const Home:FC = ()=>{
                     content: textareaValue,
                     sender: 'user',
                     timestamp: new Date().toLocaleString(),
+                    isfavorite:false
                 }
                 setMessages([...messages, newMessage])
                 // 发送请求前设置isLoading为true
@@ -154,6 +159,7 @@ const Home:FC = ()=>{
                         content: text,
                         sender: "assistant",
                         timestamp: new Date().toLocaleTimeString(),
+                        isfavorite:false
                         };
                     setMessages((prevMessages) => [...prevMessages, replyMessage]);
                     setIsLoading(false);
@@ -171,6 +177,7 @@ const Home:FC = ()=>{
                 content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
                 timestamp: new Date().toLocaleString(),
+                isfavorite:false
             }
             setMessages([newMessage])
         }else{
@@ -178,6 +185,7 @@ const Home:FC = ()=>{
                 content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                 sender: 'assistant',
                 timestamp: new Date().toLocaleString(),
+                isfavorite:false
             }
             setMessages([newMessage])
         }
@@ -188,39 +196,42 @@ const Home:FC = ()=>{
         }
     }, [messages])
 
-    const [isFavorite, setIsFavorite] = useState(false) // 使用状态来追踪按钮的收藏状态
+    // const [isFavorite, setIsFavorite] = useState(false) // 使用状态来追踪按钮的收藏状态
     const [id,setId] = useState('')
-    const handleClick = (text:string,time:string) => {
+    const handleClick = (text:string,isFavorite:boolean) => {
         // 分情况发送数据
         // 收藏
         if(!isFavorite){
-            // 发送prompt与时间
-            console.log({data:JSON.stringify(text)})
+            // 发送prompt
             axios.post('/api/user/save_prompt',{data:JSON.stringify(text)})
             .then((res)=>{
-                console.log(res)
-                // const code = res.data.data.code
                 const tid = res.data.data.cur_id
-                console.log(tid)
-                // if(code === 1){
                 message.success("收藏成功!")
                 setId(tid)
-                // }
             })
         }
         // 取消收藏
         else{
-            // 发送prompt与时间
             axios.post(`/api/user/delete_prompt/${id}`)
             .then((res)=>{
-                console.log(res)
                 const code = res.data.data.data
                 if(code === 1){
                     message.success("已取消收藏!")
                 }
             })
         }
-        setIsFavorite(!isFavorite) // 切换收藏状态
+        // setIsFavorite(!isFavorite) // 切换收藏状态
+
+        const updatedList = messages.map((message) => {
+            if (message.content === text) {
+              return {
+                ...message,
+                isfavorite: !message.isfavorite, // 切换isfavorite状态
+              };
+            }
+            return message
+          });
+          setMessages(updatedList)
     }
     return (
         <div  >
@@ -384,10 +395,10 @@ const Home:FC = ()=>{
                                                     <></>
                                                     :
                                                     <div className="actions">
-                                                        <div className="action2" onClick={(e)=>handleClick(message.content,message.timestamp)} >
-                                                            <div id="star" className={`${isFavorite ? 'fill' : ''}`} ></div>
+                                                        <div className="action2" onClick={(e)=>handleClick(message.content,message.isfavorite)} >
+                                                            <div id="star" className={`${message.isfavorite ? 'fill' : ''}`} ></div>
                                                             <div>
-                                                                {isFavorite ? "取消收藏":"点击收藏"}
+                                                                {message.isfavorite ? "取消收藏":"点击收藏"}
                                                             </div>
                                                         </div>
                                                         <div className="action" onClick={(e)=>copyanwser(message.content)}>
