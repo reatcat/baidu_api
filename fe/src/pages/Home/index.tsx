@@ -189,29 +189,34 @@ const Home:FC = ()=>{
     }, [messages])
 
     const [isFavorite, setIsFavorite] = useState(false) // 使用状态来追踪按钮的收藏状态
-
+    const [id,setId] = useState('')
     const handleClick = (text:string,time:string) => {
         // 分情况发送数据
         // 收藏
         if(!isFavorite){
             // 发送prompt与时间
-            // console.log({text:JSON.stringify(text),time:JSON.stringify(time)})
-            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text)}})
+            console.log({data:JSON.stringify(text)})
+            axios.post('/api/user/save_prompt',{data:JSON.stringify(text)})
             .then((res)=>{
-                const code = res.data.data.code
-                if(code === 1){
-                    message.success("收藏成功!")
-                }
+                console.log(res)
+                // const code = res.data.data.code
+                const tid = res.data.data.cur_id
+                console.log(tid)
+                // if(code === 1){
+                message.success("收藏成功!")
+                setId(tid)
+                // }
             })
         }
         // 取消收藏
         else{
             // 发送prompt与时间
-            axios.post('/api/user/xxxx',{data:{text:JSON.stringify(text)}})
+            axios.post(`/api/user/delete_prompt/${id}`)
             .then((res)=>{
-                const code = res.data.data.code
+                console.log(res)
+                const code = res.data.data.data
                 if(code === 1){
-                    message.success("取消收藏!")
+                    message.success("已取消收藏!")
                 }
             })
         }
