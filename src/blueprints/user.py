@@ -51,7 +51,7 @@ def user_gen_prompt():
             else:
                 message = "请按照要求输入哦！"
         # 优化prompt
-        elif code ==2:
+        elif code == 2:
             if '&' in query:
                 sen = query.split('&',1)
                 query = sen[0]
@@ -67,7 +67,32 @@ def user_gen_prompt():
         print(response.json)
         return response
     return "chat"
+@user_bp.route('/gen_muti_prompt', methods=['GET', 'POST'])
+def user_gen_muti_prompt():
+    # 多轮对话生成
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        query = data['data']['text']
+        history = data['data']['history']
+        code = data['data']['code']
+        print(code)
+        message = ""
+        if code == 3 or code == 4:
+            # todo
+            # 调接口，获得回复内容
+            # input：text :string
+            # out:message :string
+            # history:string 历史数据
+            # 生成prompt
+            print(query)
+            # message = ""
 
+        result = jsonify(data={'message': message, 'code': 2})
+        response = make_response(result)
+        print(response.json)
+        return response
+    return "chat"
 @user_bp.route('/save_prompt', methods=['GET', 'POST'])
 def user_save_prompt():
     '''
