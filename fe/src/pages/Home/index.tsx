@@ -174,9 +174,9 @@ const Home:FC = ()=>{
                         setIsLoading(false);
                     })
                 }else{
-                    const updatedList = [...messages]
-                    updatedList.splice(0, 1) // 从索引 0 开始删除一个元素
-                    axios.post('/api/user/gen_muti_prompt',{data:{text:JSON.stringify(textareaValue),code:mode + 2,mes:JSON.stringify(updatedList)}})
+                    // const updatedList = [...messages]
+                    // updatedList.splice(0, 1) // 从索引 0 开始删除一个元素
+                    axios.post('/api/user/gen_muti_prompt',{data:{text:JSON.stringify(textareaValue),code:mode + 2,history:JSON.stringify(messages)}})
                     .then((res)=>{
                         const text = res.data.data.message
                         const replyMessage: Message = {
