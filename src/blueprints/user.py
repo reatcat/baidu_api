@@ -75,17 +75,40 @@ def user_gen_muti_prompt():
         print(data)
         query = data['data']['text']
         history = data['data']['history']
+        # 解析字符串形式的历史数据
+        try:
+            history = json.loads(history)
+        except json.JSONDecodeError:
+            print("Invalid history format. Unable to parse the history string.")
+            history = []
         code = data['data']['code']
-        print(code)
+        print(f'history length {len(history)}')
+
+        print("Original History:")
+        print(history)
+        formatted_history = []
+        if len(history) > 1:
+            for i, item in enumerate(history):
+                if i == 0:
+                    continue  # Skip the first element
+                role = item.get("sender")
+                content = item.get('content')
+                if role is not None and content is not None:
+                    formatted_history.append({"role": role, "content": content})
+
+        print("\nFormatted History:")
+        print(formatted_history)
+
         message = ""
         if code == 3 or code == 4:
             # todo
-            # 调接口，获得回复内容
-            # input：text :string
+            # 如果是上下文多轮对话
+            # input：query :string
             # out:message :string
-            # history:string 历史数据
+            # Formatted history:list 历史数据
             # 生成prompt
             print(query)
+            message = "这里是多轮的回答内容"
             # message = ""
 
         result = jsonify(data={'message': message, 'code': 2})
