@@ -113,8 +113,8 @@ const Home:FC = ()=>{
     const [textareaValue, setTextareaValue] = useState('')
     const messageRef = useRef<HTMLDivElement>(null)
     const [mode,setMode] = useState(1)
+    const [mode2,setMode2] = useState(1)
     const changemode = (e:any)=>{
-        console.log(e)
         if(e){
             setMode(1)
             const newMessage: Message = {
@@ -135,10 +135,18 @@ const Home:FC = ()=>{
             setMessages([newMessage])   
         }
     }
-    const handelSendmessage = ()=>{
-        if(messages.length >= 3){
-            message.warning("对话过多,请新开启一轮对话吧~")
+    const changemode2 = (e:any)=>{
+        if(e){
+            setMode2(1)
         }else{
+            setMode2(2)
+        }
+        
+    }
+    const handelSendmessage = ()=>{
+        if(mode2 === 1 && messages.length >= 3){
+            message.warning("对话过多,请新开启一轮对话吧~")
+        }else {
             if(textareaValue.length === 0){
                 message.warning("对话不能为空哦~")
             }else{
@@ -152,18 +160,36 @@ const Home:FC = ()=>{
                 // 发送请求前设置isLoading为true
                 setTextareaValue('')
                 setIsLoading(true)
-                axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
-                .then((res)=>{
-                    const text = res.data.data.message
-                    const replyMessage: Message = {
-                        content: text,
-                        sender: "assistant",
-                        timestamp: new Date().toLocaleTimeString(),
-                        isfavorite:false
-                        };
-                    setMessages((prevMessages) => [...prevMessages, replyMessage]);
-                    setIsLoading(false);
-                })
+                if(mode2 === 1){
+                    axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
+                    .then((res)=>{
+                        const text = res.data.data.message
+                        const replyMessage: Message = {
+                            content: text,
+                            sender: "assistant",
+                            timestamp: new Date().toLocaleTimeString(),
+                            isfavorite:false
+                            };
+                        setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                        setIsLoading(false);
+                    })
+                }else{
+                    const updatedList = [...messages]
+                    updatedList.splice(0, 1) // 从索引 0 开始删除一个元素
+                    axios.post('/api/user/gen_muti_prompt',{data:{text:JSON.stringify(textareaValue),code:mode + 2,mes:JSON.stringify(updatedList)}})
+                    .then((res)=>{
+                        const text = res.data.data.message
+                        const replyMessage: Message = {
+                            content: text,
+                            sender: "assistant",
+                            timestamp: new Date().toLocaleTimeString(),
+                            isfavorite:false
+                            };
+                        setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                        setIsLoading(false);
+                    })
+                }
+                
             }
         }
     }
@@ -275,8 +301,8 @@ const Home:FC = ()=>{
                 </div>
             </header>
             <div className="page-heading" style={{paddingTop:'5%'}}>
-                <div className="col-lg-12">
-                    <h6>Try It</h6>
+                <div className="col-lg-12" >
+                    <h6>Try It</h6> 
                 </div>
                 <div className="box">
                     <div className="box-left">
@@ -291,10 +317,20 @@ const Home:FC = ()=>{
                                 <img src="./nav.png" alt="icon"  />
                             </div>
                         </div>
+                        <div>
+                            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'5%'}}>
+                                <div style={{fontStyle:'italic',fontSize:'14px'}}>
+                                    点击右侧进行轮次模式切换
+                                </div>
+                                <div>
+                                    <Switch onChange={(e)=>{changemode2(e)}} style={{backgroundColor:'#4A2EB3'}} checkedChildren="单轮" unCheckedChildren="多轮" defaultChecked />
+                                </div>
+                            </div>
+                        </div>
                         <div >
                             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'5%'}}>
-                                <div style={{fontStyle:'italic',fontSize:'15px'}}>
-                                    点击右侧进行模式切换
+                                <div style={{fontStyle:'italic',fontSize:'14px'}}>
+                                    点击右侧进行需求模式切换
                                 </div>
                                 <div>
                                     <Switch onChange={(e)=>{changemode(e)}} style={{backgroundColor:'#4A2EB3'}} checkedChildren="生成" unCheckedChildren="优化" defaultChecked />
@@ -347,7 +383,7 @@ const Home:FC = ()=>{
                                 }
                             </div>
                         </div>
-                        <div className="box-left-bottom" style={mode === 1?{paddingTop:'43%'}:{paddingTop:'52%'}}>
+                        <div className="box-left-bottom" style={mode === 1?{paddingTop:'35%'}:{paddingTop:'45%'}}>
                             <div style={{display:'inline-flex'}}>
                                 <div className="address">
                                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
