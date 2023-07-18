@@ -140,6 +140,13 @@ const Home:FC = ()=>{
             setMode2(1)
         }else{
             setMode2(2)
+            const newMessage: Message = {
+                content: '您好,这里是Better Prompt,当前是多轮对话模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                sender: 'assistant',
+                timestamp: new Date().toLocaleString(),
+                isfavorite:false
+            }
+            setMessages([newMessage])   
         }
         
     }
