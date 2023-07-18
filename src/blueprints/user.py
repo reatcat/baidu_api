@@ -1,5 +1,6 @@
 import json
 import logging
+from DialoguePrompt.dialoguePrompt import dialoguePromptMaster
 
 from flask import make_response, jsonify
 from flask import request, render_template, redirect, url_for, Blueprint
@@ -108,7 +109,7 @@ def user_gen_muti_prompt():
             # Formatted history:list 历史数据
             # 生成prompt
             print(query)
-            message = "这里是多轮的回答内容"
+            message = dialoguePromptMaster(query,formatted_history,code)
             # message = ""
 
         result = jsonify(data={'message': message, 'code': 2})
