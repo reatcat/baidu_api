@@ -117,40 +117,90 @@ const Home:FC = ()=>{
     const changemode = (e:any)=>{
         if(e){
             setMode(1)
-            const newMessage: Message = {
-                content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
-                sender: 'assistant',
-                timestamp: new Date().toLocaleString(),
-                isfavorite:false
+            if(mode2 === 1){
+                const newMessage: Message = {
+                    content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
+            }else{
+                const newMessage: Message = {
+                    content: '你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
             }
-            setMessages([newMessage])
         }else{
             setMode(2)
-            const newMessage: Message = {
-                content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
-                sender: 'assistant',
-                timestamp: new Date().toLocaleString(),
-                isfavorite:false
+            if(mode2 === 1){
+                const newMessage: Message = {
+                    content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])   
+            }else{
+                const newMessage: Message = {
+                    content: '你好！很高兴成为你的提示词优化者。请告诉我你的Prompt提示词。',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])   
             }
-            setMessages([newMessage])   
+            
         }
     }
     const changemode2 = (e:any)=>{
         if(e){
             setMode2(1)
+            if(mode === 1){
+                const newMessage: Message = {
+                    content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
+            }else if(mode === 2){
+                const newMessage: Message = {
+                    content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
+            }
         }else{
             setMode2(2)
-            const newMessage: Message = {
-                content: '您好,这里是Better Prompt,当前是多轮对话模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
-                sender: 'assistant',
-                timestamp: new Date().toLocaleString(),
-                isfavorite:false
+            if(mode === 1){
+                const newMessage: Message = {
+                    content: '你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])   
+            }else if(mode === 2){
+                const newMessage: Message = {
+                    content: '你好！很高兴成为你的提示词优化者。请告诉我你的Prompt提示词。',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])   
             }
-            setMessages([newMessage])   
         }
         
     }
     const handelSendmessage = ()=>{
+        // const processedText = textareaValue.replace(/\n/g, '\n'); // 将 "\n" 替换为回车
+        // console.log(processedText);
         if(mode2 === 1 && messages.length >= 3){
             message.warning("对话过多,请新开启一轮对话吧~")
         }else {
@@ -167,6 +217,16 @@ const Home:FC = ()=>{
                 // 发送请求前设置isLoading为true
                 setTextareaValue('')
                 setIsLoading(true)
+                // const text = "111\n2222\n333\n"
+                // const processedText = text.replace(/\n/g, '\n'); // 将 "\n" 替换为回车
+                // const replyMessage: Message = {
+                //     content: processedText,
+                //     sender: "assistant",
+                //     timestamp: new Date().toLocaleTimeString(),
+                //     isfavorite:false
+                //     };
+                // setMessages((prevMessages) => [...prevMessages, replyMessage]);
+                // setIsLoading(false);
                 if(mode2 === 1){
                     axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
                     .then((res)=>{
@@ -449,7 +509,7 @@ const Home:FC = ()=>{
                                                         </div>
                                                     </div>
                                                 }
-                                                <div className="message-body">
+                                                <div className="message-body" style={{whiteSpace:'pre-line'}}>
                                                     {message.content}
                                                 </div>
                                             </div>
@@ -488,6 +548,7 @@ const Home:FC = ()=>{
                                     <textarea value={textareaValue} className="send-question" placeholder="Ctrl + Enter发送" 
                                     onChange={(e) => setTextareaValue(e.target.value)}
                                     onKeyDown={(e) =>{if (e.ctrlKey && e.key === 'Enter') {
+                                        e.preventDefault()
                                         handelSendmessage()
                                     }} }
                                     rows={3}></textarea>
