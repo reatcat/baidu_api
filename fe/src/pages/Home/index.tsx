@@ -104,7 +104,7 @@ const Home:FC = ()=>{
         nav('/')
     }
     const [messages, setMessages] = useState<Message[]>([{
-        content:'您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+        content:'你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？',
         sender:'assistant',
         timestamp:new Date().toLocaleString(),
         isfavorite:false
@@ -117,7 +117,7 @@ const Home:FC = ()=>{
     const changemode = (e:any)=>{
         if(e){
             setMode(1)
-            if(mode2 === 1){
+            if(mode2 === 2){
                 const newMessage: Message = {
                     content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                     sender: 'assistant',
@@ -136,7 +136,7 @@ const Home:FC = ()=>{
             }
         }else{
             setMode(2)
-            if(mode2 === 1){
+            if(mode2 === 2){
                 const newMessage: Message = {
                     content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                     sender: 'assistant',
@@ -157,8 +157,9 @@ const Home:FC = ()=>{
         }
     }
     const changemode2 = (e:any)=>{
-        if(e){
-            setMode2(1)
+        console.log(e)
+        if(!e){
+            setMode2(2)
             if(mode === 1){
                 const newMessage: Message = {
                     content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
@@ -177,7 +178,7 @@ const Home:FC = ()=>{
                 setMessages([newMessage])
             }
         }else{
-            setMode2(2)
+            setMode2(1)
             if(mode === 1){
                 const newMessage: Message = {
                     content: '你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？',
@@ -390,7 +391,7 @@ const Home:FC = ()=>{
                                     点击右侧进行轮次模式切换
                                 </div>
                                 <div>
-                                    <Switch onChange={(e)=>{changemode2(e)}} style={{backgroundColor:'#4A2EB3'}} checkedChildren="单轮" unCheckedChildren="多轮" defaultChecked />
+                                    <Switch onChange={(e)=>{changemode2(e)}} style={{backgroundColor:'#4A2EB3'}} checkedChildren="多轮" unCheckedChildren="单轮" defaultChecked />
                                 </div>
                             </div>
                         </div>
