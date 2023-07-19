@@ -104,7 +104,7 @@ const Home:FC = ()=>{
         nav('/')
     }
     const [messages, setMessages] = useState<Message[]>([{
-        content:'您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+        content:'你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？',
         sender:'assistant',
         timestamp:new Date().toLocaleString(),
         isfavorite:false
@@ -117,7 +117,7 @@ const Home:FC = ()=>{
     const changemode = (e:any)=>{
         if(e){
             setMode(1)
-            if(mode2 === 1){
+            if(mode2 === 2){
                 const newMessage: Message = {
                     content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                     sender: 'assistant',
@@ -136,14 +136,14 @@ const Home:FC = ()=>{
             }
         }else{
             setMode(2)
-            if(mode2 === 1){
+            if(mode2 === 2){
                 const newMessage: Message = {
                     content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
                     sender: 'assistant',
                     timestamp: new Date().toLocaleString(),
                     isfavorite:false
                 }
-                setMessages([newMessage])
+                setMessages([newMessage])   
             }else{
                 const newMessage: Message = {
                     content: '你好！很高兴成为你的提示词优化者。请告诉我你的Prompt提示词。',
@@ -151,14 +151,15 @@ const Home:FC = ()=>{
                     timestamp: new Date().toLocaleString(),
                     isfavorite:false
                 }
-                setMessages([newMessage])
+                setMessages([newMessage])   
             }
-
+            
         }
     }
     const changemode2 = (e:any)=>{
-        if(e){
-            setMode2(1)
+        console.log(e)
+        if(!e){
+            setMode2(2)
             if(mode === 1){
                 const newMessage: Message = {
                     content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
@@ -177,7 +178,7 @@ const Home:FC = ()=>{
                 setMessages([newMessage])
             }
         }else{
-            setMode2(2)
+            setMode2(1)
             if(mode === 1){
                 const newMessage: Message = {
                     content: '你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？',
@@ -185,7 +186,7 @@ const Home:FC = ()=>{
                     timestamp: new Date().toLocaleString(),
                     isfavorite:false
                 }
-                setMessages([newMessage])
+                setMessages([newMessage])   
             }else if(mode === 2){
                 const newMessage: Message = {
                     content: '你好！很高兴成为你的提示词优化者。请告诉我你的Prompt提示词。',
@@ -193,10 +194,10 @@ const Home:FC = ()=>{
                     timestamp: new Date().toLocaleString(),
                     isfavorite:false
                 }
-                setMessages([newMessage])
+                setMessages([newMessage])   
             }
         }
-
+        
     }
     const handelSendmessage = ()=>{
         // const processedText = textareaValue.replace(/\n/g, '\n'); // 将 "\n" 替换为回车
@@ -256,7 +257,7 @@ const Home:FC = ()=>{
                         setIsLoading(false);
                     })
                 }
-
+                
             }
         }
     }
@@ -361,7 +362,7 @@ const Home:FC = ()=>{
                                             </a>
                                         </Popover>
                                     </li>
-                                </ul>
+                                </ul>   
                             </nav>
                         </div>
                     </div>
@@ -369,7 +370,7 @@ const Home:FC = ()=>{
             </header>
             <div className="page-heading" style={{paddingTop:'5%'}}>
                 <div className="col-lg-12" >
-                    <h6>Try It</h6>
+                    <h6>Try It</h6> 
                 </div>
                 <div className="box">
                     <div className="box-left">
@@ -390,7 +391,7 @@ const Home:FC = ()=>{
                                     点击右侧进行轮次模式切换
                                 </div>
                                 <div>
-                                    <Switch onChange={(e)=>{changemode2(e)}} style={{backgroundColor:'#4A2EB3'}} checkedChildren="单轮" unCheckedChildren="多轮" defaultChecked />
+                                    <Switch onChange={(e)=>{changemode2(e)}} style={{backgroundColor:'#4A2EB3'}} checkedChildren="多轮" unCheckedChildren="单轮" defaultChecked />
                                 </div>
                             </div>
                         </div>
@@ -435,7 +436,7 @@ const Home:FC = ()=>{
                                             输入格式:
                                         </div>
                                         <div className="text">
-                                            原Prompt
+                                            原Prompt 
                                             修改要求 (&连接)
                                         </div>
                                         <div className="rule" style={{marginTop:'5%'}}>
@@ -515,7 +516,7 @@ const Home:FC = ()=>{
                                             </div>
                                             <div className="message-time">
                                                 <div >
-                                                    {message.timestamp}
+                                                    {message.timestamp} 
                                                 </div>
                                             </div>
                                         </div>
@@ -545,7 +546,7 @@ const Home:FC = ()=>{
                             </div>
                             <div className="box-right-input">
                                 <div className="box-right-input-bottom">
-                                    <textarea value={textareaValue} className="send-question" placeholder="Ctrl + Enter发送"
+                                    <textarea value={textareaValue} className="send-question" placeholder="Ctrl + Enter发送" 
                                     onChange={(e) => setTextareaValue(e.target.value)}
                                     onKeyDown={(e) =>{if (e.ctrlKey && e.key === 'Enter') {
                                         e.preventDefault()
