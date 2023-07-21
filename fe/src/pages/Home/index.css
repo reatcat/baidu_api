@@ -559,6 +559,9 @@ nav {
 .user>.message-item{
     background-color: #1b262a;
 }
+.user>.message-container{
+    text-align: justify;
+}
 .message-item{
     box-sizing: border-box;
     max-width: 100%;

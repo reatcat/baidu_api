@@ -266,22 +266,44 @@ const Home:FC = ()=>{
         message.success("复制成功!")
     }
     const newchat = ()=>{
-        if(mode === 1){
-            const newMessage: Message = {
-                content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
-                sender: 'assistant',
-                timestamp: new Date().toLocaleString(),
-                isfavorite:false
+        if(mode2 === 1){
+            if(mode === 1){
+                const newMessage: Message = {
+                    content: '你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
             }
-            setMessages([newMessage])
+            else{
+                const newMessage: Message = {
+                    content: '你好！很高兴成为你的提示词优化者。请告诉我你的Prompt提示词。',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
+            }
         }else{
-            const newMessage: Message = {
-                content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
-                sender: 'assistant',
-                timestamp: new Date().toLocaleString(),
-                isfavorite:false
+            if(mode === 1){
+                const newMessage: Message = {
+                    content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
             }
-            setMessages([newMessage])
+            else{
+                const newMessage: Message = {
+                    content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                    sender: 'assistant',
+                    timestamp: new Date().toLocaleString(),
+                    isfavorite:false
+                }
+                setMessages([newMessage])
+            }
         }
     }
     useEffect(() => {
@@ -290,7 +312,6 @@ const Home:FC = ()=>{
         }
     }, [messages])
 
-    // const [isFavorite, setIsFavorite] = useState(false) // 使用状态来追踪按钮的收藏状态
     const [id,setId] = useState('')
     const handleClick = (text:string,isFavorite:boolean) => {
         // 分情况发送数据
@@ -327,6 +348,10 @@ const Home:FC = ()=>{
           });
           setMessages(updatedList)
     }
+    const handleImageClick = () => {
+        // 在此处进行页面导航
+        window.open("./case.png", '_blank');
+      };
     return (
         <div  >
             <header className={"header-area header-sticky background-header"}>
@@ -406,7 +431,7 @@ const Home:FC = ()=>{
                             </div>
                             <div style={{marginTop:'10%'}}>
                                 {
-                                    mode === 1?
+                                    mode2 === 2? mode === 1?
                                     <div>
                                         <div className="rule">
                                             输入格式:
@@ -448,10 +473,36 @@ const Home:FC = ()=>{
                                         {/* + 修改要求<br></br> */}
                                         </div>
                                     </div>
+                                    :mode === 1?
+                                    <div>
+                                        <div className="rule">
+                                            Description:
+                                        </div>
+                                        <div className="text">
+                                            提示词创建者将帮助你创建一个完备的提示词，并提供建议和问题，根据您的要求不断更新Prompt。回答会先生成Prompt，然后提供“可能选项”以及“补充问题”，可以选择任意项回答。
+                                        </div>
+                                        <div className="rule" style={{marginTop:'5%',display:'block'}}>
+                                            <div>
+                                                Example:
+                                            </div>
+                                            <div onClick={handleImageClick} style={{ cursor: 'pointer',fontSize:'15px',textAlign:'center',marginTop:'5%'}}>
+                                                点击查看示例
+                                            </div>
+                                        </div>
+                                    </div>
+                                    :
+                                    <div>
+                                        <div className="rule">
+                                            Description:
+                                        </div>
+                                        <div className="text">
+                                        提示词优化者将帮助你优化一个初步的提示词，并提供建议和问题，根据您的要求不断更新Prompt。回答会先生成Prompt，然后提供“补充问题”以及“重新开始”和“退出”的选项，根据需求回答即可。
+                                        </div>  
+                                    </div>
                                 }
                             </div>
                         </div>
-                        <div className="box-left-bottom" style={mode === 1?{paddingTop:'35%'}:{paddingTop:'45%'}}>
+                        <div className="box-left-bottom" style={mode2 === 2?mode === 1?{paddingTop:'35%'}:{paddingTop:'45%'}:mode === 1?{paddingTop:'47%'}:{paddingTop:'68%'}}>
                             <div style={{display:'inline-flex'}}>
                                 <div className="address">
                                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
