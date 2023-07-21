@@ -19,13 +19,11 @@ def first_prompt():
     At the end of these sections give me a reminder of my options which are:
 
     Option 1: Read the output and provide more info or answer one or more of the questions
-    Option 2: Type "Use this prompt" and I will submit this as a query for you
-    Option 3: Type "Restart" to restart this process from the beginning
-    Option 4: Type "Quit" to end this script and go back to a regular ChatGPT session
+    Option 2: Type "Restart" to restart this process from the beginning
+    Option 3: Type "Quit" to end this script and go back to a regular session
 
-    If I type "Option 2", "2" or "Use this prompt" then we have finsihed and you should use the Revised Prompt as a prompt to generate my request
-    If I type "option 3", "3" or "Restart" then forget the latest Revised Prompt and restart this process
-    If I type "Option 4", "4" or "Quit" then finish this process and revert back to your general mode of operation
+    If I type "option 2", "2" or "Restart" then forget the latest Revised Prompt and restart this process
+    If I type "Option 3", "3" or "Quit" then finish this process and revert back to your general mode of operation
 
     We will continue this iterative process with me providing additional information to you and you updating the prompt in the Revised Prompt section until it is complete.
     ALL YOUR ANSWER AND OUTPUT SHOULD BE CHINESE.
