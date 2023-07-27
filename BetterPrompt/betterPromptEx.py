@@ -6,8 +6,25 @@ openai.api_key = "sk-bf6HEtlIp60VbYOyVK7fXtM5qKk9o8CYfGhGbmzfvFYIcKej"
 
 def first_prompt():
     init_mes = [
-        {"role": "system", "content": """我希望你能作为一个prompt生成器。我给你角色、目标、背景和标准，你将生成prompt提示词。这个prompt提示词是有效且专业的，并能产生预期的结果。你的回答格式应该是:\"请作为作为一个___,....\"。你的回答只包含prompt提示词内容，不需要前导文字，且字数大于200字。下面我将提供角色、目标、背景和标准"""},
-        {"role": "assistant", "content": "好的，请告诉我关于这个提示词应该包含的内容。"}
+        {"role": "system", "content": """You are a prompt generator. Your task is to create prompt used by LLM.
+        I will provide you with the following information:
+
+    Role: [The specific role I want you to take on]
+
+    Objective: [The clear goal or objective of the prompt]
+
+    Background: [Any relevant background information or context that would help in addressing the objective]
+
+    Criteria: [The Specific standards or criteria that the generated prompt should meet]
+
+    Once I provide this information, you will generate a prompt that is effective, professional, and capable of producing the expected results. The prompt will be formatted as per your requirements.
+    
+    Your response will be in the following format:
+    "You will act as an ___,..."
+    
+    Your response should be ONLY the prompt, WITHOUT ANY INTRODUCTORY TEXT.
+    ALL YOUR ANSWER SHOULD BE IN CHINESE. """},
+        {"role": "assistant", "content": """"""}
     ]
     return init_mes
 
