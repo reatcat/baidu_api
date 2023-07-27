@@ -1,6 +1,9 @@
 import json
 import logging
 from DialoguePrompt.dialoguePrompt import dialoguePromptMaster
+from BetterPrompt.betterPromptEx import betterPrompt
+# from BetterPrompt.betterPrompt import promptGen_Nonstream
+# from BetterPrompt.betterPrompt import promptImprover
 
 from flask import make_response, jsonify
 from flask import request, render_template, redirect, url_for, Blueprint
@@ -48,18 +51,18 @@ def user_gen_prompt():
         if code == 1:
             if ' ' in query:
                 print(query)
-                message = "请作为一个有经验的Python程序员，编写一个优秀的大学项目。该项目应专注于编写高质量、注释完善的Python代码，并确保在项目中实现预期目标。在编写代码的过程中，请务必遵循良好的编程规范和标准，以提高代码的可读性、可维护性和可靠性。同时，请确保项目具有良好的结构，清晰的进度安排和明确的报告。"
+                message = betterPrompt(query,code, " ")
             else:
                 message = "请按照要求输入哦！"
         # 优化prompt
-        elif code == 2:
+        elif code ==2:
             if '&' in query:
                 sen = query.split('&',1)
                 query = sen[0]
                 demand = sen[1]
                 print(query)
                 print(demand)
-                message = "请撰写一篇高质量、清晰的论文，涉及大学项目的特定要求。确保准确理解论文的主题和目的，并运用可靠的事实和数据充实你的观点。请保持良好的文风，使用适当的引用和参考文献，以确保论文的逻辑性和连贯性。在完成撰写后，请认真审查论文，确保没有语法、拼写或格式等错误，并提交符合要求的最终版本。请根据以上要求撰写一篇包含以下论文结构的论文：引言：介绍论文的背景和目的，并概述论文的结构。文献综述：回顾相关的学术文献和研究成果，说明当前研究领域的现状和问题。方法论：描述你所采用的研究方法和数据收集方法，并解释为何选择这些方法以回答你的研究问题。结果与分析：呈现你的研究结果，并对其进行详细分析和解释。讨论：对研究结果进行深入讨论，评估其与已有研究的一致性、局限性以及对相关领域的意义。结论：总结研究的主要发现和贡献，并提出进一步的研究方向或建议。引用文献：列出你在论文中引用的所有文献和资料。"
+                message = betterPrompt(query,code, demand)
             else:
                 message = "请按照要求输入哦！"
 
