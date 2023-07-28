@@ -98,7 +98,7 @@ const Personal:FC = ()=>{
             for(let i = 0;i < itemlist.length;i++){
                 let tmp:favorite = {
                     id:itemlist[i].Id,
-                    content:itemlist[i].Prompt,
+                    content:itemlist[i].Prompt.replace("\n", "<br>"),
                     time:itemlist[i].Time
                 }
                 item.push(tmp)
