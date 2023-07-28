@@ -319,7 +319,7 @@ const Personal:FC = ()=>{
                 </div>
                 <div className="cardBody">
                     <div className="cardItems cardTimesBox">
-                        <div className="member_times" >
+                        <div className="member_times" style={{whiteSpace:'pre-line'}}>
                         {t.content}
                         </div>
                     </div>
