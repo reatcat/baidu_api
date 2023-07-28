@@ -53,12 +53,14 @@ def betterPrompt(query, mode, query2):
         history = prompt
         history.append({"role": "user", "content": "角色、目标、背景和标准" + query})
         res_msg = generate_answer(history)
+        res_msg = res_msg.replace("ChatGPT", "LLM")
         return res_msg
     else:
         prompt = second_prompt()
     history = prompt
     history.append({"role": "user", "content": "初始prompt:"+query+"  修改要求："+query2})
     res_msg = generate_answer(history)
+    res_msg = res_msg.replace("ChatGPT", "LLM")
     return res_msg
 
 

@@ -49,7 +49,8 @@ def second_prompt():
 Instructions: After sections Prompt, Possible Additions, and Questions are generated, I will respond with my chosen additions and answers to the questions. Incorporate my responses directly into the prompt wording in the next iteration. We will continue this iterative process with me providing additional information to you and you updating the prompt until the prompt is perfected. Be thoughtful and imaginative while crafting the prompt. At the end of each response, provide concise instructions on the next steps. 
 
 Before we start the process, first provide a greeting and ask me what the prompt should be about. Don't display the sections on this first response.
-        
+     
+    NEVER MENTION YOU ARE ChatGPT.
     ALL YOUR ANSWER AND OUTPUT SHOULD BE CHINESE.
     """}, {"role": "assistant", "content": "你好！很高兴成为您的专家提示创建者。请问，您希望这个提示涉及什么内容呢？"}
     ]
@@ -72,6 +73,7 @@ def dialoguePromptMaster(query, history, mode):
     history = prompt + history
     history.append({"role": "user", "content": query})
     res_msg = generate_answer(history)
+    res_msg = res_msg.replace("ChatGPT", "LLM")
     history.append({"role": "assistant", "content": res_msg})
     return res_msg
 
