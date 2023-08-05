@@ -5,6 +5,8 @@ import Register from "./pages/Register"
 import Personal from "./pages/Personal"
 import Index from "./pages/Index"
 import Author from "./pages/Author"
+import Application from "./pages/Application"
+import Apps from "./pages/App"
 const router = createHashRouter([
     {
         path: "",
@@ -13,6 +15,14 @@ const router = createHashRouter([
     {
         path: "/Home",
         element: <Home/>,
+    },
+    {
+        path: "/Application",
+        element: <Application/>,
+    },
+    {
+        path: "/Apps/:id",
+        element: <Apps/>,
     },
     {
         path: "/Login",

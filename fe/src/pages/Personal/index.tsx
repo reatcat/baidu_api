@@ -98,7 +98,7 @@ const Personal:FC = ()=>{
             for(let i = 0;i < itemlist.length;i++){
                 let tmp:favorite = {
                     id:itemlist[i].Id,
-                    content:itemlist[i].Prompt.replace("\n", "<br>"),
+                    content:itemlist[i].Prompt,
                     time:itemlist[i].Time
                 }
                 item.push(tmp)
@@ -169,10 +169,10 @@ const Personal:FC = ()=>{
                     <div className="tab_list_item" id="item3">
                         <div className="light"></div>
                         <div className="con">
-                            <Link to="/Home" id="goback">
+                            <Link to="/" id="goback">
                                 <img className="home" style={{width:'20px'}} src="./home.svg" alt="svg1" />
                                 <div style={{marginTop:'5px'}}>
-                                    返回主页
+                                    返回首页
                                 </div>
                             </Link>
                         </div>
@@ -319,7 +319,7 @@ const Personal:FC = ()=>{
                 </div>
                 <div className="cardBody">
                     <div className="cardItems cardTimesBox">
-                        <div className="member_times" style={{whiteSpace:'pre-line'}}>
+                        <div className="member_times" >
                         {t.content}
                         </div>
                     </div>

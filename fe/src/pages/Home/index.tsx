@@ -228,7 +228,7 @@ const Home:FC = ()=>{
                 //     };
                 // setMessages((prevMessages) => [...prevMessages, replyMessage]);
                 // setIsLoading(false);
-                if(mode2 === 2){
+                if(mode2 === 1){
                     axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
                     .then((res)=>{
                         const text = res.data.data.message
@@ -376,6 +376,9 @@ const Home:FC = ()=>{
                                     </li>
                                     <li>
                                         <Link to='/Home' className="active">全新体验</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/Application'>最佳应用</Link>
                                     </li>
                                     <li>
                                         <Link to='/Author'>关于我们</Link>
