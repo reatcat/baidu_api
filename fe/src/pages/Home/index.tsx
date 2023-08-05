@@ -202,7 +202,7 @@ const Home:FC = ()=>{
     const handelSendmessage = ()=>{
         // const processedText = textareaValue.replace(/\n/g, '\n'); // 将 "\n" 替换为回车
         // console.log(processedText);
-        if(mode2 === 1 && messages.length >= 3){
+        if(mode2 === 2 && messages.length >= 3){
             message.warning("对话过多,请新开启一轮对话吧~")
         }else {
             if(textareaValue.length === 0){
