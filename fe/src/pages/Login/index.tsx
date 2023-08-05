@@ -19,7 +19,7 @@ const Login:FC = () => {
             switch(code){
                 case 1:
                     message.success('登录成功!')
-                    nav('/Home')
+                    nav('/')
                     break;
                 case 0:
                     message.warning('密码错误!')

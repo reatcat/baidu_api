@@ -378,6 +378,9 @@ const Home:FC = ()=>{
                                         <Link to='/Home' className="active">全新体验</Link>
                                     </li>
                                     <li>
+                                        <Link to='/Application'>最佳应用</Link>
+                                    </li>
+                                    <li>
                                         <Link to='/Author'>关于我们</Link>
                                     </li>
                                     <li>

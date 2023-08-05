@@ -191,9 +191,14 @@ const Index:FC = ()=>{
                                     </li>
                                     {
                                         log?
-                                        <li>
-                                            <Link to='/Home'>继续使用</Link>
-                                        </li>
+                                        <>
+                                            <li>
+                                                <Link to='/Home'>全新体验</Link>
+                                            </li>
+                                            <li>
+                                                <Link to='/Application'>最佳应用</Link>
+                                            </li>
+                                        </>
                                         :
                                         <li>
                                             <Link to='/Login'>登录</Link>

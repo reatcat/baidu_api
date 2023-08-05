@@ -1,0 +1,28 @@
+.col-lg-13{
+    display: flex;
+    margin-top: 10px;
+    font-size: 20px;
+    color: rgb(209, 217, 225);
+    letter-spacing: 2px;
+    filter: contrast(30);
+}
+.col-lg-13 div{
+    animation: showup 1s forwards;
+}
+.apps{
+    cursor: pointer;
+    margin-right: 10px;
+}
+.apps:hover{
+    color: #8062f8;
+}
+@keyframes showup {
+    from{
+        letter-spacing: -10px;
+        filter: blur(5px);
+    }
+    to{
+        letter-spacing: 4px;
+        filter: blur(0px);
+    }
+}
