@@ -35,6 +35,51 @@ def user_index():
         print(response.json)
         return response
     return make_response()
+@user_bp.route('best_chat', methods=['GET', 'POST'])
+def user_best_chat():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        query = data['data']['text']
+        code = data['data']['code']
+        history = data['data']['history']
+        try:
+            history = json.loads(history)
+        except json.JSONDecodeError:
+            print("Invalid history format. Unable to parse the history string.")
+            history = []
+        print(f'history length {len(history)}')
+
+        print("Original History:")
+        print(history)
+        formatted_history = []
+        if len(history) > 1:
+            for i, item in enumerate(history):
+                if i == 0:
+                    continue  # Skip the first element
+                role = item.get("sender")
+                content = item.get('content')
+                if role is not None and content is not None:
+                    formatted_history.append({"role": role, "content": content})
+
+        print("\nFormatted History:")
+        print(formatted_history)
+        message = ""
+        if code == 3 or code == 4:
+            # !TODO
+            # 如果是上下文多轮对话
+            # input：query :string
+            # out:message :string
+            # Formatted history:list 历史数据
+            # 生成prompt
+            print(query)
+            message = ""
+
+        result = jsonify(data={'message': message, 'code': 2})
+        response = make_response(result)
+        print(response.json)
+        return response
+    return "chat"
 
 @user_bp.route('/gen_prompt', methods=['GET', 'POST'])
 def user_gen_prompt():
@@ -53,13 +98,15 @@ def user_gen_prompt():
         if code == 1:
             if ' ' in query:
                 print(query)
-                if query.find("程序员 编写python代码 大学项目 专业、有注释、结构清晰")!=-1:
-                    message = "请作为一个有经验的Python程序员，编写一个优秀的大学项目。该项目应专注于编写高质量、注释完善的Python代码，并确保在项目中实现预期目标。在编写代码的过程中，请务必遵循良好的编程规范和标准，以提高代码的可读性、可维护性和可靠性。同时，请确保项目具有良好的结构，清晰的进度安排和明确的报告。"
-                    print(message)
-                    sleep_time = random.randint(10, 15)
-                    time.sleep(sleep_time)
-                else:
-                    message = betterPrompt(query,code, " ")
+                # if query.find("程序员 编写python代码 大学项目 专业、有注释、结构清晰")!=-1:
+                #     message = "请作为一个有经验的Python程序员，编写一个优秀的大学项目。该项目应专注于编写高质量、注释完善的Python代码，并确保在项目中实现预期目标。在编写代码的过程中，请务必遵循良好的编程规范和标准，以提高代码的可读性、可维护性和可靠性。同时，请确保项目具有良好的结构，清晰的进度安排和明确的报告。"
+                #     print(message)
+                #     sleep_time = random.randint(10, 15)
+                #     time.sleep(sleep_time)
+                # else:
+                #     message = betterPrompt(query,code, " ")
+                #     !TODO
+                message = ""
             else:
                 message = "请按照要求输入哦！"
         # 优化prompt
@@ -70,18 +117,20 @@ def user_gen_prompt():
                 demand = sen[1]
                 print(query)
                 print(demand)
-                if query == "请作为一个专业的撰稿人，为大学项目撰写高质量、清晰的论文。在撰写过程中，请确保遵循项目的具体要求，准确理解论文的主题和目的，并充分利用可靠的事实和数据来支持你的观点。":
-                    message = "请撰写一篇高质量、清晰的论文，涉及大学项目的特定要求。确保准确理解论文的主题和目的，并运用可靠的事实和数据充实你的观点。请保持良好的文风，使用适当的引用和参考文献，以确保论文的逻辑性和连贯性。在完成撰写后，请认真审查论文，确保没有语法、拼写或格式等错误，并提交符合要求的最终版本。请根据以上要求撰写一篇包含以下论文结构的论文：引言：介绍论文的背景和目的，并概述论文的结构。文献综述：回顾相关的学术文献和研究成果，说明当前研究领域的现状和问题。方法论：描述你所采用的研究方法和数据收集方法，并解释为何选择这些方法以回答你的研究问题。结果与分析：呈现你的研究结果，并对其进行详细分析和解释。讨论：对研究结果进行深入讨论，评估其与已有研究的一致性、局限性以及对相关领域的意义。结论：总结研究的主要发现和贡献，并提出进一步的研究方向或建议。引用文献：列出你在论文中引用的所有文献和资料。"
-                #     sen2 = "请撰写一篇拥有高质量、清晰特性的论文，这篇论文需要满足大学项目的特定要求。能够准确解读文章的主题并且应用可靠的事实和数据充实你的观点。你需要保持一个良好的写作手法，必要时添加适当的引用和参考文献，以确保论文的逻辑性和连贯性。在完成撰写后，请认真审查论文，确保没有语法、拼写或格式等错误，并提交符合要求的最终版本。请根据以上要求撰写一篇包含以下论文结构的论文：引言：介绍论文的背景和目的，并概述论文的结构。文献综述：回顾相关的学术文献和研究成果，说明当前研究领域的现状和问题。方法论：描述你所采用的研究方法和数据收集方法，并解释为何选择这些方法以回答你的研究问题。结果与分析：呈现你的研究结果，并对其进行详细分析和解释。讨论：对研究结果进行深入讨论，评估其与已有研究的一致性、局限性以及对相关领域的意义。结论：总结研究的主要发现和贡献，并提出进一步的研究方向或建议。引用文献：给出这里所需要的参考文献的内容。"
-                #     message = sen1 if temp == 1 else sen2
-                #     temp+=1
-                    print(message)
-                    sleep_time = random.randint(10, 15)
-                    time.sleep(sleep_time)
-                else:
-                    message = betterPrompt(query,code, demand)
-            else:
-                message = "请按照要求输入哦！"
+            #     if query == "请作为一个专业的撰稿人，为大学项目撰写高质量、清晰的论文。在撰写过程中，请确保遵循项目的具体要求，准确理解论文的主题和目的，并充分利用可靠的事实和数据来支持你的观点。":
+            #         message = "请撰写一篇高质量、清晰的论文，涉及大学项目的特定要求。确保准确理解论文的主题和目的，并运用可靠的事实和数据充实你的观点。请保持良好的文风，使用适当的引用和参考文献，以确保论文的逻辑性和连贯性。在完成撰写后，请认真审查论文，确保没有语法、拼写或格式等错误，并提交符合要求的最终版本。请根据以上要求撰写一篇包含以下论文结构的论文：引言：介绍论文的背景和目的，并概述论文的结构。文献综述：回顾相关的学术文献和研究成果，说明当前研究领域的现状和问题。方法论：描述你所采用的研究方法和数据收集方法，并解释为何选择这些方法以回答你的研究问题。结果与分析：呈现你的研究结果，并对其进行详细分析和解释。讨论：对研究结果进行深入讨论，评估其与已有研究的一致性、局限性以及对相关领域的意义。结论：总结研究的主要发现和贡献，并提出进一步的研究方向或建议。引用文献：列出你在论文中引用的所有文献和资料。"
+            #     #     sen2 = "请撰写一篇拥有高质量、清晰特性的论文，这篇论文需要满足大学项目的特定要求。能够准确解读文章的主题并且应用可靠的事实和数据充实你的观点。你需要保持一个良好的写作手法，必要时添加适当的引用和参考文献，以确保论文的逻辑性和连贯性。在完成撰写后，请认真审查论文，确保没有语法、拼写或格式等错误，并提交符合要求的最终版本。请根据以上要求撰写一篇包含以下论文结构的论文：引言：介绍论文的背景和目的，并概述论文的结构。文献综述：回顾相关的学术文献和研究成果，说明当前研究领域的现状和问题。方法论：描述你所采用的研究方法和数据收集方法，并解释为何选择这些方法以回答你的研究问题。结果与分析：呈现你的研究结果，并对其进行详细分析和解释。讨论：对研究结果进行深入讨论，评估其与已有研究的一致性、局限性以及对相关领域的意义。结论：总结研究的主要发现和贡献，并提出进一步的研究方向或建议。引用文献：给出这里所需要的参考文献的内容。"
+            #     #     message = sen1 if temp == 1 else sen2
+            #     #     temp+=1
+            #         print(message)
+            #         sleep_time = random.randint(10, 15)
+            #         time.sleep(sleep_time)
+            #     else:
+            #         message = betterPrompt(query,code, demand)
+            # else:
+            #     message = "请按照要求输入哦！"
+            #     !TODO
+                message = ""
 
         result = jsonify(data={'message': message, 'code': 1})
         response = make_response(result)
@@ -122,15 +171,15 @@ def user_gen_muti_prompt():
 
         message = ""
         if code == 3 or code == 4:
-            # todo
+            # TODO
             # 如果是上下文多轮对话
             # input：query :string
             # out:message :string
             # Formatted history:list 历史数据
             # 生成prompt
             print(query)
-            message = dialoguePromptMaster(query,formatted_history,code)
-            # message = ""
+            # message = dialoguePromptMaster(query,formatted_history,code)
+            message = ""
 
         result = jsonify(data={'message': message, 'code': 2})
         response = make_response(result)
