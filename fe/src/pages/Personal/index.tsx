@@ -110,7 +110,6 @@ const Personal:FC = ()=>{
         getitem()
     },[])
     const copytext = (text:string)=>{
-
         copy(text)
         message.success("复制成功!")
     }
@@ -317,10 +316,10 @@ const Personal:FC = ()=>{
                         </div>
                     </div>
                 </div>
-                <div className="cardBody">
+                <div className="cardBody" style={{whiteSpace:'pre-line'}}>
                     <div className="cardItems cardTimesBox">
-                        <div className="member_times" >
-                        {t.content}
+                        <div className="member_times">
+                            {t.content}
                         </div>
                     </div>
                 </div>
