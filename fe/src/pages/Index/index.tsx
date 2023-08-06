@@ -3,7 +3,8 @@ import { FC,useEffect,useState } from "react"
 import {Link, useNavigate } from "react-router-dom"
 import { createThrottle } from '../../component/help'
 import 'swiper/swiper-bundle.css'
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {message} from 'antd'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import axios from "axios"
 import './index.css'
@@ -167,6 +168,13 @@ const Index:FC = ()=>{
             description:"开发中，敬请期待……"
         }
     ]
+    const jumptoapp = (id:number)=>{
+        if(id === 11){
+            message.warning('正在开发中,敬请期待……')
+        }else{
+            nav(`/Apps/${id}`)
+        }
+    }
     return (
         <>
             <header className={show?"header-area header-sticky background-header":"header-area header-sticky"}>
@@ -331,7 +339,7 @@ const Index:FC = ()=>{
                                                 {data.map(t => {
                                                     return (
                                                         <SwiperSlide key={t.id} >
-                                                            <div className="menu-item">
+                                                            <div className="menu-item" onClick={(e)=>jumptoapp(t.id)}>
                                                                 <div className="menu-item-box"></div>
                                                                 <div className="menu-item-img">
                                                                     <img src={t.img} alt={t.name} />

@@ -316,12 +316,13 @@ const Personal:FC = ()=>{
                         </div>
                     </div>
                 </div>
-                <div className="cardBody" style={{whiteSpace:'pre-line'}}>
+                <div className="cardBody">
                     <div className="cardItems cardTimesBox">
-                        <div className="member_times">
+                        <div className="member_times" style={{whiteSpace:'pre-line'}}>
                             {t.content}
                         </div>
                     </div>
+                    
                 </div>
                 <div className="cardItems cardOperateBox">
                     <div className="member_operate">

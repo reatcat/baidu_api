@@ -228,7 +228,7 @@ const Home:FC = ()=>{
                 //     };
                 // setMessages((prevMessages) => [...prevMessages, replyMessage]);
                 // setIsLoading(false);
-                if(mode2 === 1){
+                if(mode2 === 2){
                     axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:mode}})
                     .then((res)=>{
                         const text = res.data.data.message
@@ -247,6 +247,7 @@ const Home:FC = ()=>{
                     axios.post('/api/user/gen_muti_prompt',{data:{text:JSON.stringify(textareaValue),code:mode + 2,history:JSON.stringify(messages)}})
                     .then((res)=>{
                         const text = res.data.data.message
+                        console.log(text)
                         const replyMessage: Message = {
                             content: text,
                             sender: "assistant",
@@ -318,7 +319,8 @@ const Home:FC = ()=>{
         // 收藏
         if(!isFavorite){
             // 发送prompt
-            axios.post('/api/user/save_prompt',{data:JSON.stringify(text)})
+            console.log(text)
+            axios.post('/api/user/save_prompt',{data:text})
             .then((res)=>{
                 const tid = res.data.data.cur_id
                 message.success("收藏成功!")
@@ -336,7 +338,6 @@ const Home:FC = ()=>{
             })
         }
         // setIsFavorite(!isFavorite) // 切换收藏状态
-
         const updatedList = messages.map((message) => {
             if (message.content === text) {
               return {
