@@ -39,7 +39,11 @@ const Personal:FC = ()=>{
     const [modified,setModified] = useState(0)
     const [userinfo,setUserinfo] = useState(iniuserinfo)
     // 定义item
-    const [item,setItem] = useState<favorite[]>([])
+    const [item,setItem] = useState<favorite[]>([{
+        id:"1",
+        content:"Hello\n\nWorld",
+        time:'111'
+    }])
     // 修改信息完成
     const finishmodify = (values:string)=>{
         userinfo.username = JSON.parse(JSON.stringify(values)).username === undefined?userinfo.username:JSON.parse(JSON.stringify(values)).username
@@ -98,7 +102,7 @@ const Personal:FC = ()=>{
             for(let i = 0;i < itemlist.length;i++){
                 let tmp:favorite = {
                     id:itemlist[i].Id,
-                    content:itemlist[i].Prompt,
+                    content:String(itemlist[i].Prompt),
                     time:itemlist[i].Time
                 }
                 item.push(tmp)
@@ -322,6 +326,7 @@ const Personal:FC = ()=>{
                             {t.content}
                         </div>
                     </div>
+                    
                 </div>
                 <div className="cardItems cardOperateBox">
                     <div className="member_operate">
