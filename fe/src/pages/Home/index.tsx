@@ -235,7 +235,7 @@ const Home:FC = ()=>{
                         const replyMessage: Message = {
                             content: text,
                             sender: "assistant",
-                            timestamp: new Date().toLocaleTimeString(),
+                            timestamp: new Date().toLocaleString(),
                             isfavorite:false
                             };
                         setMessages((prevMessages) => [...prevMessages, replyMessage]);
@@ -251,7 +251,7 @@ const Home:FC = ()=>{
                         const replyMessage: Message = {
                             content: text,
                             sender: "assistant",
-                            timestamp: new Date().toLocaleTimeString(),
+                            timestamp: new Date().toLocaleString(),
                             isfavorite:false
                             };
                         setMessages((prevMessages) => [...prevMessages, replyMessage]);
