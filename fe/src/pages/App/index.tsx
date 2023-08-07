@@ -280,8 +280,8 @@ const Apps:FC = ()=>{
                         <div>{data[id].name}</div>
                     </div>
                 </div>
-                <div className="box" style={{marginTop:'10px',backgroundColor:'#f4eded'}}>
-                    <div className="box-left" style={{backgroundColor:'#414343'}}>
+                <div className="box" style={{marginTop:'10px',backgroundColor:'#f4eded',color:'black'}}>
+                    <div className="box-left" style={{backgroundColor:'rgb(255 255 255 / 87%)'}}>
                         <div className="box-left-top">
                             <div className="box-letf-top-title">
                                 Better Prompt
@@ -299,7 +299,7 @@ const Apps:FC = ()=>{
                                     用户指导
                                 </div>
                                 <div className="text" style={{marginTop:'10%',fontSize:'16px',fontStyle:'italic'}}>
-                                    您好!这里是Better Prompt 最佳应用中的<span>{data[id].name}</span>应用部分,
+                                    您好!这里是Better Prompt 最佳应用中的<span style={{color:'#f10d95'}}>{data[id].name}</span>应用部分,
                                     您可以按照指示直接与其进行对话并得到您所期望的结果,希望您使用顺利~
                                 </div>
                             </div>
