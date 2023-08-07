@@ -7,6 +7,6 @@
     opacity: .8;
 }
 .menu-item:hover .menu-item-names{
-    bottom: 168px;
+    bottom: 24px;
     background-color: #d30dd6;
 }

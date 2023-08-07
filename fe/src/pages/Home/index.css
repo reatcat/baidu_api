@@ -207,7 +207,7 @@ nav {
     margin-top: 8px;
 }
 .menu-item:hover .menu-item-name{
-    bottom: 112px;
+    bottom: 8px;
     background-color: #d30dd6;
 }
 /* .homes{

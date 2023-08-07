@@ -200,8 +200,9 @@ const Apps:FC = ()=>{
             // 发送请求前设置isLoading为true
             setTextareaValue('')
             setIsLoading(true)
-            axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:id}})
+            axios.post('/api/user/best_chat',{data:{text:JSON.stringify(textareaValue),code:id+1,history:JSON.stringify(messages)}})
                 .then((res)=>{
+                    console.log(res)    
                     const text = res.data.data.message
                     const replyMessage: Message = {
                         content: text,

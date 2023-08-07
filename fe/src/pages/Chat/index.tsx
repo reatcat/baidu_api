@@ -17,7 +17,7 @@ const Chat:FC = ()=>{
     // 获得路由
     const location = useLocation()
     // 获得路由id
-    const id = Number(location.pathname.split('/')[2]) - 1
+    // const id = Number(location.pathname.split('/')[2]) - 1
     const nav = useNavigate()
     const [username,setUsername] = useState('')
     const [open,setOpen] = useState(false)
@@ -131,8 +131,9 @@ const Chat:FC = ()=>{
             // 发送请求前设置isLoading为true
             setTextareaValue('')
             setIsLoading(true)
-            axios.post('/api/user/gen_prompt',{data:{text:JSON.stringify(textareaValue),code:id}})
+            axios.post('/api/user/gen_by_wenxin',{data:{text:JSON.stringify(textareaValue),code:mode}})
                 .then((res)=>{
+                    console.log(res)
                     const text = res.data.data.message
                     const replyMessage: Message = {
                         content: text,
@@ -265,7 +266,7 @@ const Chat:FC = ()=>{
             <div className="page-heading" style={{paddingTop:'5%'}}>
                 <div className="col-lg-13">
                     <div style={{display:'flex',margin:'auto'}}>
-                        <div className="apps">Have try</div>
+                        <div className="apps">Have a try</div>
                     </div>
                 </div>
                 <div className="box" style={{marginTop:'10px',backgroundColor:'#4e4b4b',color:'white'}}>
