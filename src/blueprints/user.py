@@ -4,6 +4,8 @@ import random
 import time
 from DialoguePrompt.dialoguePrompt import dialoguePromptMaster
 from BetterPrompt.betterPromptEx import betterPrompt
+from BPERNIE.ErnieBot import BetterPromptERNIE
+from BPERNIE.Application import appERNIE
 # from BetterPrompt.betterPrompt import promptGen_Nonstream
 # from BetterPrompt.betterPrompt import promptImprover
 
@@ -42,36 +44,14 @@ def user_best_chat():
         print(data)
         query = data['data']['text']
         code = data['data']['code']
-        history = data['data']['history']
-        try:
-            history = json.loads(history)
-        except json.JSONDecodeError:
-            print("Invalid history format. Unable to parse the history string.")
-            history = []
-        print(f'history length {len(history)}')
 
-        print("Original History:")
-        print(history)
-        formatted_history = []
-        if len(history) > 1:
-            for i, item in enumerate(history):
-                if i == 0:
-                    continue  # Skip the first element
-                role = item.get("sender")
-                content = item.get('content')
-                if role is not None and content is not None:
-                    formatted_history.append({"role": role, "content": content})
-
-        print("\nFormatted History:")
-        print(formatted_history)
-        #TODO 应用的上下文
+        # 应用的上下文
         # 如果是上下文多轮对话
         # input：query :string code :int 1-10代表十个应用
         # out:message :string
-        # Formatted history:list 历史数据
         # 生成prompt
         print(query)
-        message = ""
+        message = appERNIE(code,query)
 
         result = jsonify(data={'message': message, 'code': 2})
         response = make_response(result)
@@ -88,13 +68,13 @@ def user_gen_by_wenxin():
         print(code)
         message = ""
         if code == 1:
-            #TODO 文心一言的生成
+            # 文心一言的生成
             # 所有的内容都通过query传递
-            message = ""
+            message = BetterPromptERNIE(query, 1)
         elif code == 2:
-            #TODO 文心一言的优化
+            # 文心一言的优化
             # 所有的内容都通过query传递
-            message = ""
+            message = BetterPromptERNIE(query, 2)
         result = jsonify(data={'message': message, 'code': 1})
         response = make_response(result)
         print(response.json)

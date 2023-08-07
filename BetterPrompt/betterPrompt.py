@@ -2,9 +2,35 @@ import os
 import platform
 import signal
 from transformers import AutoTokenizer, AutoModel
+import gradio as gr
+import mdtex2html
 
-tokenizer = AutoTokenizer.from_pretrained(".\\BetterPrompt\\model", trust_remote_code=True)
-model = AutoModel.from_pretrained(".\\BetterPrompt\\model", trust_remote_code=True).cuda()
+#import torch
+#import loralib as lora
+#from LoRA.lora_utils.insert_lora import get_lora_model
+#
+
+# model_path = ".\\BetterPrompt\\model"
+model_path = ".\\model"
+
+tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+model = AutoModel.from_pretrained(model_path, trust_remote_code=True).cuda()
+
+#lora_config = {
+#        'r': 8,
+#        'lora_alpha':16,
+#        'lora_dropout':0.1,
+#        'enable_lora':[True, False, True],
+#    }
+#
+#
+#model = get_lora_model(model, lora_config)
+#print('get LoRA')
+#_ = model.load_state_dict(torch.load('ChatGLM-finetune-LoRA/saved/chatglm-6b_alpaca_5.pt'), strict=False)
+#
+#model = model.half().cuda().eval()
+#
+
 # 多显卡支持，使用下面两行代替上面一行，将num_gpus改为你实际的显卡数量
 # from utils import load_model_on_gpus
 # model = load_model_on_gpus("THUDM/chatglm2-6b", num_gpus=2)
