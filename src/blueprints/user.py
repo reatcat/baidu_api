@@ -90,7 +90,6 @@ def user_gen_prompt():
         code = data['data']['code']
         print(code)
         message = ""
-        # todo
         # 调接口，获得回复内容
         # input：text :string
         # out:message :string
@@ -104,9 +103,7 @@ def user_gen_prompt():
                 #     sleep_time = random.randint(10, 15)
                 #     time.sleep(sleep_time)
                 # else:
-                #     message = betterPrompt(query,code, " ")
-                #     !TODO
-                message = ""
+                message = betterPrompt(query,code, " ")
             else:
                 message = "请按照要求输入哦！"
         # 优化prompt
@@ -126,11 +123,9 @@ def user_gen_prompt():
             #         sleep_time = random.randint(10, 15)
             #         time.sleep(sleep_time)
             #     else:
-            #         message = betterPrompt(query,code, demand)
+                message = betterPrompt(query,code, demand)
             # else:
             #     message = "请按照要求输入哦！"
-            #     !TODO
-                message = ""
 
         result = jsonify(data={'message': message, 'code': 1})
         response = make_response(result)
@@ -171,15 +166,15 @@ def user_gen_muti_prompt():
 
         message = ""
         if code == 3 or code == 4:
-            # TODO
+
             # 如果是上下文多轮对话
             # input：query :string
             # out:message :string
             # Formatted history:list 历史数据
             # 生成prompt
             print(query)
-            # message = dialoguePromptMaster(query,formatted_history,code)
-            message = ""
+            message = dialoguePromptMaster(query,formatted_history,code)
+            # message = ""
 
         result = jsonify(data={'message': message, 'code': 2})
         response = make_response(result)
