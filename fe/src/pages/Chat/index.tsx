@@ -15,7 +15,7 @@ type Message = {
 }
 const Chat:FC = ()=>{
     // 获得路由
-    const location = useLocation()
+    // const location = useLocation()
     // 获得路由id
     // const id = Number(location.pathname.split('/')[2]) - 1
     const nav = useNavigate()
@@ -109,7 +109,7 @@ const Chat:FC = ()=>{
         nav('/')
     }
     const [messages, setMessages] = useState<Message[]>([{
-        content:'111',
+        content:'您好，我是您的Prompt生成助手，可以帮助您生成特定场景的高质量Prompt，请告诉我您的场景。',
         sender:'assistant',
         timestamp:new Date().toLocaleString(),
         isfavorite:false
@@ -151,7 +151,23 @@ const Chat:FC = ()=>{
         message.success("复制成功!")
     }
     const newchat = ()=>{
-        
+        if(mode === 1){
+            const newMessage: Message = {
+                content: '您好，我是您的Prompt生成助手，可以帮助您生成特定场景的高质量Prompt，请告诉我您的场景。',
+                sender: 'assistant',
+                timestamp: new Date().toLocaleString(),
+                isfavorite:false
+            }
+            setMessages([newMessage])
+        }else{
+            const newMessage: Message = {
+                content: '您好，我是您的Prompt优化助手，可以帮助您优化输入的Prompt，快点来试试吧~',
+                sender: 'assistant',
+                timestamp: new Date().toLocaleString(),
+                isfavorite:false
+            }
+            setMessages([newMessage])
+        }
     }
     useEffect(() => {
         if (messageRef.current) {
@@ -163,7 +179,7 @@ const Chat:FC = ()=>{
         if(e){
             setMode(1)
             const newMessage: Message = {
-                content: '您好,这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                content: '您好，我是您的Prompt生成助手，可以帮助您生成特定场景的高质量Prompt，请告诉我您的场景。',
                 sender: 'assistant',
                 timestamp: new Date().toLocaleString(),
                 isfavorite:false
@@ -172,7 +188,7 @@ const Chat:FC = ()=>{
         }else{
             setMode(2)
             const newMessage: Message = {
-                content: '您好,这里是Better Prompt,目前是优化Prompt模式.可以点击左侧按钮切换,请您按照左侧要求进行输入哦~',
+                content: '您好，我是您的Prompt优化助手，可以帮助您优化输入的Prompt，快点来试试吧~',
                 sender: 'assistant',
                 timestamp: new Date().toLocaleString(),
                 isfavorite:false
@@ -298,15 +314,22 @@ const Chat:FC = ()=>{
                         <div>
                             <div style={{display:'block',letterSpacing:'2px',alignItems:'center',justifyContent:'space-between',marginTop:'5%'}}>
                                 <div className="rule">
-                                    用户指导
+                                    Example:
                                 </div>
-                                <div className="text" style={{marginTop:'10%',fontSize:'16px',fontStyle:'italic'}}>
-                                    您好!这里是Better Prompt 应用功能中的部分,
-                                    您可以按照指示直接与其进行对话并得到您所期望的结果,希望您使用顺利~
-                                </div>
+                                {
+                                    mode === 1?
+                                    <div className="text" style={{marginTop:'10%',fontSize:'16px',fontStyle:'italic'}}>
+                                        微积分
+                                    </div>
+                                    :
+                                    <div className="text" style={{marginTop:'10%',fontSize:'16px',fontStyle:'italic'}}>
+                                        请作为一个专业的撰稿人，为大学项目撰写高质量、清晰的论文。在撰写过程中，请确保遵循项目的具体要求，准确理解论文的主题和目的，并充分利用可靠的事实和数据来支持你的观点。
+                                    </div>
+                                }
+                                
                             </div>
                         </div>
-                        <div className="box-left-bottom" style={{paddingTop:'110%'}}>
+                        <div className="box-left-bottom" style={mode === 1?{paddingTop:'130%'}:{paddingTop:'76%'}}>
                             <div style={{display:'inline-flex'}}>
                                 <div className="address">
                                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
