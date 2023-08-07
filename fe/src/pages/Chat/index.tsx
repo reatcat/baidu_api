@@ -268,7 +268,7 @@ const Chat:FC = ()=>{
                         <div className="apps">Have try</div>
                     </div>
                 </div>
-                <div className="box" style={{marginTop:'10px',backgroundColor:'#4e4b4b'}}>
+                <div className="box" style={{marginTop:'10px',backgroundColor:'#4e4b4b',color:'white'}}>
                     <div className="box-left" style={{backgroundColor:'#364a52'}}>
                         <div className="box-left-top">
                             <div className="box-letf-top-title">
