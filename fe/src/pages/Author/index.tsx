@@ -161,7 +161,10 @@ const Author:FC = ()=>{
                                         <li>
                                             <Link to='/Home'>全新体验</Link>
                                         </li>
-                                            <li>
+                                        <li>
+                                            <Link to='/Chat'>文心实战</Link>
+                                        </li>
+                                        <li>
                                             <Link to='/Application'>最佳应用</Link>
                                         </li>
                                         </>
