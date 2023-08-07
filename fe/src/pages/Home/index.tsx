@@ -379,6 +379,9 @@ const Home:FC = ()=>{
                                         <Link to='/Home' className="active">全新体验</Link>
                                     </li>
                                     <li>
+                                        <Link to='/Chat'>文心实战</Link>
+                                    </li>
+                                    <li>
                                         <Link to='/Application'>最佳应用</Link>
                                     </li>
                                     <li>
@@ -413,6 +416,9 @@ const Home:FC = ()=>{
                             <div className="box-icon">
                                 <img src="./nav.png" alt="icon"  />
                             </div>
+                        </div>
+                        <div className="rule" style={{fontStyle:"italic"}}>
+                            基于ChatGLM版本
                         </div>
                         <div>
                             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'5%'}}>
