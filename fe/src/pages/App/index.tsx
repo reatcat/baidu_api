@@ -6,6 +6,7 @@ import { Modal, message,Popover,Switch} from 'antd'
 import axios from "axios"
 import 'swiper/swiper-bundle.css'
 import copy from 'copy-to-clipboard'
+import ReactMarkdown from 'react-markdown'
 import './index.css'
 type Message = {
     content: string
@@ -407,7 +408,7 @@ const Apps:FC = ()=>{
                                                     </div>
                                                 }
                                                 <div className="message-body" style={{whiteSpace:'pre-line',color:'#2d2c2c'}}>
-                                                    {message.content}
+                                                    <ReactMarkdown className="markdown">{message.content}</ReactMarkdown>
                                                 </div>
                                             </div>
                                             <div className="message-time">
