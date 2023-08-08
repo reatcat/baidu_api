@@ -137,14 +137,14 @@ const Apps:FC = ()=>{
             name:"起名大师",
             img:"./qiming1.svg",
             message:'您好！作为您的起名小助手，我感到非常荣幸能够为您提供起名服务。请告诉我关于您的孩子和您家庭的更多信息，以便我能够为您提供个性化、符合您期望的名字选项。我将竭尽全力为您找到一个独特而富有意义的名字，成为您孩子一生中的宝贵礼物。请随时告诉我您的要求和喜好，让我们一起为您的孩子选择一个单字或者双字姓名吧！',
-            description:"男&赵&2022&6&10"
+            description:"我的孩子姓周，是一个男孩，出生于2023年7月2日。我希望我的孩子以后能健健康康，有一个幸福美满的家庭，能够投身于自己喜欢的事物，有所成就。"
         },
         {
             id:5,
             name:"定制妆容",
             img:"./zhuangrong1.svg",
             message:'亲爱的主人，您好！作为您的私人妆容定制师，我将为您提供个性化的妆容建议和服务。无论是日常还是特殊场合，我将为您打造精美、符合场景的妆容。请随时向我咨询，期待与您一同探索妆容的奇妙世界！请您输入即将参加的活动以及自身条件。',
-            description:"答辩&皮肤黑"
+            description:"我要去政府上班，并且我的皮肤很白，黄色头发，戴眼镜，身高163cm，拥有一头柔顺的长发。"
         },
         {
             id:6,
@@ -206,7 +206,7 @@ const Apps:FC = ()=>{
             name:"学习导师",
             img:"./daoshi1.svg",
             message:'您好，我是一位知识学习导师，你可以向我提问你所不了解的任何领域，我将向你科普。',
-            description:"量子力学"
+            description:"双缝实验"
         }
     ]
     const [messages, setMessages] = useState<Message[]>([{
@@ -359,7 +359,7 @@ const Apps:FC = ()=>{
 
                             </div>
                         </div>
-                        <div className="box-left-bottom" style={{paddingTop:'60%'}}>
+                        <div className="box-left-bottom" style={id === 3?{paddingTop:'15%'}:id === 4?{paddingTop:'35%'}:{paddingTop:'60%'}}>
                             <div style={{display:'inline-flex'}}>
                                 <div className="address">
                                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/reatcat/baidu_api">
