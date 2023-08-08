@@ -29,3 +29,23 @@
 .markdown{
     color: #fff;
 }
+.markdown a{
+    color: #fdfcfc;
+    font-style: italic;
+}
+.action2{
+    opacity: .5;
+    color: #686868;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.action2:hover{
+    color: rgb(48, 48, 48);
+    opacity: .8;
+}
+table,
+tr,
+td,
+th {
+  border: 1px solid #454040f5;
+}

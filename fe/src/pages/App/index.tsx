@@ -2,11 +2,12 @@
 import { FC,useEffect,useState,useRef } from "react"
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import {ExclamationCircleOutlined} from '@ant-design/icons'
-import { Modal, message,Popover,Switch} from 'antd'
+import { Modal, message,Popover } from 'antd'
 import axios from "axios"
 import 'swiper/swiper-bundle.css'
 import copy from 'copy-to-clipboard'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import './index.css'
 type Message = {
     content: string
@@ -268,6 +269,10 @@ const Apps:FC = ()=>{
           messageRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [messages])
+    const renderers = {
+        list: (props:any) => <ul>{props.children}</ul>,
+        listItem: (props:any) => <li>{props.children}</li>,
+      };
     return (
         <div>
             <header className={"header-area header-sticky background-header"}>
@@ -402,13 +407,13 @@ const Apps:FC = ()=>{
                                                     <></>
                                                     :
                                                     <div className="actions">
-                                                        <div className="action" onClick={(e)=>copyanwser(message.content)}>
+                                                        <div className="action2" onClick={(e)=>copyanwser(message.content)}>
                                                             复制
                                                         </div>
                                                     </div>
                                                 }
                                                 <div className="message-body" style={{whiteSpace:'pre-line',color:'#2d2c2c'}}>
-                                                    <ReactMarkdown className="markdown">{message.content}</ReactMarkdown>
+                                                    <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown">{message.content}</ReactMarkdown>
                                                 </div>
                                             </div>
                                             <div className="message-time">
@@ -427,8 +432,8 @@ const Apps:FC = ()=>{
                                                     <img style={{width:'25px',height:'25px'}} src={data[id].img} alt="avatar" />
                                                 </div>
                                             </div>
-                                            <div className="message-item" style={{backgroundColor:'rgb(22 21 21 / 45%)',color:'#2d2c2c'}}>
-                                                <div className="message-body" style={{whiteSpace:'pre-line',color:'#2d2c2c'}}>
+                                            <div className="message-item" style={{backgroundColor:'rgb(22 21 21 / 45%)',color:'#fff'}}>
+                                                <div className="message-body" style={{whiteSpace:'pre-line',color:'#fff'}}>
                                                     <div className="loading">
                                                         <div></div>
                                                         <div></div>
