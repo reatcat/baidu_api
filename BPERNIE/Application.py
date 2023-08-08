@@ -135,7 +135,8 @@ def appERNIE(id,query):
     # mode == 1 -> generate / == 2 -> enhance
     url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions?access_token=" + get_access_token()
     history = []
-    history.append({"role": "user", "content": appPromptPack(id,query)})
+    print(appPromptPack(id, query))
+    history.append({"role": "user", "content": appPromptPack(id, query)})
     payload = json.dumps({
         "messages": history
     })

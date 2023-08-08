@@ -51,7 +51,8 @@ def user_best_chat():
         # out:message :string
         # 生成prompt
         print(query)
-        message = appERNIE(code,query)
+        print(code)
+        message = appERNIE(code, query)
 
         result = jsonify(data={'message': message, 'code': 2})
         response = make_response(result)
@@ -106,9 +107,9 @@ def user_gen_prompt():
             else:
                 message = "请按照要求输入哦！"
         # 优化prompt
-        elif code ==2:
+        elif code == 2:
             if '&' in query:
-                sen = query.split('&',1)
+                sen = query.split('&', 1)
                 query = sen[0]
                 demand = sen[1]
                 print(query)
