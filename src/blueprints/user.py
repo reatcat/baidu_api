@@ -203,7 +203,7 @@ def user_save_prompt():
             response = make_response(result)
             print(response.json)
             return response
-@user_bp.route('/edit_prompt/<int:save_id>',method = ['GET','POST'])
+@user_bp.route('/edit_prompt/<int:save_id>',methods = ['GET','POST'])
 def user_edit_prompt(save_id:int):
     '''
     用户编辑收藏

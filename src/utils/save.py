@@ -21,11 +21,8 @@ def get_save(save_id: int):
     return target
 
 def create_save(prompt:str,commit:bool = False):
-    new_save = Save()
-    new_save.set_prompt(prompt)
+    new_save = Save(prompt=prompt)
     new_save.set_time()
-    # new_save.set_name("")
-    # new_save.set_tag([])
     if commit:
         db.session.add(new_save)
         db.session.commit()
