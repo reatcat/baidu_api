@@ -33,13 +33,13 @@
     color: #fdfcfc;
     font-style: italic;
 }
-.action2{
+.action3{
     opacity: .5;
     color: #686868;
     white-space: nowrap;
     cursor: pointer;
 }
-.action2:hover{
+.action3:hover{
     color: rgb(48, 48, 48);
     opacity: .8;
 }

@@ -407,7 +407,7 @@ const Apps:FC = ()=>{
                                                     <></>
                                                     :
                                                     <div className="actions">
-                                                        <div className="action2" onClick={(e)=>copyanwser(message.content)}>
+                                                        <div className="action3" onClick={(e)=>copyanwser(message.content)}>
                                                             复制
                                                         </div>
                                                     </div>

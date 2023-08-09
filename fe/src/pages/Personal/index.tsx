@@ -40,21 +40,7 @@ const Personal:FC = ()=>{
     const [modified,setModified] = useState(0)
     const [userinfo,setUserinfo] = useState(iniuserinfo)
     // 定义item
-    const [item,setItem] = useState<favorite[]>([{
-        id:"1",
-        content:"2222",
-        time:"3333",
-        name:"xxxx",
-        tag:["111","333"]
-    },
-    {
-        id:"1",
-        content:"55555",
-        time:"3333",
-        name:"",
-        tag:[]
-    }
-    ])
+    const [item,setItem] = useState<favorite[]>([])
     // 修改信息完成
     const finishmodify = (values:string)=>{
         userinfo.username = JSON.parse(JSON.stringify(values)).username === undefined?userinfo.username:JSON.parse(JSON.stringify(values)).username
@@ -109,6 +95,7 @@ const Personal:FC = ()=>{
         .then((res)=>{
             // 获得传递的item列表
             // 传给我一个列表我自己解析就可以
+            console.log(res)
             const itemlist = res.data.data.data
             for(let i = 0;i < itemlist.length;i++){
                 let tmp:favorite = {
