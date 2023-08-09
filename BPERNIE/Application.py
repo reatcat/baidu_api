@@ -1,15 +1,18 @@
 import requests
 import json
+from dotenv import load_dotenv
+import os
 
-api_key = "KgBEqO1bDFSFEdMvrksHtvgV"
-secret_key = "EIFmzQkxG7V9XfaMgBpFPlehUIgzFWNZ"
+load_dotenv()  # 加载.env文件
+
+api_key = os.getenv("USER_KEY")
+secret_key = os.getenv("SECRET_KEY")
+api_key_url = os.getenv("API_KEY_URL")
+api_url = os.getenv("API_URL")
 
 def get_access_token():
-    """
-    使用 API Key，Secret Key 获取access_token，替换下列示例中的应用API Key、应用Secret Key
-    """
 
-    url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id="+api_key+"&client_secret="+secret_key
+    url = api_key_url + "&client_id="+api_key+"&client_secret="+secret_key
 
     payload = json.dumps("")
     headers = {
@@ -133,7 +136,7 @@ e. 时间演化算符：描述量子系统的时间演
 
 def appERNIE(id,query):
     # mode == 1 -> generate / == 2 -> enhance
-    url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions?access_token=" + get_access_token()
+    url = api_url + get_access_token()
     history = []
     print(appPromptPack(id, query))
     history.append({"role": "user", "content": appPromptPack(id, query)})
