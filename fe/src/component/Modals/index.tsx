@@ -41,9 +41,15 @@ const Modals: FC<Props> = (props) =>{
     const handleok = () => {
         setConfirmLoading(true)
         // console.log({value:values,id:props.item.id})
-        axios.post(`api/user/edit_prompt/${props.item.id}`,{data:values}).then(()=>{
+        axios.post(`/api/user/edit_prompt/${props.item.id}`,{data:values}).then(()=>{
+
             props.editFinish()
         })
+        setTimeout(() => {
+            // 清空数据
+            setOpen(false)
+            setConfirmLoading(false)
+        },1000)
     }
     return (
         <>

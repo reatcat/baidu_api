@@ -94,7 +94,7 @@ class Save(db.Model):
     # name = db.Column(db.String) # 名称类型
     # tag = db.Column(db.ARRAY(db.String))
     name = db.Column(db.String, default="")  # 设置默认值为空字符串
-    tag = db.Column(db.String)  # 标签用逗号分隔的字符串
+    tag = db.Column(db.String,default="文生文")  # 标签用逗号分隔的字符串
 
     save_path = db.Column(db.String(50))  # 收集存放路径
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # 创建者 ID
@@ -112,8 +112,12 @@ class Save(db.Model):
     # def set_tag(self, tags: list):
     #     self.tag = tags
     def set_tag(self, tags: list):
-        # 将标签列表转换为逗号分隔的字符串
-        self.tag = ','.join(tags)
+        if not tags or all(tag == '' for tag in tags):
+            self.tag = ''  # 设置为空字符串
+        elif len(tags) == 1:
+            self.tag = tags[0]  # 单个元素作为标签
+        else:
+            self.tag = ', '.join(tags)  # 使用逗号和空格作为分隔符
 
     def set_save_path(self):
         # self.collection_path = os.path.join(self.creator.userspace, self.id)

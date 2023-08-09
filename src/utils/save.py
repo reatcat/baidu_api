@@ -94,16 +94,25 @@ def create_save_from_str(data_info:str)->Save:
 
 def get_save_info(save) -> dict:
     if save is None:
-        return dict
-    save_info_dict = dict()
-    save_info_dict['Id'] = save.id
-    save_info_dict['Prompt'] = save.prompt
-    save_info_dict['Time'] = save.time.strftime("%Y-%m-%d %H:%M:%S")
+        return {}
 
-    save_info_dict['Name'] = save.name
-    save_info_dict['Tag'] = save.tag
+    save_info_dict = {
+        'Id': save.id,
+        'Prompt': save.prompt,
+        'Time': save.time.strftime("%Y-%m-%d %H:%M:%S"),
+        'Name': save.name
+    }
+
+    if save.tag and ',' in save.tag:
+        tags_list = save.tag.split(',')
+        save_info_dict['Tag'] = tags_list
+    elif save.tag:
+        save_info_dict['Tag'] = [save.tag]
+    else:
+        save_info_dict['Tag'] = []
 
     return save_info_dict
+
 
 def get_save_info_byid(save_id:int)->dict:
     save = get_save(save_id)
@@ -128,9 +137,11 @@ def make_save_response_byid(save_id:int)->Optional[flask.Response]:
 
 def modify_save_from_data(data_info_dict:dict,save_id:int)->[Optional[Save]]:
     save = get_save(save_id)
+    print(data_info_dict)
     save.prompt = data_info_dict['collectContent']
     save.name = data_info_dict['collectName']
-    save.tag = data_info_dict['collectTag']
-    save.time = save.set_time()
+    save.set_tag(data_info_dict['collectTag'])
+    save.set_time()
+    print(save)
     db.session.add(save)
     db.session.commit()

@@ -332,7 +332,7 @@ const Personal:FC = ()=>{
                                 收藏标签
                             </div>
                             <div className="member_title" style={{color:'grey'}}>
-                                {t.tag.length === 0?"待选标签":t.tag[0]}
+                                {t.tag[0] === ""?"待起标签":t.tag}
                             </div>
                         </div>
                     </div>

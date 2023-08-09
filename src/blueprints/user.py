@@ -224,6 +224,12 @@ def user_edit_prompt(save_id:int):
             data = request.get_json()
             print(data)
             data_info_dict = data['data']
+            print(data_info_dict)
+            save_utils.modify_save_from_data(data_info_dict,save_id)
+            result = jsonify(data={'cur_id': save_id})
+            response = make_response(result)
+            print(response.json)
+            return response
             # save = save_utils.get_save(save_id)
 
 @user_bp.route('/delete_prompt/<int:save_id>', methods=['GET', 'POST'])
