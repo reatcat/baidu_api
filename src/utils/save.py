@@ -24,7 +24,8 @@ def create_save(prompt:str,commit:bool = False):
     new_save = Save()
     new_save.set_prompt(prompt)
     new_save.set_time()
-
+    # new_save.set_name("")
+    # new_save.set_tag([])
     if commit:
         db.session.add(new_save)
         db.session.commit()
@@ -102,6 +103,9 @@ def get_save_info(save) -> dict:
     save_info_dict['Prompt'] = save.prompt
     save_info_dict['Time'] = save.time.strftime("%Y-%m-%d %H:%M:%S")
 
+    save_info_dict['Name'] = save.name
+    save_info_dict['Tag'] = save.tag
+
     return save_info_dict
 
 def get_save_info_byid(save_id:int)->dict:
@@ -124,3 +128,12 @@ def make_save_response(save)->Optional[flask.Response]:
 def make_save_response_byid(save_id:int)->Optional[flask.Response]:
     save = get_save(save_id)
     return make_save_response(save)
+
+def modify_save_from_data(data_info_dict:dict,save_id:int)->[Optional[Save]]:
+    save = get_save(save_id)
+    save.prompt = data_info_dict['collectContent']
+    save.name = data_info_dict['collectName']
+    save.tag = data_info_dict['collectTag']
+    save.time = save.set_time()
+    db.session.add(save)
+    db.session.commit()

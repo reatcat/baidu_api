@@ -203,6 +203,28 @@ def user_save_prompt():
             response = make_response(result)
             print(response.json)
             return response
+@user_bp.route('/edit_prompt/<int:save_id>',method = ['GET','POST'])
+def user_edit_prompt(save_id:int):
+    '''
+    用户编辑收藏
+    '''
+    if request.method == 'GET':
+      response = save_utils.make_save_response_byid(save_id)
+      if response is None:
+          err_msg = f"Edit collection {save_id} failed!"
+          logging.error(err_msg)
+          print(err_msg)
+          return err_msg
+          # 返回响应
+      return response
+    elif request.method == 'POST':
+        username = session.get('username')
+        if user_utils.get_user_by_name(username) is not None:
+            print(f'get username :'+username)
+            data = request.get_json()
+            print(data)
+            data_info_dict = data['data']
+            # save = save_utils.get_save(save_id)
 
 @user_bp.route('/delete_prompt/<int:save_id>', methods=['GET', 'POST'])
 def user_delete_prompt(save_id:int):
