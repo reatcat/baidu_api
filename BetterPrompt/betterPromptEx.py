@@ -1,7 +1,12 @@
-import openai
+import openai as oa
+from dotenv import load_dotenv
+import os
 
-openai.api_base = "https://api.chatanywhere.com.cn/v1"
-openai.api_key = "sk-bf6HEtlIp60VbYOyVK7fXtM5qKk9o8CYfGhGbmzfvFYIcKej"
+load_dotenv()  # 加载.env文件
+
+
+oa.api_base = os.getenv("API_BASE")
+oa.api_key = os.getenv("API_KEY")
 
 
 def first_prompt():
@@ -38,7 +43,7 @@ def second_prompt():
 
 
 def generate_answer(messages):
-    completion = openai.ChatCompletion.create(
+    completion = oa.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=0.7
