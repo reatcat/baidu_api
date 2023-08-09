@@ -5,15 +5,14 @@ import { Link } from "react-router-dom"
 import {
     Form,
     Input,
-    message,
+    message
 } from 'antd'
-// import ParticlesBg from 'particles-bg'
-// import 'antd/lib/input/style/css'
+// 局部生效样式
+import styles from './index.module.css'
+import Modals from "../../component/Modals"
 import copy from 'copy-to-clipboard'
 import './index.css'
 import axios from "axios"
-// 局部生效样式
-import styles from './index.module.css'
 const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -32,6 +31,8 @@ type favorite = {
     id:string
     content: string
     time: string
+    name:string
+    tag:Array<string>
 }
 const Personal:FC = ()=>{
     const [form] = Form.useForm()
@@ -39,7 +40,21 @@ const Personal:FC = ()=>{
     const [modified,setModified] = useState(0)
     const [userinfo,setUserinfo] = useState(iniuserinfo)
     // 定义item
-    const [item,setItem] = useState<favorite[]>([])
+    const [item,setItem] = useState<favorite[]>([{
+        id:"1",
+        content:"2222",
+        time:"3333",
+        name:"xxxx",
+        tag:["111","333"]
+    },
+    {
+        id:"1",
+        content:"55555",
+        time:"3333",
+        name:"",
+        tag:[]
+    }
+    ])
     // 修改信息完成
     const finishmodify = (values:string)=>{
         userinfo.username = JSON.parse(JSON.stringify(values)).username === undefined?userinfo.username:JSON.parse(JSON.stringify(values)).username
@@ -99,7 +114,9 @@ const Personal:FC = ()=>{
                 let tmp:favorite = {
                     id:itemlist[i].Id,
                     content:itemlist[i].Prompt,
-                    time:itemlist[i].Time
+                    time:itemlist[i].Time,
+                    name:itemlist[i].Name,
+                    tag:itemlist[i].Tag
                 }
                 item.push(tmp)
             }
@@ -112,6 +129,7 @@ const Personal:FC = ()=>{
     const copytext = (text:string)=>{
         copy(text)
         message.success("复制成功!")
+        window.open('https://yiyan.baidu.com/welcome', '_blank');
     }
     const deleteitem = (index:number,id:string)=>{
         // 删除某一个item
@@ -131,7 +149,6 @@ const Personal:FC = ()=>{
     }
   return (
     <div className="Personal-page">
-        {/* <ParticlesBg type="cobweb" bg={true} /> */}
         <div className="navss">
             {/* <!--头像--> */}
             <div className="myicon">
@@ -306,58 +323,49 @@ const Personal:FC = ()=>{
             }
             {item.map((t,i)=>(
                 <div className="card">
-                <div className="cardHead">
-                    <div className='cardItems cardTitleBox'>
-                        <div className='itemTitles cardTitle'>
-                            收藏时间
+                    <div className="cardHead">
+                        <div className='cardItems cardTitleBox'>
+                            <div className='itemTitles cardTitle'>
+                                收藏时间
+                            </div>
+                            <div className="member_title" style={{color:'grey'}}>
+                                {t.time}
+                            </div>
                         </div>
-                        <div className="member_title" style={{color:'grey'}}>
-                            {t.time}
+                        <div className='cardItems'>
+                            <div className='itemTitles cardTitle'>
+                                收藏名称
+                            </div>
+                            <div className="member_title" style={{color:'grey'}}>
+                                {t.name === ""?"待起名":t.name}
+                            </div>
+                        </div>
+                        <div className='cardItems'>
+                            <div className='itemTitles cardTitle'>
+                                收藏标签
+                            </div>
+                            <div className="member_title" style={{color:'grey'}}>
+                                {t.tag.length === 0?"待选标签":t.tag[0]}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cardBody">
+                        <div className="cardItems cardTimesBox">
+                            <div className="member_times" style={{whiteSpace:'pre-line'}}>
+                                {t.content}
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div className="cardItems cardOperateBox">
+                        <div className="member_operate">
+                            <Modals editFinish={getitem} item={t}></Modals>
+                            <div className="operate" onClick={(e)=>copytext(t.content)}>复制</div>
+                            <div className="operate" onClick={(e)=>deleteitem(i,t.id)}>删除</div>
                         </div>
                     </div>
                 </div>
-                <div className="cardBody">
-                    <div className="cardItems cardTimesBox">
-                        <div className="member_times" style={{whiteSpace:'pre-line'}}>
-                            {t.content}
-                        </div>
-                    </div>
-                    
-                </div>
-                <div className="cardItems cardOperateBox">
-                    <div className="member_operate">
-                        <div className="operate" onClick={(e)=>copytext(t.content)}>复制</div>
-                        <div className="operate" onClick={(e)=>deleteitem(i,t.id)}>删除</div>
-                    </div>
-                </div>
-            </div>
             ))}
-            {/* <div className="card">
-                <div className="cardHead">
-                    <div className='cardItems cardTitleBox'>
-                        <div className='itemTitles cardTitle'>
-                            收藏时间
-                        </div>
-                        <div className="member_title" style={{color:'grey'}}>
-                            2023/7/16 13:43:06
-                        </div>
-                    </div>
-                </div>
-                <div className="cardBody">
-                    <div className="cardItems cardTimesBox">
-                        <div className="member_times" >
-                        您好，这里是Better Prompt,我可以帮您生成或者优化Prompt,目前是生成Prompt模式可以点击左侧按钮切换,请您按照左侧要求进行输入哦~
-                        </div>
-                    </div>
-                </div>
-                <div className="cardItems cardOperateBox">
-                    <div className="member_operate">
-                        <div className="operate" >复制</div>
-                        <div className="operate" >删除</div>
-                    </div>
-                </div>
-            </div> */}
-
         </div>
     </div>
   )
