@@ -105,8 +105,10 @@ const Personal:FC = ()=>{
                     name:itemlist[i].Name,
                     tag:itemlist[i].Tag
                 }
-                item.push(tmp)
+                item[i] = tmp
+                // item.push(tmp)
             }
+            setItem([...item])
         })
     }
     useEffect(()=>{
@@ -123,7 +125,6 @@ const Personal:FC = ()=>{
         // 传递索引过去删除，返回一个code=1
         axios.post(`/api/user/delete_prompt/${id}`)
             .then((res)=>{
-                console.log(res)
                 const code = res.data.data.data
                 if(code === 1){
                     message.success("删除成功!")
@@ -133,6 +134,10 @@ const Personal:FC = ()=>{
                     setItem(updatedData)
                 }
         })
+    }
+    const editFinish = ()=>{
+        console.log(111)
+        getitem()
     }
   return (
     <div className="Personal-page">
@@ -310,8 +315,8 @@ const Personal:FC = ()=>{
             }
             {item.map((t,i)=>(
                 <div className="card">
-                    <div className="cardHead">
-                        <div className='cardItems cardTitleBox'>
+                    <div className="cardHead" >
+                        <div className='cardItems cardTitleBox' >
                             <div className='itemTitles cardTitle'>
                                 收藏时间
                             </div>
@@ -332,7 +337,7 @@ const Personal:FC = ()=>{
                                 收藏标签
                             </div>
                             <div className="member_title" style={{color:'grey'}}>
-                                {t.tag[0] === ""?"待起标签":t.tag}
+                                {t.tag}
                             </div>
                         </div>
                     </div>
@@ -346,7 +351,7 @@ const Personal:FC = ()=>{
                     </div>
                     <div className="cardItems cardOperateBox">
                         <div className="member_operate">
-                            <Modals editFinish={getitem} item={t}></Modals>
+                            <Modals editFinish={editFinish} item={t}></Modals>
                             <div className="operate" onClick={(e)=>copytext(t.content)}>复制</div>
                             <div className="operate" onClick={(e)=>deleteitem(i,t.id)}>删除</div>
                         </div>

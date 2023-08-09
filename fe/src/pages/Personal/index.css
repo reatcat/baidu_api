@@ -387,11 +387,13 @@
 .cardBody {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 
 .cardHead {
     width: 20vw;
+    flex-direction: column;
     background-color:#ffb77359;
     border-radius:15px;
     transition: 0.5s;
@@ -403,7 +405,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
 }
 
 .cardHead .cardItems:nth-of-type(1) {
@@ -434,7 +435,7 @@
 
 .member_title,
 .member_name {
-    width: 80%;
+    width: 100%;
     white-space:nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

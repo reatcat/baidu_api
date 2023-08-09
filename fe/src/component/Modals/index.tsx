@@ -40,16 +40,14 @@ const Modals: FC<Props> = (props) =>{
     }
     const handleok = () => {
         setConfirmLoading(true)
-        // console.log({value:values,id:props.item.id})
         axios.post(`/api/user/edit_prompt/${props.item.id}`,{data:values}).then(()=>{
-
+            // 异步操作完成后关闭
             props.editFinish()
         })
         setTimeout(() => {
-            // 清空数据
             setOpen(false)
             setConfirmLoading(false)
-        },1000)
+        }, 1000)
     }
     return (
         <>
@@ -76,7 +74,7 @@ const Modals: FC<Props> = (props) =>{
             >
                 <Form layout="vertical" onFinish={onFinish}>
                     <Form.Item label="收藏内容" name="collectContent" initialValue={props.item.content} rules={[{ required: false }]}>
-                        <Input.TextArea rows={4}/>
+                        <Input.TextArea rows={8}/>
                     </Form.Item>
                     <Form.Item label="收藏名称" name="collectName" initialValue={props.item.name} rules={[{ required: false}]}>
                         <Input />
