@@ -91,7 +91,10 @@ class Save(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # 主键
     prompt = db.Column(db.Text, nullable=False)  # prompt的文本内容
     time= db.Column(db.DateTime, nullable=False)  # 创建时间
-
+    # name = db.Column(db.String) # 名称类型
+    # tag = db.Column(db.ARRAY(db.String))
+    name = db.Column(db.String, default="")  # 设置默认值为空字符串
+    tag = db.Column(db.ARRAY(db.String), default=[])  # 设置默认值为空列表
 
     save_path = db.Column(db.String(50))  # 收集存放路径
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # 创建者 ID
@@ -102,6 +105,12 @@ class Save(db.Model):
         self.prompt = prompt
     def set_time(self):
         self.time = datetime.now().replace(microsecond=0)
+
+    def set_name(self, name: str):
+        self.name = name
+
+    def set_tag(self, tags: list):
+        self.tag = tags
 
 
     def set_save_path(self):
