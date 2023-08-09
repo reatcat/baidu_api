@@ -5,6 +5,8 @@ import {ExclamationCircleOutlined} from '@ant-design/icons'
 import { Modal, message,Popover,Switch} from 'antd'
 import axios from "axios"
 import copy from 'copy-to-clipboard'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import './index.css'
 type Message = {
     content: string
@@ -572,7 +574,7 @@ const Home:FC = ()=>{
                                                     </div>
                                                 }
                                                 <div className="message-body" style={{whiteSpace:'pre-line'}}>
-                                                    {message.content}
+                                                    <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown">{message.content}</ReactMarkdown>
                                                 </div>
                                             </div>
                                             <div className="message-time">
